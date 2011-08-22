@@ -25,3 +25,6 @@
 [submodule "bundle/closetag"]
 	path = bundle/closetag
 	url = https://github.com/docunext/closetag.vim.git
+[submodule "bundle/NERDcommenter"]
+	path = bundle/NERDcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
