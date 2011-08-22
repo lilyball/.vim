@@ -46,6 +46,9 @@ set shiftwidth=4
 " Set delimitMate preferences
 let g:delimitMate_expand_cr = 1
 
+" Set TagBar preferences
+let g:tagbar_usearrows = 1
+
 " Allow edit buffers to be hidden
 set hidden
 
@@ -297,6 +300,8 @@ nmap <F4> :NERDTreeToggle<CR>
 " invoke bufexplorer
 imap <F3> <ESC>:BufExplorer<CR>
 nmap <F3> :BufExplorer<CR>
+
+noremap <leader>l :TagbarToggle<CR>
 
 "--------------------------------------
 " plugin / script / app settings
