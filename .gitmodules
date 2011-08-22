@@ -7,3 +7,6 @@
 [submodule "bundle/lua"]
 	path = bundle/lua
 	url = https://github.com/xolox/vim-lua-ftplugin.git
+[submodule "bundle/NERDtree"]
+	path = bundle/NERDtree
+	url = https://github.com/scrooloose/nerdtree.git
