@@ -43,6 +43,9 @@ set viminfo='1000,f1,:1000,/1000,r/tmp,r/Volumes
 set tabstop=4
 set shiftwidth=4
 
+" Set delimitMate preferences
+let g:delimitMate_expand_cr = 1
+
 " Allow edit buffers to be hidden
 set hidden
 
