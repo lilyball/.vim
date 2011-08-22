@@ -122,8 +122,9 @@ set laststatus=2
 fun! <SID>SetStatusLine()
 	let l:s1="%-3.3n\\ %f\\ %h%m%r%w"
 	let l:s2="[%{strlen(&filetype)?&filetype:'none'},%{&encoding},%{&fileformat}]"
-	let l:s3="%=\\ 0x%-8B\\ \\ %-14.(%l,%c%V%)\\ %<%P"
-	execute "set statusline=" . l:s1 . l:s2 . l:s3
+	let l:s3="%{fugitive#statusline()}"
+	let l:s4="%=\\ 0x%-8B\\ \\ %-14.(%l,%c%V%)\\ %<%P"
+	execute "set statusline=" . l:s1 . l:s2 . l:s3 . l:s4
 endfun
 call <SID>SetStatusLine()
 
