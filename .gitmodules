@@ -28,3 +28,6 @@
 [submodule "bundle/NERDcommenter"]
 	path = bundle/NERDcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/supertab"]
+	path = bundle/supertab
+	url = https://github.com/ervandew/supertab.git
