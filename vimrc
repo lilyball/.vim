@@ -49,6 +49,12 @@ let g:delimitMate_expand_cr = 1
 " Set TagBar preferences
 let g:tagbar_usearrows = 1
 
+" Enable matchit
+runtime macros/matchit.vim
+
+" Enable editexisting
+runtime macros/editexisting.vim
+
 " Allow edit buffers to be hidden
 set hidden
 
