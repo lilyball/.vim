@@ -305,6 +305,9 @@ nmap <F4> :NERDTreeToggle<CR>
 imap <F3> <ESC>:BufExplorer<CR>
 nmap <F3> :BufExplorer<CR>
 
+" invoke Command-T for buffers
+nmap <leader>bb :CommandTBuffer<CR>
+
 noremap <leader>l :TagbarToggle<CR>
 
 "--------------------------------------
