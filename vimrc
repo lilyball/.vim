@@ -259,7 +259,6 @@ noremap		<S-Up>		gk
 noremap		<S-Down>	gj
 
 " Commonly used commands
-nmap <F5> <C-w>c
 nnoremap <F7> :if &filetype == "vim" \| so % \| else \| make \| endif<CR>
 noremap <F10> :w !ruby -w > /tmp/vim_r_buff 2>&1<CR>:sv /tmp/vim_r_buff<CR>
 
@@ -304,6 +303,9 @@ nmap <F4> :NERDTreeToggle<CR>
 " invoke bufexplorer
 imap <F3> <ESC>:BufExplorer<CR>
 nmap <F3> :BufExplorer<CR>
+
+" invoke Gundo
+nnoremap <F5> :GundoToggle<CR>
 
 " invoke Command-T for buffers
 nmap <leader>bb :CommandTBuffer<CR>
