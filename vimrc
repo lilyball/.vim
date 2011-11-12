@@ -36,6 +36,8 @@ set nohlsearch
 set confirm
 set fileformats=unix,mac,dos
 
+set grepprg=grep\ -nH\ $*
+
 " Keep a large viminfo file
 set viminfo='1000,f1,:1000,/1000,r/tmp,r/Volumes
 
