@@ -43,3 +43,6 @@
 [submodule "bundle/tComment"]
 	path = bundle/tComment
 	url = https://github.com/tomtom/tcomment_vim.git
+[submodule "bundle/clang_complete"]
+	path = bundle/clang_complete
+	url = https://github.com/Rip-Rip/clang_complete.git
