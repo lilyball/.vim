@@ -46,3 +46,6 @@
 [submodule "bundle/clang_complete"]
 	path = bundle/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete.git
+[submodule "bundle/haskell"]
+	path = bundle/haskell
+	url = https://github.com/vim-scripts/haskell.vim.git
