@@ -880,6 +880,11 @@ let g:gundo_debug = 1
 let g:gundo_preview_bottom = 1
 
 " }}}
+" Haskell {{{
+
+let g:haddock_browser="/usr/bin/open"
+
+" }}}
 " HTML5 {{{
 
 let g:event_handler_attributes_complete = 0
