@@ -52,3 +52,6 @@
 [submodule "bundle/haskellmode"]
 	path = bundle/haskellmode
 	url = https://github.com/lukerandall/haskellmode-vim.git
+[submodule "bundle/afterimage"]
+	path = bundle/afterimage
+	url = https://github.com/tpope/vim-afterimage.git
