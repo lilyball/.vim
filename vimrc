@@ -67,8 +67,13 @@ endif
 " Terminal options --------------------------------------------------------- {{{
 
 if !has('gui_running')
-	" Terminal.app doesn't support 256 colors
-	set t_Co=16
+	if &term =~ "xterm-256color"
+		set t_Co=256
+		set t_AB=[48;5;%dm
+		set t_AF=[38;5;%dm
+	else
+		set t_Co=16
+	endif
 endif
 
 " }}}
