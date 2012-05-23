@@ -713,7 +713,7 @@ vnoremap <leader>Ac :center<cr>
 vnoremap <leader>Ar :right<cr>
 
 " Less chording
-nnoremap ; :
+"nnoremap ; :
 
 " Faster Esc
 inoremap jk <esc>
