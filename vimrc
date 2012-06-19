@@ -446,15 +446,6 @@ augroup ft_firefox
 augroup END
 
 " }}}
-" Fish {{{
-
-augroup ft_fish
-	au!
-
-	au BufNewFile,BufRead *.fish setlocal filetype=fihs
-augroup END
-
-" }}}
 " HTML and HTMLDjango {{{
 
 augroup ft_html
