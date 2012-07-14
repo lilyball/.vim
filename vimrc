@@ -2,7 +2,7 @@
 " Author: Kevin Ballard <kevin@sb.org>
 "
 " Much of these settings came from other sources.
-" Including Steve Losh (https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc)
+" Including Steve Losh (https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc)
 
 " Preamble ----------------------------------------------------------------- {{{
 
