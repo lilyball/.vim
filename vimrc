@@ -924,6 +924,8 @@ let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: li
 
 let g:tagbar_usearrows = 1
 
+nnoremap <F6> :TagbarToggle<CR>
+
 " }}}
 
 " }}}
