@@ -742,6 +742,9 @@ cmap w!! w !sudo tee % >/dev/null
 "nnoremap <localleader>= ==
 "vnoremap - =
 
+" Toggle textwidth
+nnoremap <F8> :if &tw == 0 \| set tw=78 \| else \| set tw=0 \| endif<CR>
+
 " Easy filetype switching {{{
 nnoremap _md :set ft=markdown<CR>
 "nnoremap _hd :set ft=htmldjango<CR>
