@@ -1070,13 +1070,18 @@ endfunc "}}}
 
 nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
 
+" }}}
+
+" Tidy XML/XHTML {{{
 function! Tidy() " {{{
-	if &filetype == "xml"
+	if &filetype == "xml" || &filetype == "xhtml"
 		silent %!xmllint --format --recover - 2>/dev/null
 	else
 		echo "Unknown filetype"
 	endif
 endfunc "}}}
+
+command! Tidy :call Tidy()
 
 " }}}
 
