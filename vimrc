@@ -1070,6 +1070,14 @@ endfunc "}}}
 
 nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
 
+function! Tidy() " {{{
+	if &filetype == "xml"
+		silent %!xmllint --format --recover - 2>/dev/null
+	else
+		echo "Unknown filetype"
+	endif
+endfunc "}}}
+
 " }}}
 
 " }}}
