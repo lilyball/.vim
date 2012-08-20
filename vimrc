@@ -164,6 +164,16 @@ fun! s:SetStatusLine()
 endfun
 call s:SetStatusLine()
 
+" Powerline ---------------------------------------------------------------- {{{
+
+if has('gui_running')
+	let g:Powerline_symbols = 'fancy'
+else
+	let g:Powerline_symbols = 'compatible'
+end
+
+" }}}
+
 " }}}
 " Searching and movement --------------------------------------------------- {{{
 
@@ -1137,7 +1147,7 @@ nnoremap <leader>hb :HgBlame<cr>
 " Environments (GUI/Console) ----------------------------------------------- {{{
 
 if has('gui_running')
-	set guifont=Menlo:h11
+	set guifont="Menlo Regular for Powerline:h11,Menlo:h11"
 
 	" Remove all the UI cruft
 	set go-=T
