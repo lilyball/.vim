@@ -849,6 +849,20 @@ inoremap <c-f> <c-x><c-f>
 
 " }}}
 
+" Remap arrow keys {{{
+
+nmap <Left> <<
+nmap <Right> >>
+vmap <Left> <gv
+vmap <Right> >gv
+
+nmap <Up> [e
+nmap <Down> ]e
+vmap <Up> [egv
+vmap <Down> ]egv
+
+" }}}
+
 " }}}
 " Plugin settings ---------------------------------------------------------- {{{
 
