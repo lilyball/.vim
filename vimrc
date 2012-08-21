@@ -863,6 +863,16 @@ vmap <Down> ]egv
 
 " }}}
 
+" use Ctrl+L to toggle relative line numbers
+function! g:ToggleNuMode()
+	if &nu == 1
+		set rnu
+	else
+		set nu
+	endif
+endfunction
+nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
+
 " }}}
 " Plugin settings ---------------------------------------------------------- {{{
 
