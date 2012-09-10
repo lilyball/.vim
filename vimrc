@@ -872,6 +872,7 @@ function! g:ToggleNuMode()
 	endif
 endfunction
 nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
+vnoremap <silent><C-L> :call g:ToggleNuMode()<cr>gv
 
 " }}}
 " Plugin settings ---------------------------------------------------------- {{{
