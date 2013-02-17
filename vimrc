@@ -166,11 +166,7 @@ call s:SetStatusLine()
 
 " Powerline ---------------------------------------------------------------- {{{
 
-if has('gui_running')
-	let g:Powerline_symbols = 'fancy'
-else
-	let g:Powerline_symbols = 'compatible'
-end
+set rtp+=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
 
 " }}}
 
@@ -1172,7 +1168,7 @@ nnoremap <leader>hb :HgBlame<cr>
 " Environments (GUI/Console) ----------------------------------------------- {{{
 
 if has('gui_running')
-	set guifont="Menlo Regular for Powerline:h11,Menlo:h11"
+	set guifont=Menlo\ for\ Powerline:h11,Menlo:h11
 
 	" Remove all the UI cruft
 	set go-=T
