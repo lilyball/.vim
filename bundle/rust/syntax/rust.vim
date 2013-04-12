@@ -2,7 +2,7 @@
 " Language:     Rust
 " Maintainer:   Patrick Walton <pcwalton@mozilla.com>
 " Maintainer:   Ben Blum <bblum@cs.cmu.edu>
-" Last Change:  2012 Jul 06
+" Last Change:  2012 Dec 25
 
 if version < 600
   syntax clear
@@ -10,27 +10,29 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-syn match     rustAssert      "\<assert\(\w\)*"
-syn keyword   rustKeyword     again as break
-syn keyword   rustKeyword     const copy do drop else export extern fail
-syn keyword   rustKeyword     for if impl import in let log
-syn keyword   rustKeyword     loop match mod module move mut new of priv pure
-syn match     rustKeyword     "\<pub\>"
-syn keyword   rustKeyword     ref return static to unchecked
-syn match     rustKeyword     "\<unsafe\>" " Allows also matching unsafe::foo()
-syn keyword   rustKeyword     use while with
+syn keyword   rustConditional match if else
+syn keyword   rustOperator    as
+
+syn keyword   rustKeyword     break copy do drop extern
+syn keyword   rustKeyword     for if impl let log
+syn keyword   rustKeyword     copy do drop extern
+syn keyword   rustKeyword     for impl let log
+syn keyword   rustKeyword     loop mod once priv pub
+syn keyword   rustKeyword     return
+syn keyword   rustKeyword     unsafe use while
 " FIXME: Scoped impl's name is also fallen in this category
-syn keyword   rustKeyword     mod trait class struct enum type nextgroup=rustIdentifier skipwhite
+syn keyword   rustKeyword     mod trait struct enum type nextgroup=rustIdentifier skipwhite
 syn keyword   rustKeyword     fn nextgroup=rustFuncName skipwhite
+syn keyword   rustStorage     const mut ref static
 
 syn match     rustIdentifier  contains=rustIdentifierPrime "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 syn match     rustFuncName    "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 
 " Reserved words
-syn keyword   rustKeyword     m32 m64 m128 f80 f16 f128
+syn keyword   rustKeyword     m32 m64 m128 f80 f16 f128 be
 
 syn keyword   rustType        int uint float char bool u8 u16 u32 u64 f32
-syn keyword   rustType        f64 i8 i16 i32 i64 str
+syn keyword   rustType        f64 i8 i16 i32 i64 str Self
 syn keyword   rustType        Option Either
 
 " Types from libc
@@ -44,8 +46,8 @@ syn keyword   rustType        off_t dev_t ino_t pid_t mode_t ssize_t
 
 syn keyword   rustTrait       Const Copy Send Owned " inherent traits
 syn keyword   rustTrait       Eq Ord Num Ptr
-syn keyword   rustTrait       Add Sub Mul Div Modulo Neg BitAnd BitOr BitXor
-syn keyword   rustTrait       Shl Shr Index
+syn keyword   rustTrait       Drop Add Sub Mul Div Modulo Neg BitAnd BitOr
+syn keyword   rustTrait       BitXor Shl Shr Index
 
 syn keyword   rustSelf        self
 syn keyword   rustBoolean     true false
@@ -72,8 +74,8 @@ syn keyword   rustConstant    STDIN_FILENO STDOUT_FILENO STDERR_FILENO
 syn match     rustModPath     "\w\(\w\)*::[^<]"he=e-3,me=e-3
 syn match     rustModPathSep  "::"
 
-syn match     rustFuncCall    "\w\(\w\)*("he=e-1,me=e-1 contains=rustAssert
-syn match     rustFuncCall    "\w\(\w\)*::<"he=e-3,me=e-3 contains=rustAssert " foo::<T>();
+syn match     rustFuncCall    "\w\(\w\)*("he=e-1,me=e-1
+syn match     rustFuncCall    "\w\(\w\)*::<"he=e-3,me=e-3 " foo::<T>();
 
 syn match     rustMacro       '\w\(\w\)*!'
 syn match     rustMacro       '#\w\(\w\)*'
@@ -104,12 +106,14 @@ syn match     rustFloat       display "\<[0-9][0-9_]*\.[0-9_]\+\(f\|f32\|f64\)\>
 syn match     rustFloat       display "\<[0-9][0-9_]*\.[0-9_]\+\%([eE][+-]\=[0-9_]\+\)\>"
 syn match     rustFloat       display "\<[0-9][0-9_]*\.[0-9_]\+\%([eE][+-]\=[0-9_]\+\)\(f\|f32\|f64\)\>"
 
+"rustLifetime must appear before rustCharacter, or chars will get the lifetime highlighting
+syn match     rustLifetime    display "\'\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*"
 syn match   rustCharacter   "'\([^'\\]\|\\\(['nrt\\\"]\|x\x\{2}\|u\x\{4}\|U\x\{8}\)\)'"
 
 syn region    rustComment     start="/\*" end="\*/" contains=rustComment,rustTodo
 syn region    rustComment     start="//" skip="\\$" end="$" contains=rustTodo keepend
 
-syn keyword   rustTodo        TODO FIXME XXX NB
+syn keyword rustTodo contained TODO FIXME XXX NB
 
 hi def link rustHexNumber       rustNumber
 hi def link rustBinNumber       rustNumber
@@ -124,8 +128,9 @@ hi def link rustBoolean       Boolean
 hi def link rustConstant      Constant
 hi def link rustSelf          Constant
 hi def link rustFloat         Float
-hi def link rustAssert        Keyword
+hi def link rustOperator      Operator
 hi def link rustKeyword       Keyword
+hi def link rustConditional   Conditional
 hi def link rustIdentifier    Identifier
 hi def link rustModPath       Include
 hi def link rustFuncName      Function
@@ -134,9 +139,10 @@ hi def link rustMacro         Macro
 hi def link rustType          Type
 hi def link rustTodo          Todo
 hi def link rustAttribute     PreProc
+hi def link rustStorage       StorageClass
+hi def link rustLifetime      Special
 
 " Other Suggestions:
-" hi rustAssert ctermfg=yellow
 " hi rustMacro ctermfg=magenta
 
 syn sync minlines=200
