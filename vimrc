@@ -615,6 +615,15 @@ augroup ft_ruby
 augroup END
 
 " }}}
+" Rust {{{
+
+let g:rust_conceal=1
+augroup ft_rust
+	au!
+	au FileType rust setlocal colorcolumn=100
+augroup END
+
+" }}}
 " Vagrant {{{
 
 augroup ft_vagrant

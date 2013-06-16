@@ -15,7 +15,7 @@ syn keyword   rustOperator    as
 
 syn keyword   rustKeyword     break copy do drop extern
 syn keyword   rustKeyword     for if impl let log
-syn keyword   rustKeyword     copy do drop extern
+syn keyword   rustKeyword     copy do extern
 syn keyword   rustKeyword     for impl let log
 syn keyword   rustKeyword     loop mod once priv pub
 syn keyword   rustKeyword     return
@@ -28,8 +28,8 @@ syn keyword   rustStorage     const mut ref static
 syn match     rustIdentifier  contains=rustIdentifierPrime "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 syn match     rustFuncName    "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 
-" Reserved words
-syn keyword   rustKeyword     m32 m64 m128 f80 f16 f128 be
+" reserved
+syn keyword   rustKeyword     be
 
 syn keyword   rustType        int uint float char bool u8 u16 u32 u64 f32
 syn keyword   rustType        f64 i8 i16 i32 i64 str Self
@@ -44,9 +44,9 @@ syn keyword   rustType        size_t ptrdiff_t clock_t time_t
 syn keyword   rustType        c_longlong c_ulonglong intptr_t uintptr_t
 syn keyword   rustType        off_t dev_t ino_t pid_t mode_t ssize_t
 
-syn keyword   rustTrait       Const Copy Send Owned " inherent traits
+syn keyword   rustTrait       Const Copy Send Owned Sized " inherent traits
 syn keyword   rustTrait       Eq Ord Num Ptr
-syn keyword   rustTrait       Drop Add Sub Mul Div Modulo Neg BitAnd BitOr
+syn keyword   rustTrait       Drop Add Sub Mul Quot Rem Neg BitAnd BitOr
 syn keyword   rustTrait       BitXor Shl Shr Index
 
 syn keyword   rustSelf        self
@@ -110,8 +110,11 @@ syn match     rustFloat       display "\<[0-9][0-9_]*\.[0-9_]\+\%([eE][+-]\=[0-9
 syn match     rustLifetime    display "\'\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*"
 syn match   rustCharacter   "'\([^'\\]\|\\\(['nrt\\\"]\|x\x\{2}\|u\x\{4}\|U\x\{8}\)\)'"
 
-syn region    rustComment     start="/\*" end="\*/" contains=rustComment,rustTodo
-syn region    rustComment     start="//" skip="\\$" end="$" contains=rustTodo keepend
+syn region    rustCommentDoc  start="/\*[\*!]" end="\*/"
+syn region    rustCommentDoc  start="//[/!]" skip="\\$" end="$" keepend
+syn match     rustComment     "/\*\*/"
+syn region    rustComment     start="/\*\([^\*!]\|$\)" end="\*/" contains=rustTodo
+syn region    rustComment     start="//\([^/!]\|$\)" skip="\\$" end="$" contains=rustTodo keepend
 
 syn keyword rustTodo contained TODO FIXME XXX NB
 
@@ -134,6 +137,7 @@ hi def link rustConditional   Conditional
 hi def link rustIdentifier    Identifier
 hi def link rustModPath       Include
 hi def link rustFuncName      Function
+hi def link rustCommentDoc    SpecialComment
 hi def link rustComment       Comment
 hi def link rustMacro         Macro
 hi def link rustType          Type
