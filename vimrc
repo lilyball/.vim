@@ -620,7 +620,7 @@ augroup END
 let g:rust_conceal=1
 augroup ft_rust
 	au!
-	au FileType rust setlocal colorcolumn=100
+	au FileType rust setlocal colorcolumn=100 et
 augroup END
 
 " }}}
