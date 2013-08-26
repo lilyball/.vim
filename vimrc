@@ -623,6 +623,21 @@ augroup ft_rust
 	au FileType rust setlocal colorcolumn=100 et
 augroup END
 
+let g:tagbar_type_rust = {
+	\ 'ctagstype' : 'rust',
+	\ 'kinds'     : [
+		\ 'f:function',
+		\ 'T:types',
+		\ 'm:types',
+		\ 'm:modules',
+		\ 'm:consts',
+		\ 'm:traits',
+		\ 'm:impls',
+		\ 'm:macros'
+	\ ],
+	\ 'sro'      : '::'
+\ }
+
 " }}}
 " Vagrant {{{
 
