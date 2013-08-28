@@ -137,7 +137,7 @@ syn match     rustLifetime    display "\'\%([^[:cntrl:][:space:][:punct:][:digit
 syn match   rustCharacter   /'\([^'\\]\|\\\([nrt\\'"]\|x\x\{2}\|u\x\{4}\|U\x\{8}\)\)'/ contains=rustSpecial
 
 syn region    rustCommentML   start="/\*" end="\*/" contains=rustTodo
-syn region    rustComment     start="//" skip="\\$" end="$" contains=rustTodo keepend
+syn region    rustComment     start="//" end="$" contains=rustTodo keepend
 syn region    rustCommentMLDoc start="/\*\%(!\|\*/\@!\)" end="\*/" contains=rustTodo
 syn region    rustCommentDoc  start="//[/!]" skip="\\$" end="$" contains=rustTodo keepend
 
