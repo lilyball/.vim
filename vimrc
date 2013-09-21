@@ -1494,9 +1494,9 @@ augroup kevin
 	autocmd BufWinEnter svn-commit.tmp :1
 
 	" For .git/COMMIT_EDITMSG, don't create backups
-	autocmd BufRead .git/COMMIT_EDITMSG :setlocal nobackup
+	autocmd BufRead */.git/COMMIT_EDITMSG :setlocal nobackup
 	" for .git/COMMIT_EDITMSG, always start on line 1
-	autocmd BufWinEnter .git/COMMIT_EDITMSG :1
+	autocmd BufWinEnter */.git/COMMIT_EDITMSG :1
 
 	" Detect procmailrc (as if I'd ever need this)
 	autocmd BufRead procmailrc :setfiletype procmail
