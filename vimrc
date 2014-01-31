@@ -55,6 +55,10 @@ set whichwrap+=<,>,[,]
 " Keep a large viminfo file
 set viminfo='1000,f1,:1000,/1000,r/tmp,r/Volumes
 
+" Spell-checking
+set spelllang=en_us
+"set spell
+
 " GUI options -------------------------------------------------------------- {{{
 
 if has('gui_running')
