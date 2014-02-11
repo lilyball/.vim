@@ -989,6 +989,9 @@ let g:tagbar_usearrows = 1
 nnoremap <F6> :TagbarToggle<CR>
 
 " }}}
+" JsBeautify {{{
+
+autocmd FileType javascript command JsBeautify :call JsBeautify()
 
 " }}}
 " Text objects ------------------------------------------------------------- {{{
