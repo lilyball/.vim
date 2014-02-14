@@ -1569,9 +1569,10 @@ inoremap	<S-Down>	<C-o>gj
 noremap		<S-Up>		gk
 noremap		<S-Down>	gj
 
-" Commonly used commands
-nnoremap <F7> :if &filetype == "vim" \| so % \| else \| make \| endif<CR>
-noremap <F10> :w !ruby -w > /tmp/vim_r_buff 2>&1<CR>:sv /tmp/vim_r_buff<CR>
+" Syntax debugging
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Insert a single char
 noremap <Leader>i i<Space><Esc>r
