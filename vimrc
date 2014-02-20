@@ -341,7 +341,7 @@ augroup ft_clojure
 	au!
 
 	au FileType clojure call TurnOnClojureFolding()
-	au FileType clojure compiler clojure
+	"au FileType clojure compiler clojure
 	au FileType clojure setlocal report=100000
 	au FileType clojure nnoremap <buffer> o jI<cr><esc>kA
 	au FileType clojure nnoremap <buffer> O I<cr><esc>kA
@@ -586,7 +586,7 @@ augroup ft_python
 
 	au FileType python setlocal omnifunc=pythoncomplete#Complete
 	au FileType python setlocal define=^\s*\\(def\\\\|class\\)
-	au FileType python compiler nose
+	"au FileType python compiler nose
 	au FileType man nnoremap <buffer> <cr> :q<cr>
 augroup END
 
