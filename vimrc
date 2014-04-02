@@ -906,6 +906,11 @@ vnoremap <silent><C-L> :call g:ToggleNuMode()<cr>gv
 map <leader>a :Ack!
 
 " }}}
+" ClangComplete {{{
+
+let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
+
+" }}}
 " DelimitMate {{{
 
 let g:delimitMate_expand_cr = 1
