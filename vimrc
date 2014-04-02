@@ -909,6 +909,8 @@ map <leader>a :Ack!
 " ClangComplete {{{
 
 let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
+" temporarily disable the keymappings, it's interfering with delimitMate
+let g:clang_make_default_keymappings = 0
 
 " }}}
 " DelimitMate {{{
