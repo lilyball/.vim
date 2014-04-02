@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.sieve setlocal filetype=sieve
+au BufRead,BufNewFile *.sieve setfiletype sieve
