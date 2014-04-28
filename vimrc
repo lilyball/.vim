@@ -177,10 +177,6 @@ set rtp+=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vi
 " }}}
 " Searching and movement --------------------------------------------------- {{{
 
-" Use sane regexes
-nnoremap / /\v
-vnoremap / /\v
-
 set ignorecase
 set smartcase
 set incsearch
@@ -316,10 +312,6 @@ inoremap <F1> <ESC>:set invfullscreen<CR>a
 
 " Fuck you too, manual key.
 nnoremap K <nop>
-
-" Stop it, hash key.
-" Note: wtf is this for?
-inoremap # X<BS>#
 
 " }}}
 " Various filetype-specific stuff ------------------------------------------ {{{
@@ -658,7 +650,7 @@ augroup ft_vim
 
 	au FileType vim setlocal foldmethod=marker
 	"au FileType help setlocal textwidth=78
-	au BufWinEnter *.txt if &ft == 'help' | wincmd K | endif
+	au BufWinEnter *.txt if &buftype == 'help' | wincmd K | endif
 augroup END
 
 " }}}
@@ -689,71 +681,24 @@ function! s:ExecuteInShell(command) " {{{
 	echo 'Shell command ' . command . ' executed.'
 endfunction " }}}
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-nnoremap <leader>! :Shell
+nnoremap <leader>! :Shell<Space>
 
 " }}}
 " Convenience mappings ----------------------------------------------------- {{{
 
-" Clean whitespace
-map <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
-" Damit, Slimv
-map <leader>WW :%s/\s\+$//<cr>:let @/=''<CR>
-
-" Change case
-"nnoremap <C-u> gUiw
-"inoremap <C-u> <esc>gUiwea
-
-" Substitute
-nnoremap <leader>s :%s//<left>
-
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-
-" Diffoff
-"nnoremap <leader>D :diffoff!<cr>
-
-" Yankring
-"nnoremap <silent> <F6> :YRShow<cr>
-
-" Formatting, TextMate-style
-nnoremap Q gqip
-
-" Easier linewise reselection
-nnoremap <leader>V V`]
-
-" Preview Files
-"nnoremap <leader>p :w<cr>:Hammer<cr>
-
-" HTML tag closing
-inoremap <C-_> <Space><BS><Esc>:call InsertCloseTag()<cr>a
-
-" Align text
-nnoremap <leader>Al :left<cr>
-nnoremap <leader>Ac :center<cr>
-nnoremap <leader>Ar :right<cr>
-vnoremap <leader>Al :left<cr>
-vnoremap <leader>Ac :center<cr>
-vnoremap <leader>Ar :right<cr>
-
-" Less chording
-"nnoremap ; :
+cnoremap <c-k> <C-\>estrpart(getcmdline(),0,getcmdpos()-1)<CR>
 
 " Faster Esc
-inoremap jk <esc>
-
-" Cmdheight switching
-nnoremap <leader>1 :set cmdheight=1<cr>
-nnoremap <leader>2 :set cmdheight=2<cr>
+if !&insertmode
+	inoremap jk <esc>
+endif
 
 " Source
 vnoremap <leader>S y:execute @@<cr>
 nnoremap <leader>S ^vg_y:execute @@<cr>
-
-" Replaste
-" Note: I think this overrides Cmd-P. Why would I want to do that?
-"nnoremap <D-p> "_ddPV`]=
 
 " Marks and Quotes
 noremap ' `
@@ -778,15 +723,6 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Toggle textwidth
 nnoremap <F8> :if &tw == 0 \| set tw=78 \| else \| set tw=0 \| endif<CR>
-
-" Easy filetype switching {{{
-nnoremap _md :set ft=markdown<CR>
-"nnoremap _hd :set ft=htmldjango<CR>
-"nnoremap _jt :set ft=htmljinja<CR>
-"nnoremap _cw :set ft=confluencewiki<CR>
-"nnoremap _pd :set ft=python.django<CR>
-nnoremap _d  :set ft=diff<CR>
-" }}}
 
 " Toggle paste
 set pastetoggle=<F8>
@@ -828,7 +764,6 @@ map <leader>u :call HandleURI()<CR>
 
 " Quickreturn
 inoremap <c-cr> <esc>A<cr>
-inoremap <s-cr> <esc>A:<cr>
 
 " Indent Guides {{{
 
@@ -866,37 +801,17 @@ endfunction "}}}
 nnoremap <leader>B :call BlockColor()<cr>
 
 " }}}
-" Insert Mode Completion {{{
-
-inoremap <c-l> <c-x><c-l>
-inoremap <c-f> <c-x><c-f>
-
-" }}}
-
-" Remap arrow keys {{{
-
-nmap <Left> <<
-nmap <Right> >>
-vmap <Left> <gv
-vmap <Right> >gv
-
-nmap <Up> [e
-nmap <Down> ]e
-vmap <Up> [egv
-vmap <Down> ]egv
-
-" }}}
 
 " use Ctrl+L to toggle relative line numbers
-function! g:ToggleNuMode()
-	if &nu == 1
+function! s:ToggleNuMode()
+	if &nu
 		set rnu
 	else
 		set nu
 	endif
 endfunction
-nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
-vnoremap <silent><C-L> :call g:ToggleNuMode()<cr>gv
+nnoremap <script><silent> <C-L> :<C-U>call <SID>ToggleNuMode()<cr>
+vnoremap <script><silent> <C-L> :<C-U>call <SID>ToggleNuMode()<cr>gv
 
 " }}}
 " Plugin settings ---------------------------------------------------------- {{{
@@ -1434,6 +1349,8 @@ function! PulseCursorLine()
 endfunction
 
 " }}}
+" }}}
+
 " ==============================================================================
 
 " /bin/sh is bash
@@ -1458,12 +1375,27 @@ if v:version >= 700
 endif
 
 "-------------------------
+" commands
+"-------------------------
+
+function! s:TabMessage(cmd)
+	redir => message
+	silent execute a:cmd
+	redir END
+	tabnew
+	silent put =message
+	set nomodified
+	1
+endfunction
+command! -nargs=+ -complete=command TabMessage call <SID>TabMessage(<q-args>)
+
+"-------------------------
 " autocmds
 "-------------------------
 
 " If we're in a wide window, enable line numbers
 fun! <SID>WindowWidth()
-	if bufname('%') != '-MiniBufExplorer-' && &filetype != 'help'
+	if bufname('%') != '-MiniBufExplorer-' && &buftype != 'help'
 		if winwidth(0) > 90
 			setlocal number
 		else
@@ -1491,18 +1423,18 @@ augroup kevin
 	autocmd!
 
 	" Automagic line numbers
-	autocmd BufEnter * :call <SID>WindowWidth()
+	autocmd VimEnter,WinEnter * :call <SID>WindowWidth()
 
 	" Always do a full syntax refresh
 	autocmd BufEnter * syntax sync fromstart
 
 	" For help files, move them to the top window and make <Return>
 	" behave like <C-]> (jump to tag)
-	autocmd FileType help :call <SID>WindowToTop()
-	autocmd FileType help nmap <buffer> <Return> <C-]>
+	"autocmd FileType help :call <SID>WindowToTop()
+	"autocmd FileType help nmap <buffer> <Return> <C-]>
 
 	" For the quickfix window, move it to the bottom
-	autocmd FileType qf :3 wincmd _ | :call <SID>WindowToBottom()
+	"autocmd FileType qf :3 wincmd _ | :call <SID>WindowToBottom()
 
 	" For svn-commit, don't create backups
 	autocmd BufRead svn-commit.tmp :setlocal nobackup
