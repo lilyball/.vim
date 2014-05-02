@@ -100,9 +100,6 @@ set wildignore+=*.pyc                            " Python byte code
 
 " }}}
 
-" Don't back up temporary files
-set backupskip=/tmp/*,/private/tmp/*
-
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
 
@@ -125,6 +122,12 @@ set backupdir=~/.vim/tmp/backup//
 set directory=~/.vim/tmp/swap//
 set nobackup
 set writebackup
+set backupskip+=/private/tmp/*
+" Skip backups of Git files
+set backupskip+=*.git/COMMIT_EDITMSG,*.git/MERGE_MSG
+set backupskip+=*.git/modules/*/COMMIT_EDITMSG,git-rebase-todo
+" Skip backups of SVN commit files
+set backupskip+=svn-commit*.tmp
 
 " }}}
 " Leader {{{
@@ -1433,20 +1436,10 @@ augroup kevin
 	" For help files, move them to the top window and make <Return>
 	" behave like <C-]> (jump to tag)
 	"autocmd FileType help :call <SID>WindowToTop()
-	"autocmd FileType help nmap <buffer> <Return> <C-]>
+	autocmd FileType help nmap <buffer> <Return> <C-]>
 
 	" For the quickfix window, move it to the bottom
 	"autocmd FileType qf :3 wincmd _ | :call <SID>WindowToBottom()
-
-	" For svn-commit, don't create backups
-	autocmd BufRead svn-commit.tmp :setlocal nobackup
-	" For svn-commit, always start on line 1
-	autocmd BufWinEnter svn-commit.tmp :1
-
-	" For .git/COMMIT_EDITMSG, don't create backups
-	autocmd BufRead */.git/COMMIT_EDITMSG :setlocal nobackup
-	" for .git/COMMIT_EDITMSG, always start on line 1
-	autocmd BufWinEnter */.git/COMMIT_EDITMSG :1
 
 	" Detect procmailrc (as if I'd ever need this)
 	autocmd BufRead procmailrc :setfiletype procmail
