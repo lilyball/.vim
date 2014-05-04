@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.ts setfiletype typescript
+au BufRead,BufNewFile *.ts set filetype=typescript
