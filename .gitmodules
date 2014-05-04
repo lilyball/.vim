@@ -103,3 +103,6 @@
 [submodule "bundle/fish"]
 	path = bundle/fish
 	url = https://github.com/dag/vim-fish.git
+[submodule "bundle/markdown"]
+	path = bundle/markdown
+	url = https://github.com/tpope/vim-markdown
