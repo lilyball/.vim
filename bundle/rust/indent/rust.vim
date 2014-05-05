@@ -166,7 +166,8 @@ function GetRustIndent(lnum)
 	" column zero)
 
 	call cursor(a:lnum, 1)
-	if searchpair('{\|(', '', '}\|)', 'nbW') == 0
+	if searchpair('{\|(', '', '}\|)', 'nbW'
+				\ 's:is_string_comment(line("."), col("."))') == 0
 		if searchpair('\[', '', '\]', 'nbW',
 					\ 's:is_string_comment(line("."), col("."))') == 0
 			" Global scope, should be zero
