@@ -124,8 +124,9 @@ set nobackup
 set writebackup
 set backupskip+=/private/tmp/*
 " Skip backups of Git files
-set backupskip+=*.git/COMMIT_EDITMSG,*.git/MERGE_MSG
-set backupskip+=*.git/modules/*/COMMIT_EDITMSG,git-rebase-todo
+set backupskip+=*.git/COMMIT_EDITMSG,*.git/MERGE_MSG,*.git/TAG_EDITMSG
+set backupskip+=*.git/modules/*/COMMIT_EDITMSG,.*.git/modules/*/MERGE_MSG
+set backupskip+=*.git/modules/*/TAG_EDITMSG,git-rebase-todo
 " Skip backups of SVN commit files
 set backupskip+=svn-commit*.tmp
 
