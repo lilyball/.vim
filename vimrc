@@ -623,6 +623,7 @@ let g:rust_conceal=1
 augroup ft_rust
 	au!
 	au FileType rust setlocal colorcolumn=100 et
+	au FileType rust nnoremap <buffer> <leader>R :unlet b:did_indent \| :delf GetRustIndent \| :runtime indent/rust.vim<CR>
 augroup END
 
 let g:tagbar_type_rust = {
@@ -666,8 +667,6 @@ augroup END
 
 nnoremap <leader>ev <C-w>s<C-w>j<C-w>L:e $MYVIMRC<cr>
 nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/snippets/<cr>
-nnoremap <leader>eh <C-w>s<C-w>j<C-w>L:e ~/.hgrc<cr>
-nnoremap <leader>eg <C-w>s<C-w>j<C-w>L:e ~/.gitconfig<cr>
 
 " }}}
 " Shell -------------------------------------------------------------------- {{{
