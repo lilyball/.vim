@@ -19,9 +19,13 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! SyntaxCheckers_dtrace_dtrace_GetLocList() dict
-    let makeprg = self.makeprgBuild({
-                \ 'fname_before': '-s',
-                \ 'args_after': '-e' })
+    let args = {  'fname_before': '-s',
+                \ 'args_after':   '-e' }
+
+    if getline(1) =~ "^#!.*dtrace.*-C"
+        let args['args_after'] += ' -C'
+    endif
+    let makeprg = self.makeprgBuild(args)
 
     let errorformat = 'dtrace: failed to compile script %f: line %l: %m'
 
