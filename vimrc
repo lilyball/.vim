@@ -883,6 +883,13 @@ let g:atia_attributes_complete = 0
 let g:lisp_rainbow = 1
 
 " }}}
+" NERD Commenter {{{
+
+let g:NERDCustomDelimiters = {
+            \ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'}
+            \ }
+
+" }}}
 " NERD Tree {{{
 
 noremap  <F2> :NERDTreeToggle<cr>
