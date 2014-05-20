@@ -93,7 +93,7 @@
 	url = https://github.com/vim-scripts/ConflictDetection.git
 [submodule "bundle/ConflictMotions"]
 	path = bundle/ConflictMotions
-	url = https://github.com/vim-scripts/ConflictMotions.git
+	url = https://github.com/kballard/ConflictMotions.git
 [submodule "bundle/ingo-library"]
 	path = bundle/ingo-library
 	url = https://github.com/vim-scripts/ingo-library.git
