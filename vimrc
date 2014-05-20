@@ -1511,7 +1511,8 @@ noremap		<S-Up>		gk
 noremap		<S-Down>	gj
 
 " Syntax debugging
-noremap <F10> :echo map(synstack(line("."), col(".")), 'synIDattr(v:val, "name")')<CR>
+noremap <F10> :echo string(map(synstack(line("."), col(".")), 'synIDattr(v:val, "name")'))
+            \ . ": " . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
 
 " Insert a single char
 noremap <Leader>i i<Space><Esc>r
