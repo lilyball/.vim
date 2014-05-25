@@ -622,7 +622,7 @@ augroup END
 let g:rust_conceal=1
 augroup ft_rust
 	au!
-	au FileType rust setlocal colorcolumn=100 et
+	au FileType rust setlocal colorcolumn=100 et fdl=99 foldmethod=syntax
 	au FileType rust nnoremap <buffer> <leader>R :unlet b:did_indent \| :delf GetRustIndent \| :runtime indent/rust.vim<CR>
 augroup END
 
