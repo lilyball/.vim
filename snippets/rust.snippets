@@ -9,3 +9,16 @@ snippet copyright
 	// option. This file may not be copied, modified, or distributed
 	// except according to those terms.
 	
+snippet feat
+	#![feature(${1})]${2}
+snippet macro_rules
+	macro_rules! ${1:name}{
+		(${2}) => {${3}}${4}
+	}${5}
+snippet deprecate
+	#[allow(missing_doc)]
+	#[deprecated = "replaced by .${1:}()"]
+	#[inline]
+	fn ${2}(${3}) -> ${4} {
+		self.$1(${5})
+	}${6}
