@@ -22,3 +22,11 @@ snippet deprecate
 	fn ${2}(${3}) -> ${4} {
 		self.$1(${5})
 	}${6}
+snippet main
+	fn main() {
+		${1}
+	}
+snippet fn
+	fn ${1:name}(${2}) ${3:-> ${4:()}} {
+		${5}
+	}

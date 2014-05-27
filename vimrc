@@ -1,4 +1,4 @@
-" .vimrc
+" vim: noet sw=4 ts=4
 " Author: Kevin Ballard <kevin@sb.org>
 "
 " Much of these settings came from other sources.
@@ -623,8 +623,17 @@ let g:rust_conceal=1
 augroup ft_rust
 	au!
 	au FileType rust setlocal colorcolumn=100 et fdl=99 foldmethod=syntax
-	au FileType rust nnoremap <buffer> <leader>R :unlet b:did_indent \| :delf GetRustIndent \| :runtime indent/rust.vim<CR>
+	au FileType rust command! -buffer ReloadRust call <SID>ReloadRust()
 augroup END
+
+function! s:ReloadRust()
+	unlet b:did_indent
+	delf GetRustIndent
+	runtime indent/rust.vim
+	set filetype=
+	set filetype=rust
+	runtime autoload/rust.vim
+endfunction
 
 let g:tagbar_type_rust = {
 	\ 'ctagstype' : 'rust',
