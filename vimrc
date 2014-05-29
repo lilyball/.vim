@@ -100,8 +100,12 @@ set wildignore+=*.pyc                            " Python byte code
 
 " }}}
 
-" Resize splits when the window is resized
-au VimResized * exe "normal! \<c-w>="
+augroup vimrc_resize
+	au!
+
+	" Resize splits when the window is resized
+	au VimResized * exe "normal! \<c-w>="
+augroup END
 
 " Tabs, spaces, wrapping {{{
 
@@ -941,7 +945,10 @@ nnoremap <F6> :TagbarToggle<CR>
 " }}}
 " JsBeautify {{{
 
-autocmd FileType javascript command JsBeautify :call JsBeautify()
+augroup plug_jsbeautify
+	au!
+	autocmd FileType javascript command JsBeautify :call JsBeautify()
+augroup END
 
 " }}}
 " Text objects ------------------------------------------------------------- {{{

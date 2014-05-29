@@ -30,3 +30,27 @@ snippet fn
 	fn ${1:name}(${2}) ${3:-> ${4:()}} {
 		${5}
 	}
+
+# this snippet reproduces the template that the IRC bot rusti uses
+snippet rusti
+	#![feature(asm, globs, macro_rules, phase, simd, struct_variant, quad_precision_float)]
+	
+	extern crate collections;
+	extern crate native;
+	extern crate rand;
+	#[phase(syntax)]
+	extern crate regex_macros;
+	extern crate regex;
+
+	#[allow(dead_code)]
+	static version: &'static str = "`system("rustc --version | head -1")`";
+
+	#[allow(dead_code)]
+	fn show<T: std::fmt::Show>(e: T) { println!("{}", e) }
+
+	fn main() {
+		let r = {
+			${1}
+		};
+		println!("{}", r)
+	}
