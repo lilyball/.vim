@@ -19,12 +19,12 @@ function! rust#Jump(mode, function) range
 	let &foldenable = foldenable
 endfunction
 
-function! <SID>Jump_Back()
+function! s:Jump_Back()
 	call search('{', 'b')
 	keepjumps normal! w99[{
 endfunction
 
-function! <SID>Jump_Forward()
+function! s:Jump_Forward()
 	normal! j0
 	call search('{', 'b')
 	keepjumps normal! w99[{%
