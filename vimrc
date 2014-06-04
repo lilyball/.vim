@@ -313,6 +313,9 @@ function! MyFoldText() " {{{
 endfunction " }}}
 set foldtext=MyFoldText()
 
+" Always ensure current fold is visible when opening a file
+au BufEnter * normal zv
+
 " }}}
 " Destroy infuriating keys ------------------------------------------------- {{{
 
