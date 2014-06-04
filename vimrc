@@ -284,15 +284,6 @@ set foldlevelstart=-1
 
 set foldcolumn=1
 
-" Space to toggle folds
-" Note: I think this will just confuse me
-"nnoremap <Space> za
-"vnoremap <Space> za
-
-" Make zO recursively open whatever top level fold we're in, no matter where the
-" cursor happens to be.
-nnoremap zO zCzO
-
 " Use ,z to "focus" the current fold
 nnoremap <leader>z zMzvzz
 
