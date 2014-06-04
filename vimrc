@@ -849,12 +849,6 @@ let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
 let g:clang_make_default_keymappings = 0
 
 " }}}
-" Command-T {{{
-
-" Disable this plugin until it has Ruby 2.0 support
-let g:command_t_loaded = 1
-
-" }}}
 " DelimitMate {{{
 
 let g:delimitMate_expand_cr = 1
