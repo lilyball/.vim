@@ -21,7 +21,7 @@
 	url = git://git.wincent.com/command-t.git
 [submodule "bundle/delimitMate"]
 	path = bundle/delimitMate
-	url = https://github.com/Raimondi/delimitMate.git
+	url = https://github.com/kballard/delimitMate.git
 [submodule "bundle/closetag"]
 	path = bundle/closetag
 	url = https://github.com/docunext/closetag.vim.git
