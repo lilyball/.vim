@@ -51,12 +51,15 @@ function! rust#Run(bang, args)
 	let b:rust_last_rustc_args = rustc_args
 	let b:rust_last_args = args
 
-	call s:WithPath(function("s:Run"), a:bang, rustc_args, args)
+	call s:WithPath(function("s:Run"), rustc_args, args)
 endfunction
 
-function! s:Run(path, bang, rustc_args, args)
+function! s:Run(path, rustc_args, args)
 	try
 		let exepath = tempname()
+		if has('win32')
+			let exepath .= '.exe'
+		endif
 
 		let rustc_args = [a:path, '-o', exepath] + a:rustc_args
 
