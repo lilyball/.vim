@@ -1020,50 +1020,26 @@ function! s:AckMotion(type) abort
 endfunction
 
 " }}}
-" Error toggles ------------------------------------------------------------ {{{
-
-command! ErrorsToggle call ErrorsToggle()
-function! ErrorsToggle() " {{{
-	if exists("w:is_error_window")
-		unlet w:is_error_window
-		exec "q"
-	else
-		exec "Errors"
-		lopen
-		let w:is_error_window = 1
-	endif
-endfunction " }}}
-
-command! -bang -nargs=? QFixToggle call QFixToggle(<bang>0)
-function! QFixToggle(forced) " {{{
-	if exists("g:qfix_win") && a:forced == 0
-		cclose
-		unlet g:qfix_win
-	else
-		copen 10
-		let g:qfix_win = bufnr("$")
-	endif
-endfunction " }}}
-
-nmap <silent> <F3> :ErrorsToggle<cr>
-nmap <silent> <F4> :QFixToggle<cr>
-
-" }}}
 " Utils -------------------------------------------------------------------- {{{
-
-function! g:echodammit(msg)
-	exec 'echom "----------> ' . a:msg . '"'
-endfunction
 
 " Synstack {{{
 
 " Show the stack of syntax highlighting classes affecting whatever is under the
 " cursor.
-function! SynStack() "{{{{
-	echo join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'), " > ")
+function! s:SynStack() "{{{{
+	let syns = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+	let trans = synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
+	let res = join(syns, ' > ')
+	if !empty(trans) && (empty(syns) || syns[-1] != trans)
+		let res .= ' (' . trans . ')'
+	endif
+	if empty(res)
+		let res = 'No syntax items!'
+	endif
+	echo res
 endfunc "}}}
 
-nnoremap ß :call SynStack()<CR>
+nnoremap ß :call <SID>SynStack()<CR>
 
 " }}}
 " Toggle whitespace in diffs {{{
@@ -1524,10 +1500,6 @@ inoremap	<S-Up>		<C-o>gk
 inoremap	<S-Down>	<C-o>gj
 noremap		<S-Up>		gk
 noremap		<S-Down>	gj
-
-" Syntax debugging
-noremap <F10> :echo string(map(synstack(line("."), col(".")), 'synIDattr(v:val, "name")'))
-            \ . ": " . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")<CR>
 
 " Insert a single char
 noremap <Leader>i i<Space><Esc>r
