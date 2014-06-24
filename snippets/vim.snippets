@@ -3,3 +3,11 @@ snippet header
 	" Author: ${2:`g:snips_author`}
 	" Description: ${3}
 	${4:" Last Change: `strftime("%B %d, %Y")`}
+snippet save_cpo
+	let s:save_cpo = &cpo
+	set cpo&vim
+
+	${1}
+
+	let &cpo = s:save_cpo
+	unlet s:save_cpo
