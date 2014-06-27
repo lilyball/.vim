@@ -51,6 +51,7 @@ set grepprg=grep\ -nH\ $*
 set showmatch
 set showfulltag
 set whichwrap+=<,>,[,]
+set nojoinspaces
 
 " Keep a large viminfo file
 set viminfo='1000,f1,:1000,/1000,r/tmp,r/Volumes
