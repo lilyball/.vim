@@ -1031,7 +1031,7 @@ function! s:SynStack() "{{{{
 	let syns = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 	let trans = synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
 	let res = join(syns, ' > ')
-	if !empty(trans) && (empty(syns) || syns[-1] != trans)
+	if !empty(syns) && syns[-1] != trans
 		let res .= ' (' . trans . ')'
 	endif
 	if empty(res)
