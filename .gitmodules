@@ -115,3 +115,6 @@
 [submodule "bundle/vim-swift"]
 	path = bundle/vim-swift
 	url = https://github.com/kballard/vim-swift.git
+[submodule "bundle/scriptease"]
+	path = bundle/scriptease
+	url = https://github.com/tpope/vim-scriptease.git
