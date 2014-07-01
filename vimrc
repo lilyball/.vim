@@ -834,6 +834,17 @@ vnoremap <script><silent> <C-L> :<C-U>call <SID>ToggleNuMode()<cr>gv
 map <leader>a :Ack!
 
 " }}}
+" CamelCaseMotion {{{
+
+for s:mode in ['n', 'o', 'v']
+	for s:motion in ['w', 'b', 'e']
+		execute (s:mode ==# 'v' ? 'x' : s:mode) . 'map <silent> <S-' . toupper(s:motion) . '> <Plug>CamelCaseMotion_' . s:motion
+	endfor
+endfor
+unlet s:mode
+unlet s:motion
+
+" }}}
 " ClangComplete {{{
 
 let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
