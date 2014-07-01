@@ -112,3 +112,6 @@
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets
+[submodule "bundle/vim-swift"]
+	path = bundle/vim-swift
+	url = https://github.com/kballard/vim-swift.git
