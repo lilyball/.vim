@@ -674,7 +674,7 @@ augroup END
 " Quick editing ------------------------------------------------------------ {{{
 
 nnoremap <leader>ev <C-w>s<C-w>j<C-w>L:e $MYVIMRC<cr>
-nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/snippets/<cr>
+nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/UltiSnips/<cr>
 
 " }}}
 " Shell -------------------------------------------------------------------- {{{
@@ -936,6 +936,13 @@ let g:syntastic_warning_symbol = '⚠'
 let g:tagbar_usearrows = 1
 
 nnoremap <F6> :TagbarToggle<CR>
+
+" }}}
+" UltiSnips {{{
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " }}}
 " JsBeautify {{{

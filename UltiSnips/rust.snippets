@@ -1,0 +1,53 @@
+snippet copyright "Copyright header" b
+// Copyright `!v strftime("%Y")` The Rust Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution and at
+// http://rust-lang.org/COPYRIGHT.
+//
+// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
+
+endsnippet
+
+snippet macro "macro_rules!" b
+macro_rules! ${1:name}{
+	(${2:matcher}) => {
+		${3}
+	}${4}
+}
+endsnippet
+
+snippet deprecate "Stub for a deprecated function"
+#[allow(missing_doc)]
+#[deprecated = "replaced by .${1:function_name}()"]
+#[inline]
+fn ${2:old_name}(${3})${4/..*/ -> /}${4} {
+	self.$1(${3/:[^,]*//g})
+}
+endsnippet
+
+snippet rusti "Template used by the IRC rusti bot"
+#![feature(asm, globs, macro_rules, phase, simd, struct_variant, quad_precision_float)]
+
+extern crate collections;
+extern crate native;
+extern crate rand;
+#[phase(plugin)]
+extern crate regex_macros;
+extern crate regex;
+
+#[allow(dead_code)]
+static version: &'static str = "`rustc --version | head -1`";
+
+#[allow(dead_code)]
+fn show<T: std::fmt::Show>(e: T) { println!("{}", e) }
+
+fn main() {
+	let r = {
+		${1}
+	};
+	println!("{}", r)
+}
+endsnippet
