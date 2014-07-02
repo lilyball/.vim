@@ -817,11 +817,10 @@ nnoremap <leader>B :call BlockColor()<cr>
 
 " use Ctrl+L to toggle relative line numbers
 function! s:ToggleNuMode()
-	if &nu
-		set rnu
-	else
+	if !&nu
 		set nu
 	endif
+	set rnu!
 endfunction
 nnoremap <script><silent> <C-L> :<C-U>call <SID>ToggleNuMode()<cr>
 vnoremap <script><silent> <C-L> :<C-U>call <SID>ToggleNuMode()<cr>gv
