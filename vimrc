@@ -44,7 +44,6 @@ set shiftround
 set autoread
 set title
 set dictionary=/usr/share/dict/words
-set nohlsearch
 set confirm
 set fileformats=unix,mac,dos
 set grepprg=grep\ -nH\ $*
@@ -188,8 +187,6 @@ set rtp+=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vi
 
 set ignorecase
 set smartcase
-set incsearch
-set nohlsearch
 set nogdefault
 
 set scrolloff=3
@@ -199,10 +196,6 @@ set sidescrolloff=10
 set virtualedit+=block
 
 runtime macros/matchit.vim
-
-" Easier to type, and I never use the default behavior.
-noremap H ^
-noremap L g_
 
 " Heresy
 inoremap <c-a> <esc>I
@@ -214,13 +207,14 @@ nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " Ack for the last search
 nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
 
-" Fix linewise visual selection of various text objects
-" Note: need to figure out what the hell these do
-"nnoremap VV V
-"nnoremap Vit vitVkoj
-"nnoremap Vat vatV
-"nnoremap Vab vabV
-"nnoremap VaB vaBV
+" Search highlighting {{{
+
+set hlsearch
+set incsearch
+
+nnoremap <silent> <C-[>u :nohlsearch<CR>
+
+" }}}
 
 " Error navigation {{{
 "
@@ -252,15 +246,23 @@ noremap <C-h>  <C-w>h
 noremap <C-j>  <C-w>j
 noremap <C-k>  <C-w>k
 noremap <C-l>  <C-w>l
-noremap <leader>v <C-w>v
 
 " }}}
 
 " Highlight word {{{
-nnoremap <silent> <leader>hh :execute 'match InterestingWord1 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h1 :execute 'match InterestingWord1 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h2 :execute '2match InterestingWord2 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h3 :execute '3match InterestingWord3 /\<<c-r><c-w>\>/'<cr>
+nnoremap <silent> <leader>hh :match InterestingWord1  /\<<c-r><c-w>\>/<cr>
+nnoremap <silent> <leader>h1 :match InterestingWord1  /\<<c-r><c-w>\>/<cr>
+nnoremap <silent> <leader>h2 :2match InterestingWord2 /\<<c-r><c-w>\>/<cr>
+nnoremap <silent> <leader>h3 :3match InterestingWord3 /\<<c-r><c-w>\>/<cr>
+
+nnoremap <silent> <leader>hn  :match  none<cr>
+nnoremap <silent> <leader>hn1 :match  none<cr>
+nnoremap <silent> <leader>hn2 :2match none<cr>
+nnoremap <silent> <leader>hn3 :3match none<cr>
+
+hi def InterestingWord1 ctermbg=green guibg=green ctermfg=black guifg=#000000
+hi def InterestingWord2 ctermbg=blue  guibg=blue  ctermfg=black guifg=#000000
+hi def InterestingWord3 ctermbg=red   guibg=red   ctermfg=white guifg=#FFFFFF
 " }}}
 
 " Visual Mode */# from Scrooloose {{{
@@ -795,23 +797,34 @@ nnoremap <leader>i :call IndentGuides()<cr>
 " }}}
 " Block Colors {{{
 
-let g:blockcolor_state = 0
-function! BlockColor() " {{{
-	if g:blockcolor_state
-		let g:blockcolor_state = 0
-		call matchdelete(77880)
+let s:blockcolor_state = 0
+function s:BlockColor() " {{{
+	if s:blockcolor_state
+		let s:blockcolor_state = 0
 		call matchdelete(77881)
 		call matchdelete(77882)
 		call matchdelete(77883)
+		call matchdelete(77884)
+		call matchdelete(77885)
+		call matchdelete(77886)
 	else
-		let g:blockcolor_state = 1
-		call matchadd("BlockColor1", '^ \{4}.*', 1, 77880)
-		call matchadd("BlockColor2", '^ \{8}.*', 2, 77881)
-		call matchadd("BlockColor3", '^ \{12}.*', 3, 77882)
-		call matchadd("BlockColor4", '^ \{16}.*', 4, 77883)
+		let s:blockcolor_state = 1
+		call matchadd("BlockColor1", '^ \{4}.*', 1, 77881)
+		call matchadd("BlockColor2", '^ \{8}.*', 2, 77882)
+		call matchadd("BlockColor3", '^ \{12}.*', 3, 77883)
+		call matchadd("BlockColor4", '^ \{16}.*', 4, 77884)
+		call matchadd("BlockColor5", '^ \{20}.*', 4, 77885)
+		call matchadd("BlockColor6", '^ \{24}.*', 4, 77886)
 	endif
 endfunction "}}}
-nnoremap <leader>B :call BlockColor()<cr>
+nnoremap <leader>B :call <SID>BlockColor()<cr>
+
+hi def BlockColor1 guibg=#222222 ctermbg=234
+hi def BlockColor2 guibg=#2a2a2a ctermbg=235
+hi def BlockColor3 guibg=#353535 ctermbg=236
+hi def BlockColor4 guibg=#3d3d3d ctermbg=237
+hi def BlockColor5 guibg=#444444 ctermbg=238
+hi def BlockColor6 guibg=#4a4a4a ctermbg=239
 
 " }}}
 
