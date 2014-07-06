@@ -780,51 +780,55 @@ map <leader>u :call HandleURI()<CR>
 " Quickreturn
 inoremap <c-cr> <esc>A<cr>
 
-" Indent Guides {{{
-
-let g:indentguides_state = 0
-function! IndentGuides() " {{{
-	if g:indentguides_state
-		let g:indentguides_state = 0
-		2match None
-	else
-		let g:indentguides_state = 1
-        execute '2match IndentGuides /\%(\_^\s*\)\@<=\%(\%'.(0*&sw+1).'v\|\%'.(1*&sw+1).'v\|\%'.(2*&sw+1).'v\|\%'.(3*&sw+1).'v\|\%'.(4*&sw+1).'v\|\%'.(5*&sw+1).'v\|\%'.(6*&sw+1).'v\|\%'.(7*&sw+1).'v\)\s/'
-	endif
-endfunction " }}}
-nnoremap <leader>i :call IndentGuides()<cr>
-
-" }}}
 " Block Colors {{{
 
-let s:blockcolor_state = 0
-function s:BlockColor() " {{{
-	if s:blockcolor_state
-		let s:blockcolor_state = 0
-		call matchdelete(77881)
-		call matchdelete(77882)
-		call matchdelete(77883)
-		call matchdelete(77884)
-		call matchdelete(77885)
-		call matchdelete(77886)
-	else
-		let s:blockcolor_state = 1
-		call matchadd("BlockColor1", '^ \{4}.*', 1, 77881)
-		call matchadd("BlockColor2", '^ \{8}.*', 2, 77882)
-		call matchadd("BlockColor3", '^ \{12}.*', 3, 77883)
-		call matchadd("BlockColor4", '^ \{16}.*', 4, 77884)
-		call matchadd("BlockColor5", '^ \{20}.*', 4, 77885)
-		call matchadd("BlockColor6", '^ \{24}.*', 4, 77886)
-	endif
-endfunction "}}}
-nnoremap <leader>B :call <SID>BlockColor()<cr>
+function s:InitBlockColor() abort " {{{
+	let s:blockcolor_count = 20
+	let s:blockcolor_state = 0
+	let s:blockcolor_matchid = 77880
 
-hi def BlockColor1 guibg=#222222 ctermbg=234
-hi def BlockColor2 guibg=#2a2a2a ctermbg=235
-hi def BlockColor3 guibg=#353535 ctermbg=236
-hi def BlockColor4 guibg=#3d3d3d ctermbg=237
-hi def BlockColor5 guibg=#444444 ctermbg=238
-hi def BlockColor6 guibg=#4a4a4a ctermbg=239
+	function s:ToggleBlockColor() " {{{
+		if s:blockcolor_state
+			let s:blockcolor_state = 0
+			for l:idx in range(s:blockcolor_count)
+				call matchdelete(s:blockcolor_matchid+l:idx)
+			endfor
+		else
+			let s:blockcolor_state = 1
+			for l:idx in range(s:blockcolor_count)
+				" hard tabs match the virtual column of their start, not their
+				" end. This makes things a little more complicated.
+				" Instead of searching up to the shiftwidth, we instead want
+				" to locate the first indent character that's greater than the
+				" previous indentation level, and which is followed by
+				" anything greater than the current indentation level.
+				if l:idx == 0
+					" First indentation level is the trivial case
+					let l:pat = '^\s'
+				else
+					let l:pat = printf('^\s*\zs\%%>%dv\s\%%>%dv',
+								\ l:idx * &sw - &sw,
+								\ l:idx * &sw + 1)
+				endif
+				let l:pat .= '.*'
+				call matchadd("BlockColor".l:idx, l:pat, -100 + l:idx,
+							\ s:blockcolor_matchid+l:idx)
+			endfor
+		endif
+	endfunction " }}}
+
+	for l:idx in range(s:blockcolor_count)
+		let l:termbg = 234 + min([l:idx, 10])
+		let l:bgcomp = 0x22 + (l:idx * 2)
+		let l:guibg = printf("#%02x%02x%02x", l:bgcomp, l:bgcomp, l:bgcomp)
+		execute printf('hi def BlockColor%d guibg=%s ctermbg=%d', l:idx,
+					\ l:guibg, l:termbg)
+	endfor
+
+	nnoremap <leader>B :call <SID>ToggleBlockColor()<CR>
+endfunction " }}}
+
+call s:InitBlockColor()
 
 " }}}
 
