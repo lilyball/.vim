@@ -854,12 +854,6 @@ vnoremap <silent> <leader>l :<C-U>normal! <C-L><CR>gv
 map <leader>a :Ack!
 
 " }}}
-" BufExplorer {{{
-
-inoremap <F3> <Esc>:BufExplorer<CR>
-nnoremap <F3> :BufExplorer<CR>
-
-" }}}
 " CamelCaseMotion {{{
 
 for s:mode in ['n', 'o', 'v']
