@@ -621,9 +621,10 @@ augroup END
 " Rust {{{
 
 let g:rust_conceal=1
+let g:rust_colorcolumn=1
+let g:rust_fold=1
 augroup ft_rust
 	au!
-	au FileType rust setlocal colorcolumn=100 et fdl=99 foldmethod=syntax
 	au FileType rust command! -buffer ReloadRust call <SID>ReloadRust()
 augroup END
 
