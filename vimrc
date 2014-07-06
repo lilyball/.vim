@@ -850,6 +850,12 @@ vnoremap <script><silent> <C-L> :<C-U>call <SID>ToggleNuMode()<cr>gv
 map <leader>a :Ack!
 
 " }}}
+" BufExplorer {{{
+
+inoremap <F3> <Esc>:BufExplorer<CR>
+nnoremap <F3> :BufExplorer<CR>
+
+" }}}
 " CamelCaseMotion {{{
 
 for s:mode in ['n', 'o', 'v']
@@ -866,6 +872,11 @@ unlet s:motion
 let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
 " temporarily disable the keymappings, it's interfering with delimitMate
 let g:clang_make_default_keymappings = 0
+
+" }}}
+" Command-T {{{
+
+nmap <leader>bb :CommandTBuffer<CR>
 
 " }}}
 " DelimitMate {{{
@@ -1566,18 +1577,6 @@ noremap <Leader>= gg=G
 " Map space and backspace to forward/backward screen
 map <space> <c-f>
 map <backspace> <c-b>
-
-" invoke bufexplorer
-imap <F3> <ESC>:BufExplorer<CR>
-nmap <F3> :BufExplorer<CR>
-
-" invoke Gundo
-nnoremap <F5> :GundoToggle<CR>
-
-" invoke Command-T for buffers
-nmap <leader>bb :CommandTBuffer<CR>
-
-noremap <leader>l :TagbarToggle<CR>
 
 "--------------------------------------
 " plugin / script / app settings
