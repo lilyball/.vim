@@ -832,15 +832,19 @@ call s:InitBlockColor()
 
 " }}}
 
-" use Ctrl+L to toggle relative line numbers
+" use ,r to toggle relative line numbers
 function! s:ToggleNuMode()
 	if !&nu
 		set nu
 	endif
 	set rnu!
 endfunction
-nnoremap <script><silent> <C-L> :<C-U>call <SID>ToggleNuMode()<cr>
-vnoremap <script><silent> <C-L> :<C-U>call <SID>ToggleNuMode()<cr>gv
+nnoremap <silent> <leader>r :call <SID>ToggleNuMode()<cr>
+vnoremap <silent> <leader>r :<C-U>call <SID>ToggleNuMode()<cr>gv
+
+" Redraw the screen with ,l
+nnoremap <silent> <leader>l <C-L>
+vnoremap <silent> <leader>l :<C-U>normal! <C-L><CR>gv
 
 " }}}
 " Plugin settings ---------------------------------------------------------- {{{
