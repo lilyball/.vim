@@ -931,7 +931,6 @@ let g:lisp_rainbow = 1
 
 let g:NERDCustomDelimiters = {
 			\ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
-			\ 'swift': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'}
 			\ }
 
 " }}}
