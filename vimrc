@@ -930,8 +930,9 @@ let g:lisp_rainbow = 1
 " NERD Commenter {{{
 
 let g:NERDCustomDelimiters = {
-            \ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'}
-            \ }
+			\ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
+			\ 'swift': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'}
+			\ }
 
 " }}}
 " NERD Tree {{{
