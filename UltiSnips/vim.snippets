@@ -1,8 +1,8 @@
 snippet header "Header comment"
-" File: ${1:`expand('%:p:h:t').'/'.expand('%:t')`}
-" Author: ${2:`g:snips_author`}
+" File: ${1:`!v expand('%:p:h:t').'/'.expand('%:t')`}
+" Author: ${2:`!v g:snips_author`}
 " Description: ${3}
-${4:" Last Change: `strftime("%B %d, %Y")`}
+${4:" Last Change: `!v strftime("%b %d, %Y")`}
 endsnippet
 
 snippet save_cpo
