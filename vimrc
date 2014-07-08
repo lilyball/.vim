@@ -47,7 +47,6 @@ set dictionary=/usr/share/dict/words
 set confirm
 set fileformats=unix,mac,dos
 set grepprg=grep\ -nH\ $*
-set showmatch
 set showfulltag
 set whichwrap+=<,>,[,]
 set nojoinspaces
