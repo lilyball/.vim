@@ -13,9 +13,9 @@ endsnippet
 
 snippet macro "macro_rules!" b
 macro_rules! ${1:name}{
-	(${2:matcher}) => {
-		${3}
-	}${4}
+	(${2:matcher}) => {${3:{
+		${4}
+	}}}${5}
 }
 endsnippet
 
