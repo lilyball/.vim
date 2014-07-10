@@ -287,22 +287,43 @@ set foldcolumn=1
 " Use ,z to "focus" the current fold
 nnoremap <leader>z zMzvzz
 
-function! MyFoldText() " {{{
-	let line = getline(v:foldstart)
+function! MyFoldText(foldstart, foldend) " {{{
+	let line = getline(a:foldstart)
 
-	let nucolwidth = &fdc + &number * &numberwidth
-	let windowwidth = winwidth(0) - nucolwidth - 3
-	let foldedlinecount = v:foldend - v:foldstart
+	let foldedlinecount = a:foldend - a:foldstart + 1
 
 	" expand tabs into spaces
-	let onetab = strpart('        ', 0, &tabstop)
-	let line = substitute(line, '\t', onetab, 'g')
+	while 1
+		let idx = stridx(line, "\t")
+		if idx == -1
+			break
+		endif
+		let width = strdisplaywidth("\t", idx)
+		let line = strpart(line, 0, idx) . repeat(" ", width) . line[idx+1:]
+	endwhile
 
-	let line = strpart(line, 0, windowwidth - 2 - len(foldedlinecount))
-	let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+	" get window width
+	" this is pretty hacky, but unfortunately the only way to get the
+	" definitive window width involves moving the cursor and that kind of
+	" sucks.
+	let nucolwidth = &fdc + &number * &numberwidth
+	let windowwidth = winwidth(0) - nucolwidth - 3
+	if has('signs')
+		redir => signs
+			silent execute 'sign place buffer=' . bufnr('')
+		redir END
+		if signs =~# '='
+			" at least one sign is defind, there must be a gutter
+			let windowwidth -= 2
+		endif
+	endif
+
+	let maxwidth = windowwidth - strwidth(foldedlinecount) - 2
+	let line = line[:maxwidth]
+	let fillcharcount = maxwidth - strwidth(line)
 	return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
-set foldtext=MyFoldText()
+set foldtext=MyFoldText(v:foldstart,v:foldend)
 
 " Always ensure current fold is visible when opening a file
 au BufEnter * normal zv
