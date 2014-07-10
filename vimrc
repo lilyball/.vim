@@ -969,6 +969,11 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 " }}}
+" Preview {{{
+
+let g:PreviewMarkdownFences = 1
+
+" }}}
 " snipMate {{{
 
 let g:snips_author = "Kevin Ballard"
