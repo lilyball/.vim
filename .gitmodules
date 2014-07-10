@@ -99,7 +99,7 @@
 	url = https://github.com/vim-scripts/CountJump.git
 [submodule "bundle/fish"]
 	path = bundle/fish
-	url = https://github.com/dag/vim-fish.git
+	url = https://github.com/kballard/vim-fish.git
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/tpope/vim-markdown
