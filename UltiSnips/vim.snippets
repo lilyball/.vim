@@ -14,3 +14,34 @@ ${1}
 let &cpo = s:save_cpo
 unlet s:save_cpo
 endsnippet
+
+snippet skeleton_syntax "Skeleton Syntax file" b
+" Vim syntax file
+" Language:    ${1:`!v substitute(expand('%:t:r'), '.*', '\u\0', '')`}
+" Maintainer:  ${2:`!v g:snips_author`}
+${3:" Last Change: `!v strftime("%b %d, %Y")`}
+
+if version < 600
+	syntax clear
+elseif exists('b:current_syntax')
+	finish
+endif
+
+" Settings {{{1
+${5}
+
+" Syntax definitions {{{1
+
+
+" Default highlighting {{{1
+
+
+" }}}1
+
+syn sync minlines=200
+syn sync maxlines=500
+
+let b:current_syntax = '${4:`!p snip.rv = snip.basename or 'filetype'`}'
+
+" vim: set et sw=4 ts=4:
+endsnippet
