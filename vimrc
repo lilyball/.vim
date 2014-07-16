@@ -865,6 +865,27 @@ vnoremap <silent> <leader>r :<C-U>call <SID>ToggleNuMode()<cr>gv
 nnoremap <silent> <leader>l <C-L>
 vnoremap <silent> <leader>l :<C-U>normal! <C-L><CR>gv
 
+" Bind ,gq to reformat without textwidth. This is intended for formatting
+" comments at the normal 79 when the ftplugin sets a longer textwidth.
+function! s:ReformatComments(type, ...)
+	let save_tw = &l:tw
+	setl tw=0
+
+	if a:0 " Invoked from Visual mode
+		silent exe 'normal! `<' . a:type . '`>gq'
+	elseif a:type == 'line'
+		silent exe "normal! '[V']gq"
+	elseif a:type == 'block'
+		silent exe "normal! `[\<C-V>`]gq"
+	else
+		silent exe "normal! `[v`]gq"
+	endif
+
+	let &l:tw = save_tw
+endfunction
+nnoremap <silent> <leader>gq :set opfunc=<SID>ReformatComments<CR>g@
+vnoremap <silent> <leader>gq :<C-U>call <SID>ReformatComments(visualmode(), 1)<CR>
+
 " }}}
 " Plugin settings ---------------------------------------------------------- {{{
 
@@ -901,16 +922,16 @@ let g:delimitMate_expand_cr = 1
 " }}}
 " Fugitive {{{
 
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gw :Gwrite<cr>
-nnoremap <leader>ga :Gadd<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gco :Gcheckout<cr>
-nnoremap <leader>gci :Gcommit<cr>
-nnoremap <leader>gm :Gmove<cr>
-nnoremap <leader>gr :Gremove<cr.
-nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
+nnoremap <leader>Gd :Gdiff<cr>
+nnoremap <leader>Gs :Gstatus<cr>
+nnoremap <leader>Gw :Gwrite<cr>
+nnoremap <leader>Ga :Gadd<cr>
+nnoremap <leader>Gb :Gblame<cr>
+nnoremap <leader>Gco :Gcheckout<cr>
+nnoremap <leader>Gci :Gcommit<cr>
+nnoremap <leader>Gm :Gmove<cr>
+nnoremap <leader>Gr :Gremove<cr.
+nnoremap <leader>Gl :Shell git gl -18<cr>:wincmd \|<cr>
 
 augroup ft_fugitive
 	au!
@@ -1584,15 +1605,6 @@ fun! <SID>Join()
 	s/\%#\(.*\)\n\(.*\)/\2\1/e
 	call cursor(l:l,l:c)
 endfun
-
-" Select everything
-noremap <Leader>gg ggVG
-
-" Reformat everything
-noremap <Leader>gq gggqG
-
-" Reindent everything
-noremap <Leader>= gg=G
 
 " Map space and backspace to forward/backward screen
 map <space> <c-f>
