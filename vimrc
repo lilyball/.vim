@@ -1257,12 +1257,8 @@ if has('gui_running')
 		ino  <D-Down>       <C-End>
 		imap <M-Down>       <C-o>}
 
-		imap <M-BS>         <C-w>
-		"inoremap <D-BS>     <esc>my0c`y
-		"The above definition of <D-BS> doesn't work. It won't delete
-		"the last character in the line. Lets just use the default MacVim
-		"definition.
-		inoremap <D-BS>     <C-u>
+		no! <M-BS>          <C-w>
+		no! <D-BS>          <C-u>
 	else
 		" Non-MacVim GUI, like Gvim
 	end
