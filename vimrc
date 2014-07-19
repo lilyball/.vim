@@ -8,6 +8,12 @@
 
 filetype off
 execute pathogen#infect()
+let s:goroot = (exists("$GOROOT_FINAL") ? $GOROOT_FINAL : "/usr/local/opt/go/libexec")
+let s:goroot = substitute(s:goroot, '/$', '', '') . '/misc/vim'
+if isdirectory(s:goroot)
+	call pathogen#surround(s:goroot)
+endif
+unlet s:goroot
 filetype plugin indent on
 set nocompatible
 
