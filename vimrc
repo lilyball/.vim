@@ -116,8 +116,8 @@ augroup END
 
 set tabstop=4
 set shiftwidth=4
-set softtabstop=0
-set noexpandtab
+set softtabstop=-1
+set expandtab
 set wrap
 set formatoptions=tcrql
 set colorcolumn=+1
