@@ -1481,6 +1481,14 @@ function! s:TabMessage(cmd)
 endfunction
 command! -nargs=+ -complete=command TabMessage call <SID>TabMessage(<q-args>)
 
+function! s:ReloadFiletype()
+	let old_ft = &filetype
+	setf none
+	let &l:filetype=old_ft
+endfunction
+
+command! Setf call <SID>ReloadFiletype()
+
 "-------------------------
 " autocmds
 "-------------------------
