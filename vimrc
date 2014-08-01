@@ -272,7 +272,7 @@ hi def InterestingWord3 ctermbg=red   guibg=red   ctermfg=white guifg=#FFFFFF
 function! s:VSetSearch()
 	let temp = @@
 	norm! gvy
-	let @/ = '\V' . substitute(excape(@@, '\'), '\n', '\\n', 'g')
+	let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
 	let @@ = temp
 endfunction
 
