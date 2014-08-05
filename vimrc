@@ -1484,6 +1484,8 @@ command! -nargs=+ -complete=command TabMessage call <SID>TabMessage(<q-args>)
 function! s:ReloadFiletype()
 	let old_ft = &filetype
 	setf none
+	" ensure all the syntax items are cleared out
+	syn clear
 	let &l:filetype=old_ft
 endfunction
 
