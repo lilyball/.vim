@@ -45,3 +45,37 @@ let b:current_syntax = '${4:`!p snip.rv = snip.basename or 'filetype'`}'
 
 " vim: set et sw=4 ts=4:
 endsnippet
+
+snippet skeleton_ftplugin "Skeleton ftplugin file" b
+" File: ${1:`!v expand('%:p:h:t').'/'.expand('%:t')`}
+" Author: ${2:`!v g:snips_author`}
+" Description: ${3:FileType Plugin for ${4:`!p snip.rv = snip.basename.title() or 'filetype'`}}
+${5:" Last Change: `!v strftime("%b %d, %Y")`}
+
+if exists('b:did_ftplugin')
+	finish
+endif
+let b:did_ftplugin = 1
+
+let s:save_cpo = &cpo
+set cpo&vim
+
+" ${6:Settings} {{{1
+
+$7
+
+" Cleanup {{{1
+
+let b:undo_ftplugin = "
+			\ $0
+			\"
+
+" }}}
+
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
+" vim: set et sw=4 ts=4:
+endsnippet
+# vim: set noet:
