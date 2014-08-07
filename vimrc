@@ -1489,7 +1489,7 @@ function! s:ReloadFiletype()
 	let &l:filetype=old_ft
 endfunction
 
-command! Setf call <SID>ReloadFiletype()
+command! -bar Setf call <SID>ReloadFiletype()
 
 "-------------------------
 " autocmds
