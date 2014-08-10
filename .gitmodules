@@ -127,3 +127,6 @@
 [submodule "bundle/vim-speeddating"]
 	path = bundle/vim-speeddating
 	url = https://github.com/tpope/vim-speeddating.git
+[submodule "bundle/AfterColors"]
+	path = bundle/AfterColors
+	url = https://github.com/vim-scripts/AfterColors.vim.git
