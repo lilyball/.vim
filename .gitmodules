@@ -108,7 +108,7 @@
 	url = https://github.com/greyblake/vim-preview.git
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
+	url = https://github.com/kballard/ultisnips.git
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets
