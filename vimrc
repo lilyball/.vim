@@ -543,7 +543,7 @@ augroup END
 " }}}
 " Markdown {{{
 
-let g:markdown_fenced_languages = ['rust']
+let g:markdown_fenced_languages = ['rust', 'objc', 'swift']
 
 augroup ft_markdown
 	au!
