@@ -1034,7 +1034,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 augroup plug_jsbeautify
 	au!
-	autocmd FileType javascript command! -buffer JsBeautify :call JsBeautify()
+	autocmd FileType javascript,json command! -buffer JsBeautify :call JsBeautify()
 augroup END
 
 " }}}
