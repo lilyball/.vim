@@ -1024,6 +1024,9 @@ let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: li
 let g:syntastic_check_on_open=1
 let g:syntastic_warning_symbol = '⚠'
 
+let g:syntastic_objc_compiler = 'clang'
+let g:syntastic_objc_compiler_options = '-std=gnu99 -fmodules'
+
 " }}}
 " TagBar {{{
 
