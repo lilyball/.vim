@@ -1544,9 +1544,6 @@ augroup kevin
 	" Automagic line numbers
 	autocmd VimEnter,WinEnter * :call <SID>WindowWidth()
 
-	" Always do a full syntax refresh
-	autocmd BufEnter * syntax sync fromstart
-
 	" For help files, move them to the top window and make <Return>
 	" behave like <C-]> (jump to tag)
 	"autocmd FileType help :call <SID>WindowToTop()
