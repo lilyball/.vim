@@ -955,6 +955,11 @@ augroup ft_fugitive
 augroup END
 
 " }}}
+" GitGutter {{{
+
+let g:gitgutter_eager = 0
+
+" }}}
 " Gundo {{{
 
 nnoremap <F5> :GundoToggle<CR>
