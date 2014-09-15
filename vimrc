@@ -913,14 +913,16 @@ unlet s:motion
 " }}}
 " ClangComplete {{{
 
-let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
-if !isdirectory(g:clang_library_path)
-	let s:devdir = substitute(system("xcode-select --print-path"), '\n$', '', '')
-	if v:shell_error != 0 || !isdirectory(s:devdir)
-		echom "Could not find Xcode developer directory")
-		unlet g:clang_library_path
-	else
-		let g:clang_library_path = substitute(s:devdir, '/$', '', '') . '/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
+if system("uname") =~? "darwin"
+	let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
+	if !isdirectory(g:clang_library_path)
+		let s:devdir = substitute(system("xcode-select --print-path"), '\n$', '', '')
+		if v:shell_error != 0 || !isdirectory(s:devdir)
+			echom "Could not find Xcode developer directory"
+			unlet g:clang_library_path
+		else
+			let g:clang_library_path = substitute(s:devdir, '/$', '', '') . '/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
+		endif
 	endif
 endif
 
