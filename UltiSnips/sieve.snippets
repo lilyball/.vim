@@ -1,0 +1,36 @@
+snippet github "GitHub folder structure" b
+# $2
+${VISUAL:if/else/elsif/} address :matches :localpart "Message-ID" "${1:team}/${2:repo}/*" {
+	# PRs
+	if address :matches :localpart "Message-ID" "$1/$2/pull/*" {
+		if allof (
+			address :matches :localpart "Message-ID" "$1/$2/pull/*/*",
+			not exists ["X-GitHub-Reason"]
+		) {
+			fileinto "INBOX.GitHub.$1.$2.pulls.replies";
+		} else {
+			fileinto "INBOX.GitHub.$1.$2.pulls";
+		}
+	}
+	# Issues
+	elsif address :matches :localpart "Message-ID" "$1/$2/issues/*" {
+		if allof (
+			address :matches :localpart "Message-ID" "$1/$2/issues/*/*",
+			not exists ["X-GitHub-Reason"]
+		) {
+			fileinto "INBOX.GitHub.$1.$2.issues.replies";
+		} else {
+			fileinto "INBOX.GitHub.$1.$2.issues";
+		}
+	}
+	# Commit comments
+	elsif address :matches :localpart "Message-ID" "$1/$2/commit/*" {
+		fileinto "INBOX.GitHub.$1.$2.comments";
+	}
+	# Issue events are handled above
+	# Unknown formats (may be thrown out later, save them for now)
+	else {
+		fileinto "INBOX.GitHub.unknown";
+	}
+}
+endsnippet
