@@ -78,7 +78,7 @@
 	url = https://github.com/Lokaltog/vim-easymotion
 [submodule "bundle/toml"]
 	path = bundle/toml
-	url = https://github.com/kballard/vim-toml.git
+	url = https://github.com/cespare/vim-toml.git
 [submodule "bundle/jsbeautify"]
 	path = bundle/jsbeautify
 	url = https://github.com/maksimr/vim-jsbeautify.git
