@@ -164,26 +164,33 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)?$'
 " }}}
 " Status line -------------------------------------------------------------- {{{
 
-augroup ft_statuslinecolor
-	au!
+"augroup ft_statuslinecolor
+	"au!
 
 	" These colors are from Steve Losh's vimrc, but I'm not sure I like them
 	"au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
 	"au InsertLeave * hi StatusLine ctermfg=130 guifg=#CD5907
-augroup END
+"augroup END
 
-fun! s:SetStatusLine()
-	let l:s1="%-3.3n\\ %f\\ %h%m%r%w"
-	let l:s2="[%{strlen(&filetype)?&filetype:'none'},%{&encoding},%{&fileformat}]"
-	let l:s3="%{fugitive#statusline()}"
-	let l:s4="%=\\ 0x%-8B\\ \\ %-14.(%l,%c%V%)\\ %<%P"
-	execute "set statusline=" . l:s1 . l:s2 . l:s3 . l:s4
-endfun
-call s:SetStatusLine()
+" Powerline (disabled) --------------------------------------------------- {{{
 
-" Powerline ---------------------------------------------------------------- {{{
+"set rtp+=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
 
-set rtp+=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
+" }}}
+
+" Airline ---------------------------------------------------------------- {{{
+
+let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+
+call airline#parts#define_text('bomb', 'BOM')
+call airline#parts#define_condition('bomb', '&bomb')
+call airline#parts#define_accent('bomb', 'bold')
+
+function! AirlineInit()
+	let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
+endfunction
+autocmd VimEnter * call AirlineInit()
 
 " }}}
 
