@@ -7,6 +7,7 @@
 " Preamble ----------------------------------------------------------------- {{{
 
 filetype off
+let g:pathogen_disabled = ['clang_complete']
 execute pathogen#infect()
 let s:goroot = (exists("$GOROOT_FINAL") ? $GOROOT_FINAL : "/usr/local/opt/go/libexec")
 let s:goroot = substitute(s:goroot, '/$', '', '') . '/misc/vim'
