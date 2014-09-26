@@ -904,7 +904,7 @@ vnoremap <silent> <leader>gq :<C-U>call <SID>ReformatComments(visualmode(), 1)<C
 
 " Ack {{{
 
-map <leader>a :Ack!
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " }}}
 " CamelCaseMotion {{{
