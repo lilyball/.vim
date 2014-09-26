@@ -968,6 +968,11 @@ augroup END
 
 let g:gitgutter_eager = 0
 
+" The default gutter colors are not good with the solarized background
+highlight link GitGutterAdd DiffAdd
+highlight link GitGutterChange DiffChange
+highlight link GitGutterDelete DiffDelete
+
 " }}}
 " Gundo {{{
 
