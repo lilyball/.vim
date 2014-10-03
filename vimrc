@@ -1006,24 +1006,6 @@ let g:NERDCustomDelimiters = {
 			\ }
 
 " }}}
-" NERD Tree {{{
-
-noremap  <F2> :NERDTreeToggle<cr>
-inoremap <F2> <esc>:NERDTreeToggle<cr>
-
-augroup ft_nerdtree
-	au!
-
-	au Filetype nerdtree setlocal nolist
-augroup END
-
-let NERDTreeHighlightCursorLine=1
-let NERDTreeIgnore=['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index', 'xapian_index', '.*\.pid', 'monitor.py', '.*-fixtures-.*.json', '.*\.o$', 'db\.db']
-
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
-" }}}
 " Preview {{{
 
 let g:PreviewMarkdownFences = 1
@@ -1059,6 +1041,37 @@ nnoremap <F6> :TagbarToggle<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" }}}
+" Vimfiler {{{
+
+noremap  <F2> :VimFilerExplorer<CR>
+inoremap <F2> <ESC>:VimFilerExplorer<CR>
+
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_tree_leaf_icon = '꞉'
+let g:vimfiler_tree_opened_icon = '▼'
+let g:vimfiler_tree_closed_icon = '▷'
+let g:vimfiler_readonly_file_icon = ''
+let g:vimfiler_ignore_pattern = '^\.\|\.\%(pyc\|o\)$\|.\~\|Icon\r$'
+
+if system("uname") =~? "darwin"
+	let g:vimfiler_quick_look_command = 'qlmanage -p'
+endif
+
+augroup plug_vimfiler
+	au!
+	autocmd FileType vimfiler call s:vimfiler_settings()
+augroup END
+function! s:vimfiler_settings()
+	setlocal nonumber
+
+	nunmap <buffer> <C-J>
+	nunmap <buffer> <C-L>
+	nmap <buffer> <C-R> <Plug>(vimfiler_redraw_screen)
+	nmap <buffer> <C-Q> <Plug>(vimfiler_quick_look)
+	nmap <buffer> <C-E> <Plug>(vimfiler_switch_to_history_directory)
+endfunction
 
 " }}}
 " JsBeautify {{{
@@ -1528,7 +1541,7 @@ command! -bar Setf call <SID>ReloadFiletype()
 
 " If we're in a wide window, enable line numbers
 fun! <SID>WindowWidth()
-	if bufname('%') != '-MiniBufExplorer-' && &buftype != 'help'
+	if bufname('%') != '-MiniBufExplorer-' && &buftype != 'help' && &filetype != 'unite' && &filetype != 'vimfiler'
 		if winwidth(0) > 90
 			setlocal number
 		else
@@ -1575,47 +1588,6 @@ augroup END
 " Mappings
 "-----------------------------
 
-" Find a buffer with the given number (ordering is such that the first
-" entry shown in minibufexpl is 1, the second is 2 and so on). If
-" there's already a window open for that buffer, switch to it. Otherwise
-" switch the current window to use that buffer.
-fun! <SID>SelectBuffer(wantedbufnum)
-	let l:buflast = bufnr("$")
-	let l:bufidx = 0
-	let l:goodbufcount = 0
-	while (l:bufidx < l:buflast)
-		let l:bufidx = l:bufidx + 1
-		if buflisted(l:bufidx)
-			let l:bufname = bufname(l:bufidx)
-			if (strlen(l:bufname)) &&
-						\ getbufvar(l:bufidx, "&modifiable") == 1 &&
-						\ l:bufname != '-MiniBufExplorer-'
-				let l:goodbufcount = l:goodbufcount + 1
-				if l:goodbufcount == a:wantedbufnum
-					let l:winnr = bufwinnr(l:bufidx)
-					if l:winnr > -1
-						execute l:winnr . "wincmd w"
-					else
-						execute "buffer " . l:bufidx
-					endif
-					break
-				endif
-			endif
-		endif
-	endwhile
-endfun
-
-" Buffer switches
-nmap	<silent> <M-1>	:call <SID>SelectBuffer( 1)<CR>
-nmap	<silent> <M-2>	:call <SID>SelectBuffer( 2)<CR>
-nmap	<silent> <M-3>	:call <SID>SelectBuffer( 3)<CR>
-nmap	<silent> <M-4>	:call <SID>SelectBuffer( 4)<CR>
-nmap	<silent> <M-5>	:call <SID>SelectBuffer( 5)<CR>
-nmap	<silent> <M-6>	:call <SID>SelectBuffer( 6)<CR>
-nmap	<silent> <M-7>	:call <SID>SelectBuffer( 7)<CR>
-nmap	<silent> <M-8>	:call <SID>SelectBuffer( 8)<CR>
-nmap	<silent> <M-9>	:call <SID>SelectBuffer( 9)<CR>
-nmap	<silent> <M-0>	:call <SID>SelectBuffer(10)<CR>
 nmap	<silent> <S-Left>	:bprev<CR>
 nmap	<silent> <S-Right>	:bnext<CR>
 
