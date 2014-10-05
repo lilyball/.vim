@@ -42,10 +42,14 @@ let g:loaded_netrwPlugin = 1
 
 call neobundle#begin(expand('~/.vim/neobundle/'))
 
+" Bundles {{{
+
 if neobundle#has_cache()
   NeoBundleLoadCache
 else
   NeoBundleFetch 'Shougo/neobundle.vim'
+
+  " Shougo Plugins {{{
 
   NeoBundleLazy 'Shougo/unite.vim', {
         \ 'commands': [{ 'name': 'Unite',
@@ -75,10 +79,20 @@ else
         \ }
   NeoBundle 'bling/vim-airline'
 
+  " }}}
+  " Filetypes {{{
+
+  NeoBundleLazy 'kballard/vim-fish', { 'filetypes': 'fish' }
+
+  " }}}
+
   NeoBundleSaveCache
 endif
 
 NeoBundleLocal ~/.vim/bundle
+
+" }}}
+" Configuration {{{
 
 if neobundle#tap('ack') "{{{
   function! neobundle#hooks.on_source(bundle)
@@ -291,6 +305,8 @@ if neobundle#tap('vimfiler') "{{{
 endif "}}}
 
 call neobundle#end()
+
+" }}}
 
 " }}}
 " Basic Options {{{
