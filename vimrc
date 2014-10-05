@@ -144,16 +144,6 @@ if neobundle#tap('fugitive') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('vim-gitgutter') "{{{
-  let g:gitgutter_eager = 0
-
-  " The default gutter colors are not good with the solarized background
-  highlight link GitGutterAdd DiffAdd
-  highlight link GitGutterChange DiffChange
-  highlight link GitGutterDelete DiffDelete
-
-  call neobundle#untap()
-endif "}}}
 if neobundle#tap('gundo') "{{{
   nnoremap <F5> :GundoToggle<CR>
   let g:gundo_debug = 1
@@ -171,6 +161,14 @@ if neobundle#tap('html5') "{{{
   let g:rdfa_attributes_complete = 0
   let g:microdata_attributes_complete = 0
   let g:atia_attributes_complete = 0
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('jsbeautify') "{{{
+  augroup plug_jsbeautify
+    au!
+    autocmd FileType javascript,json command! -buffer JsBeautify :call JsBeautify()
+  augroup END
 
   call neobundle#untap()
 endif "}}}
@@ -218,6 +216,35 @@ if neobundle#tap('ultisnips') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('vim-airline') " {{{
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep=' '
+  let g:airline#extensions#tabline#left_alt_sep='¦'
+
+  function! neobundle#hooks.on_source(bundle)
+    call airline#parts#define_text('bomb', 'BOM')
+    call airline#parts#define_condition('bomb', '&bomb')
+    call airline#parts#define_accent('bomb', 'bold')
+
+    function! s:AirlineInit()
+      let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
+    endfunction
+    autocmd VimEnter * call s:AirlineInit()
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-gitgutter') "{{{
+  let g:gitgutter_eager = 0
+
+  " The default gutter colors are not good with the solarized background
+  highlight link GitGutterAdd DiffAdd
+  highlight link GitGutterChange DiffChange
+  highlight link GitGutterDelete DiffDelete
+
+  call neobundle#untap()
+endif "}}}
 if neobundle#tap('vimfiler') "{{{
   noremap  <F2> :VimFilerExplorer<CR>
   inoremap <F2> <ESC>:VimFilerExplorer<CR>
@@ -251,33 +278,6 @@ if neobundle#tap('vimfiler') "{{{
     if &filetype == 'vimfiler'
       call s:vimfiler_settings()
     endif
-  endfunction
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('jsbeautify') "{{{
-  augroup plug_jsbeautify
-    au!
-    autocmd FileType javascript,json command! -buffer JsBeautify :call JsBeautify()
-  augroup END
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('vim-airline') " {{{
-  let g:airline_powerline_fonts = 1
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#left_sep=' '
-  let g:airline#extensions#tabline#left_alt_sep='¦'
-
-  function! neobundle#hooks.on_source(bundle)
-    call airline#parts#define_text('bomb', 'BOM')
-    call airline#parts#define_condition('bomb', '&bomb')
-    call airline#parts#define_accent('bomb', 'bold')
-
-    function! s:AirlineInit()
-      let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
-    endfunction
-    autocmd VimEnter * call s:AirlineInit()
   endfunction
 
   call neobundle#untap()
