@@ -216,7 +216,14 @@ if neobundle#tap('ultisnips') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('vim-airline') " {{{
+if neobundle#tap('unite.vim') "{{{
+  function! neobundle#hooks.on_source(bundle)
+    call unite#custom#profile('default', 'context', {
+          \ 'direction': 'botright'
+          \ })
+  endfunction
+endif "}}}
+if neobundle#tap('vim-airline') "{{{
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#left_sep=' '
