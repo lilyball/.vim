@@ -61,10 +61,10 @@ else
         \ }
   NeoBundleLazy 'Shougo/vimfiler', {
         \ 'depends': 'Shougo/unite.vim',
-        \ 'commands': [
-        \   { 'name': ['VimFiler', 'Edit', 'Write'],
-        \     'complete': 'customlist,vimfiler#complete' },
-        \   'Read', 'Source'],
+        \ 'commands': [{ 'name': 'VimFiler',
+        \                'complete': 'customlist,vimfiler#complete' },
+        \              'VimFilerExplorer',
+        \              'Edit', 'Read', 'Source', 'Write'],
         \ 'mappings': '<Plug>',
         \ 'explorer': 1,
         \ }
@@ -225,7 +225,7 @@ if neobundle#tap('vimfiler') "{{{
   let g:vimfiler_readonly_file_icon = ''
   let g:vimfiler_ignore_pattern = '^\.\|\.\%(pyc\|o\)$\|.\~\|Icon\r$'
 
-  function! neobundle#hooks.on_source(bundle)
+  function! neobundle#hooks.on_post_source(bundle)
     if system("uname") =~? '^darwin'
       let g:vimfiler_quick_look_command = 'qlmanage -p'
     endif
@@ -243,6 +243,10 @@ if neobundle#tap('vimfiler') "{{{
       nmap <buffer> <C-Q> <Plug>(vimfiler_quick_look)
       nmap <buffer> <C-E> <Plug>(vimfiler_switch_to_history_directory)
     endfunction
+
+    if &filetype == 'vimfiler'
+      call s:vimfiler_settings()
+    endif
   endfunction
 
   call neobundle#untap()
