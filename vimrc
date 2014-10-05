@@ -68,8 +68,6 @@ else
         \ 'mappings': '<Plug>',
         \ 'explorer': 1,
         \ }
-  ]
-  }
   NeoBundle 'Shougo/vimshell'
   NeoBundle 'bling/vim-airline'
 
