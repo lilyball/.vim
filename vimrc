@@ -68,7 +68,11 @@ else
         \ 'mappings': '<Plug>',
         \ 'explorer': 1,
         \ }
-  NeoBundle 'Shougo/vimshell'
+  NeoBundleLazy 'Shougo/vimshell', {
+        \ 'commands': [{ 'name': 'VimShell',
+        \                'complete': 'customlist,vimshell#complete'}],
+        \ 'mappings': '<Plug>'
+        \ }
   NeoBundle 'bling/vim-airline'
 
   NeoBundleSaveCache
