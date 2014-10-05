@@ -83,6 +83,9 @@ else
   " Filetypes {{{
 
   NeoBundleLazy 'kballard/vim-fish', { 'filetypes': 'fish' }
+  NeoBundleLazy 'kballard/vim-markdown', 'inline_and_code_fixes', {
+        \ 'filetypes': 'markdown'
+        \ }
 
   " }}}
 
