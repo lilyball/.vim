@@ -348,6 +348,19 @@ if has('gui_running')
   "set guioptions-=r
   "set guioptions-=R
 
+  " My shell setup defines a bunch of $LESS_TERMCAP_* variables to change how
+  " some stuff is displayed. We don't want that in GUI Vim because we don't
+  " want :! to have them.
+  let $LESS_TERMCAP_mb=''
+  let $LESS_TERMCAP_md=''
+  let $LESS_TERMCAP_me=''
+  let $LESS_TERMCAP_us=''
+  let $LESS_TERMCAP_ue=''
+  let $LESS_TERMCAP_so=''
+  let $LESS_TERMCAP_se=''
+  " It also defines $LESS, which we don't want
+  let $LESS=''
+
   highlight SpellBad term=underline gui=undercurl guisp=Orange
 
   " Use a line-drawing char for pretty vertical splits
