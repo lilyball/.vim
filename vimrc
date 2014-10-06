@@ -44,7 +44,7 @@ call neobundle#begin(expand('~/.vim/neobundle/'))
 
 " Bundles {{{
 
-if neobundle#has_cache()
+if neobundle#has_fresh_cache()
   NeoBundleLoadCache
 else
   NeoBundleFetch 'Shougo/neobundle.vim'
@@ -77,7 +77,15 @@ else
         \                'complete': 'customlist,vimshell#complete'}],
         \ 'mappings': '<Plug>'
         \ }
-  NeoBundle 'bling/vim-airline'
+
+  " }}}
+  " SCM Plugins {{{
+
+  NeoBundle 'tpope/vim-fugitive'
+  NeoBundleLazy 'gregsexton/gitv', {
+        \ 'depends': 'tpope/vim-fugitive',
+        \ 'commands': 'Gitv'
+        \ }
 
   " }}}
   " Filetypes {{{
@@ -86,6 +94,11 @@ else
   NeoBundleLazy 'kballard/vim-markdown', 'inline_and_code_fixes', {
         \ 'filetypes': 'markdown'
         \ }
+
+  " }}}
+  " Miscellaneous {{{
+
+  NeoBundle 'bling/vim-airline'
 
   " }}}
 
@@ -141,25 +154,11 @@ if neobundle#tap('delimitMate') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('fugitive') "{{{
-  nnoremap <leader>Gd :Gdiff<cr>
-  nnoremap <leader>Gs :Gstatus<cr>
-  nnoremap <leader>Gw :Gwrite<cr>
-  nnoremap <leader>Ga :Gadd<cr>
-  nnoremap <leader>Gb :Gblame<cr>
-  nnoremap <leader>Gco :Gcheckout<cr>
-  nnoremap <leader>Gci :Gcommit<cr>
-  nnoremap <leader>Gm :Gmove<cr>
-  nnoremap <leader>Gr :Gremove<cr.
-  nnoremap <leader>Gl :Shell git gl -18<cr>:wincmd \|<cr>
-
-  augroup ft_fugitive
-    au!
-
-    au BufNewFile,BufRead .git/index setlocal nolist
-  augroup END
-
-  call neobundle#untap()
+if neobundle#tap('gitv') "{{{
+  function! neobundle#hooks.on_source(bundle)
+    nnoremap <silent> <leader>Gv :Gitv<CR>
+    nnoremap <silent> <leader>GV :Gitv!<CR>
+  endfunction
 endif "}}}
 if neobundle#tap('gundo') "{{{
   nnoremap <F5> :GundoToggle<CR>
@@ -256,6 +255,27 @@ if neobundle#tap('vim-airline') "{{{
     endfunction
     autocmd VimEnter * call s:AirlineInit()
   endfunction
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-fugitive') "{{{
+  nnoremap <leader>Gd :Gdiff<CR>
+  nnoremap <leader>Gs :Gstatus<CR>
+  nnoremap <leader>Gw :Gwrite<CR>
+  nnoremap <leader>Ga :Gadd<CR>
+  nnoremap <leader>Gb :Gblame<CR>
+  nnoremap <leader>Gco :Gcheckout<CR>
+  nnoremap <leader>Gci :Gcommit<CR>
+  nnoremap <leader>Gm :Gmove<CR>
+  nnoremap <leader>Gr :Gremove<CR>
+  nnoremap <leader>Gl :Glog<CR>
+
+  augroup ft_fugitive
+    au!
+
+    au BufNewFile,BufRead .git/index setlocal nolist
+    au BufReadPost fugitive://* set bufhidden=delete
+  augroup END
 
   call neobundle#untap()
 endif "}}}
