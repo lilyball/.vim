@@ -409,6 +409,10 @@ if has('gui_running')
   " It also defines $LESS, which we don't want
   let $LESS=''
 
+  " $EDITOR tries to send focus back to Terminal.app, but if we use it from
+  " GVim, we aren't using Terminal.app
+  let $EDITOR='mvim -f'
+
   highlight SpellBad term=underline gui=undercurl guisp=Orange
 
   " Use a line-drawing char for pretty vertical splits
