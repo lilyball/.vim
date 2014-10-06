@@ -86,6 +86,7 @@ else
         \ 'depends': 'tpope/vim-fugitive',
         \ 'commands': 'Gitv'
         \ }
+  NeoBundle 'mhinz/vim-signify'
 
   " }}}
   " Filetypes {{{
@@ -279,15 +280,10 @@ if neobundle#tap('vim-fugitive') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('vim-gitgutter') "{{{
-  let g:gitgutter_eager = 0
-
-  " The default gutter colors are not good with the solarized background
-  highlight link GitGutterAdd DiffAdd
-  highlight link GitGutterChange DiffChange
-  highlight link GitGutterDelete DiffDelete
-
-  call neobundle#untap()
+if neobundle#tap('vim-signify') "{{{
+  let g:signify_update_on_bufenter=0
+  let g:signify_update_on_focusgained=1
+  let g:signify_vcs_list = ['git']
 endif "}}}
 if neobundle#tap('vimfiler') "{{{
   noremap  <F2> :VimFilerExplorer<CR>

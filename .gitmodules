@@ -55,9 +55,6 @@
 [submodule "bundle/sieve"]
 	path = bundle/sieve
 	url = https://github.com/kballard/sieve.vim.git
-[submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = git://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/vim-misc"]
 	path = bundle/vim-misc
 	url = https://github.com/xolox/vim-misc.git
