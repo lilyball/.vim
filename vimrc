@@ -87,6 +87,10 @@ else
         \ 'commands': 'Gitv'
         \ }
   NeoBundle 'mhinz/vim-signify'
+  NeoBundle 'vim-scripts/ConflictDetection'
+  NeoBundle 'vim-scripts/ConflictMotions', {
+        \ 'depends': 'vim-scripts/CountJump'
+        \ }
 
   " }}}
   " Filetypes {{{
@@ -100,6 +104,18 @@ else
   " Miscellaneous {{{
 
   NeoBundle 'bling/vim-airline'
+  NeoBundle 'vim-scripts/AfterColors.vim'
+  NeoBundle 'bkad/CamelCaseMotion'
+  NeoBundleLazy 'vim-scripts/CountJump'
+  NeoBundle 'scrooloose/nerdcommenter'
+  NeoBundleLazy 'mileszs/ack.vim', {
+        \ 'commands': [{ 'name': ['Ack', 'AckAdd', 'AckFromSearch',
+        \                         'LAck', 'LAckAdd', 'AckFile'],
+        \                'complete': 'file' },
+        \              { 'name': ['AckHelp', 'LAckHelp',
+        \                         'AckWindow', 'LAckWindow'],
+        \                'complete': 'help' }]
+        \ }
 
   " }}}
 
@@ -111,7 +127,7 @@ NeoBundleLocal ~/.vim/bundle
 " }}}
 " Configuration {{{
 
-if neobundle#tap('ack') "{{{
+if neobundle#tap('ack.vim') "{{{
   function! neobundle#hooks.on_source(bundle)
     let g:ackprg = 'ag --nogroup --nocolor --column'
   endfunction
@@ -189,7 +205,7 @@ if neobundle#tap('jsbeautify') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('NERDcommenter') "{{{
+if neobundle#tap('nerdcommenter') "{{{
   let g:NERDCustomDelimiters = {
         \ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
         \ }
