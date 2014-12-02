@@ -1,0 +1,98 @@
+# Shougo plugins
+
+[[plugins]]
+repository = 'Shougo/neomru.vim'
+filetypes = 'all'
+
+[[plugins]]
+repository = 'Shougo/unite.vim'
+depends = 'Shougo/neomru.vim'
+
+  [plugins.commands]
+  name = 'Unite'
+  complete = 'customlist,unite#complete_source'
+
+[[plugins]]
+repository = 'Shougo/vimfiler.vim'
+depends = 'Shougo/unite.vim'
+mappings = '<Plug>'
+explorer = 1
+
+  [plugins.commands]
+  name = ['VimFiler', 'VimfilerExplorer', 'Edit', 'Read', 'Source', 'Write']
+  complete = 'customlist,vimfiler#complete'
+
+[[plugins]]
+repository = 'Shougo/vimshell.vim'
+mappings = '<Plug>'
+
+  [plugins.commands]
+  name = 'VimShell'
+  complete = 'customlist,vimshell#complete'
+
+# SCM plugins
+
+[[plugins]]
+repository = 'tpope/vim-fugitive'
+filetypes = 'all'
+
+[[plugins]]
+repository = 'gregsexton/gitv'
+depends = 'tpope/vim-fugitive'
+commands = 'Gitv'
+
+[[plugins]]
+repository = 'mhinz/vim-signify'
+filetypes = 'all'
+
+[[plugins]]
+repository = 'vim-scripts/ConflictDetection'
+filetypes = 'all'
+
+[[plugins]]
+repository = 'vim-scripts/ConflictMotions'
+depends = 'vim-scripts/CountJump'
+filetypes = 'all'
+
+# Filetypes
+
+[[plugins]]
+repository = 'kballard/vim-fish'
+filetypes = ['fish', 'fishprofile']
+
+[[plugins]]
+repository = 'kballard/vim-markdown'
+rev = 'inline_and_code_fixes'
+filetypes = 'markdown'
+
+# Miscellaneous
+
+[[plugins]]
+repository = 'bling/vim-airline'
+lazy = false
+
+[[plugins]]
+repository = 'vim-scripts/AfterColors.vim'
+lazy = false
+
+[[plugins]]
+repository = 'bkad/CamelCaseMotion'
+mappings = '<Plug>'
+
+[[plugins]]
+repository = 'vim-scripts/CountJump'
+
+[[plugins]]
+repository = 'scrooloose/nerdcommenter'
+filetypes = 'all'
+
+[[plugins]]
+repository = 'mileszs/ack.vim'
+
+  [[plugins.commands]]
+  name = ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile']
+  complete = 'file'
+
+  [[plugins.commands]]
+  name = ['AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
+  complete = 'help'

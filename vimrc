@@ -44,17 +44,12 @@ call neobundle#begin(expand('~/.vim/neobundle/'))
 
 " Bundles {{{
 
-if neobundle#has_fresh_cache()
+if neobundle#has_fresh_cache() &&
+      \ neobundle#has_fresh_cache(expand('~/.vim/neobundle/neobundle.toml'))
   NeoBundleLoadCache
 else
   NeoBundleFetch 'Shougo/neobundle.vim'
 
-  " Shougo Plugins {{{
-
-  NeoBundleLazy 'Shougo/unite.vim', {
-        \ 'commands': [{ 'name': 'Unite',
-        \                'complete': 'customlist,unite#complete_source'}]
-        \ }
   NeoBundle 'Shougo/vimproc.vim', {
         \ 'build': {
         \    'mac': 'make -f make_mac.mak',
@@ -63,61 +58,8 @@ else
         \    'windows': 'tools\\update-dll-mingw',
         \   }
         \ }
-  NeoBundleLazy 'Shougo/vimfiler', {
-        \ 'depends': 'Shougo/unite.vim',
-        \ 'commands': [{ 'name': 'VimFiler',
-        \                'complete': 'customlist,vimfiler#complete' },
-        \              'VimFilerExplorer',
-        \              'Edit', 'Read', 'Source', 'Write'],
-        \ 'mappings': '<Plug>',
-        \ 'explorer': 1,
-        \ }
-  NeoBundleLazy 'Shougo/vimshell', {
-        \ 'commands': [{ 'name': 'VimShell',
-        \                'complete': 'customlist,vimshell#complete'}],
-        \ 'mappings': '<Plug>'
-        \ }
 
-  " }}}
-  " SCM Plugins {{{
-
-  NeoBundle 'tpope/vim-fugitive'
-  NeoBundleLazy 'gregsexton/gitv', {
-        \ 'depends': 'tpope/vim-fugitive',
-        \ 'commands': 'Gitv'
-        \ }
-  NeoBundle 'mhinz/vim-signify'
-  NeoBundle 'vim-scripts/ConflictDetection'
-  NeoBundle 'vim-scripts/ConflictMotions', {
-        \ 'depends': 'vim-scripts/CountJump'
-        \ }
-
-  " }}}
-  " Filetypes {{{
-
-  NeoBundleLazy 'kballard/vim-fish', { 'filetypes': ['fish', 'fishprofile'] }
-  NeoBundleLazy 'kballard/vim-markdown', 'inline_and_code_fixes', {
-        \ 'filetypes': 'markdown'
-        \ }
-
-  " }}}
-  " Miscellaneous {{{
-
-  NeoBundle 'bling/vim-airline'
-  NeoBundle 'vim-scripts/AfterColors.vim'
-  NeoBundle 'bkad/CamelCaseMotion'
-  NeoBundleLazy 'vim-scripts/CountJump'
-  NeoBundle 'scrooloose/nerdcommenter'
-  NeoBundleLazy 'mileszs/ack.vim', {
-        \ 'commands': [{ 'name': ['Ack', 'AckAdd', 'AckFromSearch',
-        \                         'LAck', 'LAckAdd', 'AckFile'],
-        \                'complete': 'file' },
-        \              { 'name': ['AckHelp', 'LAckHelp',
-        \                         'AckWindow', 'LAckWindow'],
-        \                'complete': 'help' }]
-        \ }
-
-  " }}}
+  call neobundle#load_toml('~/.vim/neobundle/neobundle.toml', {'lazy': 1})
 
   NeoBundleSaveCache
 endif
