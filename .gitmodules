@@ -7,12 +7,6 @@
 [submodule "bundle/lua"]
 	path = bundle/lua
 	url = https://github.com/xolox/vim-lua-ftplugin.git
-[submodule "bundle/NERDtree"]
-	path = bundle/NERDtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "bundle/ack"]
-	path = bundle/ack
-	url = https://github.com/mileszs/ack.vim
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
@@ -25,12 +19,6 @@
 [submodule "bundle/closetag"]
 	path = bundle/closetag
 	url = https://github.com/docunext/closetag.vim.git
-[submodule "bundle/NERDcommenter"]
-	path = bundle/NERDcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "bundle/fugitive"]
-	path = bundle/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
@@ -52,9 +40,6 @@
 [submodule "bundle/afterimage"]
 	path = bundle/afterimage
 	url = https://github.com/tpope/vim-afterimage.git
-[submodule "bundle/ctrlp"]
-	path = bundle/ctrlp
-	url = https://github.com/kien/ctrlp.vim.git
 [submodule "bundle/vim-repeat"]
 	path = bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
@@ -64,9 +49,6 @@
 [submodule "bundle/sieve"]
 	path = bundle/sieve
 	url = https://github.com/kballard/sieve.vim.git
-[submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = git://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/vim-misc"]
 	path = bundle/vim-misc
 	url = https://github.com/xolox/vim-misc.git
@@ -82,24 +64,9 @@
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "bundle/ConflictDetection"]
-	path = bundle/ConflictDetection
-	url = https://github.com/vim-scripts/ConflictDetection.git
-[submodule "bundle/ConflictMotions"]
-	path = bundle/ConflictMotions
-	url = https://github.com/kballard/ConflictMotions.git
 [submodule "bundle/ingo-library"]
 	path = bundle/ingo-library
 	url = https://github.com/vim-scripts/ingo-library.git
-[submodule "bundle/CountJump"]
-	path = bundle/CountJump
-	url = https://github.com/vim-scripts/CountJump.git
-[submodule "bundle/fish"]
-	path = bundle/fish
-	url = https://github.com/kballard/vim-fish.git
-[submodule "bundle/markdown"]
-	path = bundle/markdown
-	url = https://github.com/kballard/vim-markdown
 [submodule "bundle/preview"]
 	path = bundle/preview
 	url = https://github.com/greyblake/vim-preview.git
@@ -115,21 +82,18 @@
 [submodule "bundle/scriptease"]
 	path = bundle/scriptease
 	url = https://github.com/tpope/vim-scriptease.git
-[submodule "bundle/CamelCaseMotion"]
-	path = bundle/CamelCaseMotion
-	url = https://github.com/bkad/CamelCaseMotion.git
 [submodule "bundle/bufexplorer"]
 	path = bundle/bufexplorer
 	url = https://github.com/jlanzarotta/bufexplorer
 [submodule "bundle/vim-speeddating"]
 	path = bundle/vim-speeddating
 	url = https://github.com/tpope/vim-speeddating.git
-[submodule "bundle/AfterColors"]
-	path = bundle/AfterColors
-	url = https://github.com/vim-scripts/AfterColors.vim.git
 [submodule "bundle/splice"]
 	path = bundle/splice
 	url = https://github.com/sjl/splice.vim.git
-[submodule "bundle/vim-airline"]
-	path = bundle/vim-airline
-	url = https://github.com/kballard/vim-airline.git
+[submodule "bundle/vim-multiple-cursors"]
+	path = bundle/vim-multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors.git
+[submodule "bundle/neobundle.vim"]
+	path = bundle/neobundle.vim
+	url = https://github.com/Shougo/neobundle.vim

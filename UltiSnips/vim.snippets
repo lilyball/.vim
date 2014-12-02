@@ -78,3 +78,12 @@ unlet s:save_cpo
 
 " `!p snip.rv = "vim"`: set et sw=4 ts=4:
 endsnippet
+
+snippet neobundle_conf "NeoBundle bundle configuration" b
+if neobundle#tap('${1}') "{{{${2/.+/
+	/}${2:code}${3/.+/
+	function! neobundle#hooks.on_source(bundle)
+		/}${3:code}${3/.+/
+	endfunction/}
+endif "}}}
+endsnippet
