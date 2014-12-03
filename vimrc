@@ -545,8 +545,8 @@ nnoremap <m-Up> :cprevious<cr>zvzz
 " It's 2011
 noremap j gj
 noremap k gk
-nnoremap gj j
-nnoremap gk k
+noremap gj j
+noremap gk k
 
 " Easy buffer navigation
 noremap <C-h>  <C-w>h
