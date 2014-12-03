@@ -1003,7 +1003,43 @@ augroup ft_vim
 
   au FileType vim setlocal foldmethod=marker
   "au FileType help setlocal textwidth=78
-  au BufWinEnter *.txt if &buftype == 'help' | wincmd K | endif
+augroup END
+
+" }}}
+" Vim Help {{{
+
+function! s:AdjustHelpSplit()
+  if exists('w:adjust_help_split')
+    " this window has already had a buffer in it
+    return
+  endif
+  let w:adjust_help_split=1
+
+  if &buftype == 'help'
+    " help buffer entering a brand new window.
+    let l:lastwin = winnr('#')
+    if l:lastwin == 0
+      " no previous window? this must be on a new tab page. Ignore it.
+      return
+    endif
+    if l:lastwin != winnr()-1
+      " the last window is not above / to the left
+      return
+    endif
+
+    exe l:lastwin . 'wincmd w'
+    wincmd x
+  endif
+endfunction
+
+augroup ft_help
+  au!
+
+  " Make <Return> behave like <C-]> (jump to tag)
+  au FileType help nmap <buffer> <Return> <C-]>
+
+  " Help splits should go above even if splitbelow is set
+  au BufWinEnter * call s:AdjustHelpSplit()
 augroup END
 
 " }}}
@@ -1471,7 +1507,7 @@ command! -bar Setf call <SID>ReloadFiletype()
 " Autocmds {{{
 
 " If we're in a wide window, enable line numbers
-fun! <SID>WindowWidth()
+function! s:WindowWidth()
   if bufname('%') != '-MiniBufExplorer-' && &buftype != 'help' && &filetype != 'unite' && &filetype != 'vimfiler'
     if winwidth(0) > 90
       setlocal number
@@ -1479,33 +1515,11 @@ fun! <SID>WindowWidth()
       setlocal nonumber
     endif
   endif
-endfun
-
-" Force active window to the top of the screen without losing its size
-fun! <SID>WindowToTop()
-  let l:h=winheight(0)
-  wincmd K
-  execute "resize" l:h
-endfun
-
-" Force active window to the bottom of the screen without losing its size
-fun! <SID>WindowToBottom()
-  let l:h=winheight(0)
-  wincmd J
-  execute "resize" l:h
-endfun
+endfunction
 
 augroup vimrc
   " Automagic line numbers
-  autocmd VimEnter,WinEnter * :call <SID>WindowWidth()
-
-  " For help files, move them to the top window and make <Return>
-  " behave like <C-]> (jump to tag)
-  "autocmd FileType help :call <SID>WindowToTop()
-  autocmd FileType help nmap <buffer> <Return> <C-]>
-
-  " For the quickfix window, move it to the bottom
-  "autocmd FileType qf :3 wincmd _ | :call <SID>WindowToBottom()
+  autocmd VimEnter,WinEnter * :call s:WindowWidth()
 
   " Detect procmailrc (as if I'd ever need this)
   autocmd BufRead procmailrc :setfiletype procmail
