@@ -77,7 +77,7 @@ lazy = false
 
 [[plugins]]
 repository = 'bkad/CamelCaseMotion'
-mappings = '<Plug>'
+mappings = '<Plug>CamelCaseMotion_'
 
 [[plugins]]
 repository = 'vim-scripts/CountJump'
