@@ -34,9 +34,6 @@ let maplocalleader = "\\"
 " syntax file has loaded.
 syntax on
 
-" Disable netrw so explorer plugins (e.g. vimfiler) can be loaded lazily
-let g:loaded_netrwPlugin = 1
-
 " }}}
 " Bundles {{{
 
@@ -243,7 +240,7 @@ if neobundle#tap('vim-signify') "{{{
   let g:signify_update_on_focusgained=1
   let g:signify_vcs_list = ['git']
 endif "}}}
-if neobundle#tap('vimfiler') "{{{
+if neobundle#tap('vimfiler.vim') "{{{
   noremap  <F2> :VimFilerExplorer<CR>
   inoremap <F2> <ESC>:VimFilerExplorer<CR>
 
@@ -266,8 +263,8 @@ if neobundle#tap('vimfiler') "{{{
     function! s:vimfiler_settings()
       setlocal nonumber
 
-      nunmap <buffer> <C-J>
-      nunmap <buffer> <C-L>
+      silent! nunmap <buffer> <C-J>
+      silent! nunmap <buffer> <C-L>
       nmap <buffer> <C-R> <Plug>(vimfiler_redraw_screen)
       nmap <buffer> <C-Q> <Plug>(vimfiler_quick_look)
       nmap <buffer> <C-E> <Plug>(vimfiler_switch_to_history_directory)

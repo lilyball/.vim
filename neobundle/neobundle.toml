@@ -19,7 +19,7 @@ mappings = '<Plug>'
 explorer = 1
 
   [plugins.commands]
-  name = ['VimFiler', 'VimfilerExplorer', 'Edit', 'Read', 'Source', 'Write']
+  name = ['VimFiler', 'VimFilerExplorer', 'Edit', 'Read', 'Source', 'Write']
   complete = 'customlist,vimfiler#complete'
 
 [[plugins]]
