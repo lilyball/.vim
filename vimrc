@@ -11,7 +11,6 @@
 " Preamble {{{
 if has('vim_starting')
   set nocompatible
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Clear vimrc augroup so the rest of the file can add to it
@@ -22,8 +21,6 @@ augroup END
 " Leader {{{
 
 " Set this before loading bundles.
-" It must be defined before mappings are loaded, and I'm not sure if any
-" bundle code is loaded when the bundle group ends. So be safe and do it now.
 
 let mapleader = ","
 let maplocalleader = "\\"
@@ -33,254 +30,6 @@ let maplocalleader = "\\"
 " Turn on syntax now to ensure any appropriate autocommands run after the
 " syntax file has loaded.
 syntax on
-
-" }}}
-" Bundles {{{
-
-call neobundle#begin(expand('~/.vim/neobundle/'))
-
-" Bundles {{{
-
-if neobundle#has_fresh_cache() &&
-      \ neobundle#has_fresh_cache(expand('~/.vim/neobundle/neobundle.toml'))
-  NeoBundleLoadCache
-else
-  NeoBundleFetch 'Shougo/neobundle.vim'
-
-  NeoBundle 'Shougo/vimproc.vim', {
-        \ 'build': {
-        \    'mac': 'make -f make_mac.mak',
-        \    'unix': 'make -f make_unix.mak',
-        \    'cygwin': 'make -f make_cygwin.mak',
-        \    'windows': 'tools\\update-dll-mingw',
-        \   }
-        \ }
-
-  call neobundle#load_toml('~/.vim/neobundle/neobundle.toml', {'lazy': 1})
-
-  NeoBundleSaveCache
-endif
-
-NeoBundleLocal ~/.vim/bundle
-
-" }}}
-" Configuration {{{
-
-if neobundle#tap('ack.vim') "{{{
-  function! neobundle#hooks.on_source(bundle)
-    let g:ackprg = 'ag --nogroup --nocolor --column'
-  endfunction
-endif "}}}
-if neobundle#tap("CamelCaseMotion") "{{{
-  for s:mode in ['n', 'o', 'v']
-    for s:motion in ['w', 'b', 'e']
-      execute (s:mode ==# 'v' ? 'x' : s:mode) . 'map <silent> <S-' . toupper(s:motion) . '> <Plug>CamelCaseMotion_' . s:motion
-    endfor
-  endfor
-  unlet s:mode
-  unlet s:motion
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('clang_complete') "{{{
-  function! neobundle#hooks.on_source(bundle)
-    if system("uname") =~? "darwin"
-      let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
-      if !isdirectory(g:clang_library_path)
-        let s:devdir = substitute(system("xcode-select --print-path"), '\n$', '', '')
-        if v:shell_error != 0 || !isdirectory(s:devdir)
-          echom "Could not find Xcode developer directory"
-          unlet g:clang_library_path
-        else
-          let g:clang_library_path = substitute(s:devdir, '/$', '', '') . '/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
-        endif
-      endif
-    endif
-  endfunction
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('command-t') "{{{
-  nmap <leader>bb :CommandTBuffer<CR>
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('delimitMate') "{{{
-  let g:delimitMate_expand_cr = 1
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('gitv') "{{{
-  function! neobundle#hooks.on_source(bundle)
-    nnoremap <silent> <leader>Gv :Gitv<CR>
-    nnoremap <silent> <leader>GV :Gitv!<CR>
-  endfunction
-endif "}}}
-if neobundle#tap('gundo') "{{{
-  nnoremap <F5> :GundoToggle<CR>
-  let g:gundo_debug = 1
-  let g:gundo_preview_bottom = 1
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('haskellmode') "{{{
-  let g:haddock_browser="/usr/bin/open"
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('html5') "{{{
-  let g:event_handler_attributes_complete = 0
-  let g:rdfa_attributes_complete = 0
-  let g:microdata_attributes_complete = 0
-  let g:atia_attributes_complete = 0
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('jsbeautify') "{{{
-  augroup plug_jsbeautify
-    au!
-    autocmd FileType javascript,json command! -buffer JsBeautify :call JsBeautify()
-  augroup END
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('nerdcommenter') "{{{
-  let g:NERDCustomDelimiters = {
-        \ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
-        \ }
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('preview') "{{{
-  let g:PreviewMarkdownFences = 1
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('snipMate') "{{{
-  let g:snips_author = "Kevin Ballard"
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('syntastic') "{{{
-  let g:syntastic_enable_signs = 1
-  let g:syntastic_disabled_filetypes = ['html']
-  let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
-  "let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
-  let g:syntastic_check_on_open=1
-  let g:syntastic_warning_symbol = '⚠'
-
-  let g:syntastic_objc_compiler = 'clang'
-  let g:syntastic_objc_compiler_options = '-std=gnu99 -fmodules'
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('tagbar') "{{{
-  let g:tagbar_usearrows = 1
-
-  nnoremap <F6> :TagbarToggle<CR>
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('ultisnips') "{{{
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<tab>"
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('unite.vim') "{{{
-  function! neobundle#hooks.on_source(bundle)
-    call unite#custom#profile('default', 'context', {
-          \ 'direction': 'botright'
-          \ })
-  endfunction
-endif "}}}
-if neobundle#tap('vim-airline') "{{{
-  let g:airline_powerline_fonts = 1
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#left_sep=' '
-  let g:airline#extensions#tabline#left_alt_sep='¦'
-
-  function! neobundle#hooks.on_source(bundle)
-    call airline#parts#define_text('bomb', 'BOM')
-    call airline#parts#define_condition('bomb', '&bomb')
-    call airline#parts#define_accent('bomb', 'bold')
-
-    function! s:AirlineInit()
-      let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
-    endfunction
-    autocmd VimEnter * call s:AirlineInit()
-  endfunction
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('vim-fugitive') "{{{
-  nnoremap <leader>Gd :Gdiff<CR>
-  nnoremap <leader>Gs :Gstatus<CR>
-  nnoremap <leader>Gw :Gwrite<CR>
-  nnoremap <leader>Ga :Gadd<CR>
-  nnoremap <leader>Gb :Gblame<CR>
-  nnoremap <leader>Gco :Gcheckout<CR>
-  nnoremap <leader>Gci :Gcommit<CR>
-  nnoremap <leader>Gm :Gmove<CR>
-  nnoremap <leader>Gr :Gremove<CR>
-  nnoremap <leader>Gl :Glog<CR>
-
-  augroup ft_fugitive
-    au!
-
-    au BufNewFile,BufRead .git/index setlocal nolist
-    au BufReadPost fugitive://* set bufhidden=delete
-  augroup END
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('vim-signify') "{{{
-  let g:signify_update_on_bufenter=0
-  let g:signify_update_on_focusgained=1
-  let g:signify_vcs_list = ['git']
-endif "}}}
-if neobundle#tap('vimfiler.vim') "{{{
-  noremap  <F2> :VimFilerExplorer<CR>
-  inoremap <F2> <ESC>:VimFilerExplorer<CR>
-
-  let g:vimfiler_as_default_explorer = 1
-  let g:vimfiler_tree_leaf_icon = '꞉'
-  let g:vimfiler_tree_opened_icon = '▼'
-  let g:vimfiler_tree_closed_icon = '▷'
-  let g:vimfiler_readonly_file_icon = ''
-  let g:vimfiler_ignore_pattern = '^\.\|\.\%(pyc\|o\)$\|.\~\|Icon\r$'
-
-  function! neobundle#hooks.on_post_source(bundle)
-    if system("uname") =~? '^darwin'
-      let g:vimfiler_quick_look_command = 'qlmanage -p'
-    endif
-
-    augroup plug_vimfiler
-      au!
-      autocmd FileType vimfiler call s:vimfiler_settings()
-    augroup END
-    function! s:vimfiler_settings()
-      setlocal nonumber
-
-      silent! nunmap <buffer> <C-J>
-      silent! nunmap <buffer> <C-L>
-      nmap <buffer> <C-R> <Plug>(vimfiler_redraw_screen)
-      nmap <buffer> <C-Q> <Plug>(vimfiler_quick_look)
-      nmap <buffer> <C-E> <Plug>(vimfiler_switch_to_history_directory)
-    endfunction
-
-    if &filetype == 'vimfiler'
-      call s:vimfiler_settings()
-    endif
-  endfunction
-
-  call neobundle#untap()
-endif "}}}
-
-call neobundle#end()
-
-" }}}
 
 " }}}
 " Basic Options {{{
@@ -440,14 +189,6 @@ set wildignore+=*.luac                           " Lua byte code
 set wildignore+=*.pyc                            " Python byte code
 
 " }}}
-" Window Management {{{
-
-augroup vimrc
-  " Resize splits when the window is resized
-  au VimResized * exe "normal! \<c-w>="
-augroup END
-
-" }}}
 " Tabs, spaces, wrapping {{{
 
 set tabstop=4
@@ -475,10 +216,283 @@ set backupskip+=*.git/modules/*/TAG_EDITMSG,git-rebase-todo
 set backupskip+=svn-commit*.tmp
 
 " }}}
+
+" }}}
+" Bundles {{{
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#begin(expand('~/.vim/neobundle/'))
+
+" Bundles {{{
+
+if neobundle#has_fresh_cache() &&
+      \ neobundle#has_fresh_cache(expand('~/.vim/neobundle/neobundle.toml'))
+  NeoBundleLoadCache
+else
+  NeoBundleFetch 'Shougo/neobundle.vim'
+
+  NeoBundle 'Shougo/vimproc.vim', {
+        \ 'build': {
+        \    'mac': 'make -f make_mac.mak',
+        \    'unix': 'make -f make_unix.mak',
+        \    'cygwin': 'make -f make_cygwin.mak',
+        \    'windows': 'tools\\update-dll-mingw',
+        \   }
+        \ }
+
+  call neobundle#load_toml('~/.vim/neobundle/neobundle.toml', {'lazy': 1})
+
+  NeoBundleSaveCache
+endif
+
+NeoBundleLocal ~/.vim/bundle
+
+" }}}
+" Configuration {{{
+
+if neobundle#tap('ack.vim') "{{{
+  function! neobundle#hooks.on_source(bundle)
+    let g:ackprg = 'ag --nogroup --nocolor --column'
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap("CamelCaseMotion") "{{{
+  for s:mode in ['n', 'o', 'v']
+    for s:motion in ['w', 'b', 'e']
+      execute (s:mode ==# 'v' ? 'x' : s:mode) . 'map <silent> <S-' . toupper(s:motion) . '> <Plug>CamelCaseMotion_' . s:motion
+    endfor
+  endfor
+  unlet s:mode
+  unlet s:motion
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('clang_complete') "{{{
+  function! neobundle#hooks.on_source(bundle)
+    if system("uname") =~? "darwin"
+      let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
+      if !isdirectory(g:clang_library_path)
+        let s:devdir = substitute(system("xcode-select --print-path"), '\n$', '', '')
+        if v:shell_error != 0 || !isdirectory(s:devdir)
+          echom "Could not find Xcode developer directory"
+          unlet g:clang_library_path
+        else
+          let g:clang_library_path = substitute(s:devdir, '/$', '', '') . '/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
+        endif
+      endif
+    endif
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('command-t') "{{{
+  nmap <leader>bb :CommandTBuffer<CR>
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('delimitMate') "{{{
+  let g:delimitMate_expand_cr = 1
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('gitv') "{{{
+  function! neobundle#hooks.on_source(bundle)
+    nnoremap <silent> <leader>Gv :Gitv<CR>
+    nnoremap <silent> <leader>GV :Gitv!<CR>
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('gundo') "{{{
+  nnoremap <F5> :GundoToggle<CR>
+  let g:gundo_debug = 1
+  let g:gundo_preview_bottom = 1
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('haskellmode') "{{{
+  let g:haddock_browser="/usr/bin/open"
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('html5') "{{{
+  let g:event_handler_attributes_complete = 0
+  let g:rdfa_attributes_complete = 0
+  let g:microdata_attributes_complete = 0
+  let g:atia_attributes_complete = 0
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('jsbeautify') "{{{
+  augroup plug_jsbeautify
+    au!
+    autocmd FileType javascript,json command! -buffer JsBeautify :call JsBeautify()
+  augroup END
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('nerdcommenter') "{{{
+  let g:NERDCustomDelimiters = {
+        \ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
+        \ }
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('preview') "{{{
+  let g:PreviewMarkdownFences = 1
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('snipMate') "{{{
+  let g:snips_author = "Kevin Ballard"
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('syntastic') "{{{
+  let g:syntastic_enable_signs = 1
+  let g:syntastic_disabled_filetypes = ['html']
+  let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
+  "let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
+  let g:syntastic_check_on_open=1
+  let g:syntastic_warning_symbol = '⚠'
+
+  let g:syntastic_objc_compiler = 'clang'
+  let g:syntastic_objc_compiler_options = '-std=gnu99 -fmodules'
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('tagbar') "{{{
+  let g:tagbar_usearrows = 1
+
+  nnoremap <F6> :TagbarToggle<CR>
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('ultisnips') "{{{
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<tab>"
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('unite.vim') "{{{
+  function! neobundle#hooks.on_source(bundle)
+    call unite#custom#profile('default', 'context', {
+          \ 'direction': 'botright'
+          \ })
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-airline') "{{{
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep=' '
+  let g:airline#extensions#tabline#left_alt_sep='¦'
+
+  function! neobundle#hooks.on_source(bundle)
+    call airline#parts#define_text('bomb', 'BOM')
+    call airline#parts#define_condition('bomb', '&bomb')
+    call airline#parts#define_accent('bomb', 'bold')
+
+    function! s:AirlineInit()
+      let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
+    endfunction
+    autocmd VimEnter * call s:AirlineInit()
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-fugitive') "{{{
+  nnoremap <leader>Gd :Gdiff<CR>
+  nnoremap <leader>Gs :Gstatus<CR>
+  nnoremap <leader>Gw :Gwrite<CR>
+  nnoremap <leader>Ga :Gadd<CR>
+  nnoremap <leader>Gb :Gblame<CR>
+  nnoremap <leader>Gco :Gcheckout<CR>
+  nnoremap <leader>Gci :Gcommit<CR>
+  nnoremap <leader>Gm :Gmove<CR>
+  nnoremap <leader>Gr :Gremove<CR>
+  nnoremap <leader>Gl :Glog<CR>
+
+  augroup ft_fugitive
+    au!
+
+    au BufNewFile,BufRead .git/index setlocal nolist
+    au BufReadPost fugitive://* set bufhidden=delete
+  augroup END
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-signify') "{{{
+  let g:signify_update_on_bufenter=0
+  let g:signify_update_on_focusgained=1
+  let g:signify_vcs_list = ['git']
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('vimfiler.vim') "{{{
+  noremap  <F2> :VimFilerExplorer<CR>
+  inoremap <F2> <ESC>:VimFilerExplorer<CR>
+
+  let g:vimfiler_as_default_explorer = 1
+  let g:vimfiler_tree_leaf_icon = '꞉'
+  let g:vimfiler_tree_opened_icon = '▼'
+  let g:vimfiler_tree_closed_icon = '▷'
+  let g:vimfiler_readonly_file_icon = ''
+  let g:vimfiler_ignore_pattern = '^\.\|\.\%(pyc\|o\)$\|.\~\|Icon\r$'
+
+  function! neobundle#hooks.on_post_source(bundle)
+    if system("uname") =~? '^darwin'
+      let g:vimfiler_quick_look_command = 'qlmanage -p'
+    endif
+
+    augroup plug_vimfiler
+      au!
+      autocmd FileType vimfiler call s:vimfiler_settings()
+    augroup END
+    function! s:vimfiler_settings()
+      setlocal nonumber
+
+      silent! nunmap <buffer> <C-J>
+      silent! nunmap <buffer> <C-L>
+      nmap <buffer> <C-R> <Plug>(vimfiler_redraw_screen)
+      nmap <buffer> <C-Q> <Plug>(vimfiler_quick_look)
+      nmap <buffer> <C-E> <Plug>(vimfiler_switch_to_history_directory)
+    endfunction
+
+    if &filetype == 'vimfiler'
+      call s:vimfiler_settings()
+    endif
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
+
+" Built-in plugins {{{
+
+" netrw {{{
+
+" Disable mouse mappings, not all of them are properly <buffer>-local
+let g:netrw_mousemaps = 0
+
+" }}}
+
+" }}}
+
+" }}}
+
+call neobundle#end()
+
+" }}}
 " Color Scheme {{{
 
 set background=dark
-if has('gui_running')
+if has('gui_running') && neobundle#is_installed('solarized')
     colorscheme solarized
 else
     colorscheme darkblue
@@ -486,8 +500,6 @@ endif
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)?$'
-
-" }}}
 
 " }}}
 " Searching And Movement {{{
