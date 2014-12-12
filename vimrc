@@ -1517,7 +1517,8 @@ command! -bar Setf call <SID>ReloadFiletype()
 
 " If we're in a wide window, enable line numbers
 function! s:WindowWidth()
-  if bufname('%') != '-MiniBufExplorer-' && &buftype != 'help' && &filetype != 'unite' && &filetype != 'vimfiler'
+  if bufname('%') != '-MiniBufExplorer-' && &buftype != 'help' &&
+        \ index(['unite', 'vimfiler', 'netrw'], &filetype) == -1
     if winwidth(0) > 90
       setlocal number
     else
@@ -1528,7 +1529,7 @@ endfunction
 
 augroup vimrc
   " Automagic line numbers
-  autocmd VimEnter,WinEnter * :call s:WindowWidth()
+  autocmd VimEnter,WinEnter,VimResized,BufWinEnter * :call s:WindowWidth()
 
   " Detect procmailrc (as if I'd ever need this)
   autocmd BufRead procmailrc :setfiletype procmail
