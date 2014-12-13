@@ -96,3 +96,7 @@ repository = 'mileszs/ack.vim'
   [[plugins.commands]]
   name = ['AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
   complete = 'help'
+
+[[plugins]]
+repository = 'editorconfig/editorconfig-vim'
+filetypes = 'all'
