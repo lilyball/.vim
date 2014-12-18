@@ -104,3 +104,7 @@ repository = 'mileszs/ack.vim'
 [[plugins]]
 repository = 'editorconfig/editorconfig-vim'
 filetypes = 'all'
+
+[[plugins]]
+repository = 'tpope/vim-speeddating'
+filetypes = 'all'
