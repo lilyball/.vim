@@ -65,6 +65,10 @@ repository = 'kballard/vim-markdown'
 rev = 'inline_and_code_fixes'
 filetypes = 'markdown'
 
+[[plugins]]
+repository = 'mustache/vim-mustache-handlebars'
+filetypes = ['mustache', 'handlebars']
+
 # Miscellaneous
 
 [[plugins]]
