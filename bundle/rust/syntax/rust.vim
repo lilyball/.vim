@@ -24,7 +24,7 @@ syn keyword   rustKeyword     continue
 syn keyword   rustKeyword     extern nextgroup=rustExternCrate,rustObsoleteExternMod skipwhite skipempty
 syn keyword   rustKeyword     fn nextgroup=rustFuncName skipwhite skipempty
 syn keyword   rustKeyword     for in if impl let
-syn keyword   rustKeyword     loop once proc pub
+syn keyword   rustKeyword     loop once pub
 syn keyword   rustKeyword     return super
 syn keyword   rustKeyword     unsafe virtual where while
 syn keyword   rustKeyword     use nextgroup=rustModPath skipwhite skipempty
@@ -90,7 +90,7 @@ syn keyword rustTrait Clone
 syn keyword rustTrait PartialEq PartialOrd Eq Ord
 syn keyword rustEnum Ordering Equiv
 syn keyword rustEnumVariant Less Equal Greater
-syn keyword rustTrait FromIterator Extend ExactSize
+syn keyword rustTrait FromIterator Extend ExactSizeIterator
 syn keyword rustTrait Iterator DoubleEndedIterator
 syn keyword rustTrait RandomAccessIterator CloneableIterator
 syn keyword rustTrait OrdIterator MutableDoubleEndedIterator
