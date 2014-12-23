@@ -34,7 +34,7 @@ mappings = '<Plug>'
 
 [[plugins]]
 repository = 'tpope/vim-fugitive'
-filetypes = 'all'
+lazy = 0
 
 [[plugins]]
 repository = 'gregsexton/gitv'
