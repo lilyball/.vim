@@ -381,10 +381,70 @@ if neobundle#tap('ultisnips') "{{{
 endif "}}}
 if neobundle#tap('unite.vim') "{{{
   function! neobundle#hooks.on_source(bundle)
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    call unite#filters#sorter_default#use(['sorter_rank'])
+    call unite#custom#source('line,outline','matchers','matcher_fuzzy')
     call unite#custom#profile('default', 'context', {
-          \ 'direction': 'botright'
+          \ 'direction': 'botright',
+          \ 'prompt': '» ',
+          \ 'prompt_direction': 'top',
+          \ 'auto_resize': 1,
+          \ })
+    call unite#custom#profile('files,mixed,line,buffers', 'context', {
+          \ 'split': 0
           \ })
   endfunction
+
+  let g:unite_source_history_yank_enable=1
+
+  if executable('ag')
+    let g:unite_source_grep_command='ag'
+    let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
+    let g:unite_source_grep_recursive_opt=''
+  elseif executable('ack')
+    let g:unite_source_grep_command='ack'
+    let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
+    let g:unite_source_grep_recursive_opt=''
+  endif
+
+  function! s:unite_settings()
+    " exit on <esc>
+    nmap <buffer> <esc> <plug>(unite_all_exit)
+    " allow ctrl-j and ctrl-k in insert mode
+    imap <buffer> <C-j> <plug>(unite_select_next_line)
+    imap <buffer> <C-k> <plug>(unite_select_previous_line)
+  endfunction
+  augroup plug_unite
+    au!
+    autocmd FileType unite call s:unite_settings()
+  augroup END
+
+  " Unite filter mappings
+  nmap <leader><space> [unite]
+  nnoremap [unite] <nop>
+
+  " I believe the ! arg to file_rec says to use the project directory.
+  if has('win32') || has('win64')
+    nnoremap <silent> [unite]<space> :<C-u>Unite -resume -buffer-name=mixed -start-insert file_rec:! buffer file_mru bookmark<cr><C-u>
+    nnoremap <silent> [unite]f :<C-u>Unite -resume -buffer-name=files -start-insert file_rec:!<cr><C-u>
+  else
+    nnoremap <silent> [unite]<space> :<C-u>Unite -resume -buffer-name=mixed -start-insert file_rec/async:! buffer file_mru bookmark<cr><C-u>
+    nnoremap <silent> [unite]f :<C-u>Unite -resume -buffer-name=files -start-insert file_rec/async:!<cr><C-u>
+  endif
+  " ! doesn't work for file_rec/git though
+  nnoremap <silent> [unite]g :<C-u>Unite -resume -buffer-name=files -start-insert file_rec/git<cr><C-u>
+
+  nnoremap <silent> [unite]d :<C-u>Unite -resume -buffer-name=files -start-insert -default-action=lcd neomru/directory<cr><C-u>
+  nnoremap <silent> [unite]e :<C-u>Unite -resume -buffer-name=files -start-insert neomru/file<cr><C-u>
+
+  nnoremap <silent> [unite]l :<C-u>Unite -resume -buffer-name=line -start-insert line<cr><C-u>
+  nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
+  nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffers buffer<cr>
+  nnoremap <silent> [unite]/ :<C-u>Unite -resume -buffer-name=search -no-quit grep:.<cr>
+  nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mappings mapping<cr>
+  nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=quick_buffers -quick-match buffer<cr>
+
+  nnoremap <silent> [unite], :<C-u>UniteResume<cr>
 
   call neobundle#untap()
 endif "}}}
