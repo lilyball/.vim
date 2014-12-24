@@ -448,6 +448,172 @@ if neobundle#tap('jsbeautify') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('neocomplete.vim') "{{{
+  let g:neocomplete#enable_at_startup = 1
+
+  " settings "{{{
+
+  " These settings came from Shougo/shougo-s-github
+  let g:neocomplete#disable_auto_complete = 0
+
+  " Use smartcase
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#enable_camel_case = 1
+
+  " Use fuzzy completion
+  let g:neocomplete#enable_fuzzy_completion = 1
+
+  " Set minimum syntax keyword length
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  " Set auto completion length
+  let g:neocomplete#auto_completion_start_length = 2
+  " Set manual completion length
+  let g:neocomplete#manual_completion_start_length = 0
+  " Set minimum keyword length
+  let g:neocomplete#min_keyword_length = 3
+
+  " For auto select
+  let g:neocomplete#enable_complete_select = 1
+  try
+    let completeopt_save = &completeopt
+    set completeopt+=noinsert,noselect
+  catch
+    let g:neocomplete#enable_complete_select = 0
+  finally
+    let &completeopt = completeopt_save
+  endtry
+  let g:neocomplete#enable_auto_select = 0
+  let g:neocomplete#enable_cursor_hold_i = 1
+
+  let g:neocomplete#enable_omni_fallback = 1
+  let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : expand('~/.cache/vimshell/command-history'),
+        \ }
+
+  let g:neocomplete#enable_auto_delimiter = 1
+  let g:neocomplete#disable_auto_select_buffer_name_pattern =
+        \ '\[Command Line\]'
+  let g:neocomplete#max_list = 100
+  let g:neocomplete#force_overwrite_completefunc = 1
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  if !exists('g:neocomplete#sources#omni#functions')
+    let g:neocomplete#sources#omni#functions = {}
+  endif
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+  endif
+  let g:neocomplete#enable_auto_close_preview = 1
+
+  let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::\w*'
+
+  let g:neocomplete#sources#omni#functions.go =
+        \ 'gocomplete#Complete'
+
+  let g:neocomplete#sources#omni#input_patterns.php =
+        \'\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+  " Define keyword pattern
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns._ = '\h\w*'
+  let g:neocomplete#keyword_patterns.perl = '\h\w*->\h\w*\|\h\w*::\w*'
+  let g:neocomplete#keyword_patterns.rst =
+        \ '\$\$\?\w*\|[[:alpha:]_.\\/~-][[:alnum:]_.\\/~-]*\|\d+\%(\.\d\+\)\+'
+
+  let g:neocomplete#ignore_source_files = ['tag.vim']
+
+  let g:neocomplete#sources#vim#complete_functions = {
+        \ 'Ref' : 'ref#complete',
+        \ 'Unite' : 'unite#complete_source',
+        \ 'VimShellExecute' : 'vimshell#vimshell_execute_complete',
+        \ 'VimShellInteractive' : 'vimshell#vimshell_execute_complete',
+        \ 'VimShellTerminal' : 'vimshell#vimshell_execute_complete',
+        \ 'VimShell' : 'vimshell#complete',
+        \ 'VimFiler' : 'vimfiler#complete',
+        \ 'Vinarise' : 'vinarise#complete',
+        \}
+
+  function! neobundle#hooks.on_source(bundle)
+    call neocomplete#custom#source('look', 'min_pattern_length', 4)
+  endfunction
+  "}}}
+
+  " mappings "{{{
+  " helpers
+  inoremap <expr> <Plug>(vimrc_neocomplete#smart_close_popup) neocomplete#smart_close_popup()
+  inoremap <expr> <Plug>(vimrc_neocomplete#close_popup) neocomplete#close_popup()
+  inoremap <expr> <Plug>(vimrc_neocomplete#start_manual_complete) neocomplete#start_manual_complete()
+  " "<C-f>, <C-b>: page move
+  inoremap <expr><C-f> pumvisible() ? "\<PageDown>" : "\<Right>"
+  inoremap <expr><C-b> pumvisible() ? "\<PageUp>" : "\<Left>"
+  " <C-y>: close popup
+  inoremap <expr><C-y> pumvisible() ? neocomplete#close_popup() : "\<C-y>"
+  " <C-e>: cancel popup
+  inoremap <expr><C-e> pumvisible() ? neocomplete#cancel_popup() : "\<C-e>"
+  " <C-k>: unite completion
+  imap <C-k> <Plug>(neocomplete_start_unite_complete)
+  " <C-h>, <BS>: close popup and delete backward char
+  imap <Plug>(vimrc#key:<C-h>) <Plug>(vimrc_neocomplete#smart_close_popup)<Plug>(vimrc#key_base:<C-h>)
+  " <C-n>: neocomplete
+  inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>\<Down>"
+  " <C-p>: keyword completion
+  inoremap <expr> <C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
+  imap <expr> <Plug>(vimrc#key:') pumvisible() ? "<Plug>(vimrc_neocomplete#close_popup)" : "<Plug>(vimrc#key_base:')"
+
+  inoremap <silent><expr> <C-x><C-f> neocomplete#start_manual_complete('file')
+
+  inoremap <expr> <C-g> neocomplete#undo_completion()
+  inoremap <expr> <C-l> neocomplete#complete_common_string()
+
+  " <CR>: close popup and save indent
+  imap <silent> <Plug>(vimrc#key:<CR>) <Plug>(vimrc_neocomplete#close_popup)<Plug>(vimrc#key_base:<CR>)
+
+  " <TAB>: completion
+  " Note: uses the base <Tab> mapping
+  imap <silent><expr> <Plug>(vimrc#key_base:<Tab>) pumvisible() ?
+        \ "<Plug>(vimrc#key_base:<C-n>)" :
+        \ <SID>neocomplete_check_back_space() ? "<Plug>(vimrc#key_raw:<Tab>)" :
+        \ "<Plug>(vimrc_neocomplete#start_manual_complete)"
+  function! s:neocomplete_check_back_space() "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~ '\s'
+  endfunction "}}}
+  " <S-TAB>: completion back
+  imap <silent><expr> <Plug>(vimrc#key:<S-Tab>) pumvisible() ?
+        \ "<Plug>(vimrc#key_base:<C-p>)" :
+        \ "<Plug>(vimrc#key_base:<S-Tab>)"
+
+  " For cursor moving in insert mode
+  inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+  inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+  inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+  inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+  "}}}
+
+  let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('neosnippet.vim') "{{{
+  function! neobundle#hooks.on_source(bundle)
+    imap <silent><expr> <Plug>(vimrc#key:<Tab>) neosnippet#expandable_or_jumpable() ?
+          \ "<Plug>(neosnippet_expand_or_jump)" :
+          \ "<Plug>(vimrc#key_base:<Tab>)"
+    smap <silent><expr> <TAB> neosnippet#expandable_or_jumpable() ?
+          \ "\<Plug>(neosnippet_expand_or_jump)" :
+          \ "\<TAB>"
+    imap <silent> <C-Tab> <Plug>(neosnippet_start_unite_snippet)
+    xmap <silent> <Tab> <Plug>(neosnippet_expand_target)
+    xmap <silent> <leader>s <Plug>(neosnippet_register_oneshot_snippet)
+
+    let g:neosnippet#snippets_directory = '~/.vim/snippets'
+  endfunction
+  call neobundle#untap()
+endif "}}}
 if neobundle#tap('nerdcommenter') "{{{
   let g:NERDCustomDelimiters = {
         \ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
@@ -689,10 +855,6 @@ set sidescrolloff=10
 set virtualedit+=block
 
 runtime macros/matchit.vim
-
-" Heresy
-inoremap <c-a> <esc>I
-inoremap <c-e> <esc>A
 
 " Open a Quickfix window for the last search
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
@@ -1274,9 +1436,6 @@ nnoremap <leader>S ^vg_y:execute @@<cr>
 noremap ' `
 noremap æ '
 noremap ` <C-^>
-
-" Calculator
-inoremap <C-B> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 " Better Completion
 set completeopt=longest,menuone,preview
