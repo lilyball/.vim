@@ -85,5 +85,6 @@ if neobundle#tap('${1}') "{{{${2/.+/
 	function! neobundle#hooks.on_source(bundle)
 		/}${3:code}${3/.+/
 	endfunction/}
+	call neobundle#untap()
 endif "}}}
 endsnippet

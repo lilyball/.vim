@@ -390,7 +390,7 @@ if neobundle#tap('unite.vim') "{{{
           \ 'prompt_direction': 'top',
           \ 'auto_resize': 1,
           \ })
-    call unite#custom#profile('files,mixed,line,buffers', 'context', {
+    call unite#custom#profile('files,mixed,line,buffers,tag,outline', 'context', {
           \ 'split': 0
           \ })
   endfunction
@@ -446,6 +446,14 @@ if neobundle#tap('unite.vim') "{{{
 
   nnoremap <silent> [unite], :<C-u>UniteResume<cr>
 
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('unite-outline') "{{{
+  nnoremap <silent> [unite]o :<C-u>Unite -resume -buffer-name=outline outline<cr>
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('unite-tag') "{{{
+  nnoremap <silent> [unite]t :<C-u>Unite -resume -buffer-name=tag tag tag/file tag/include<cr>
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('vim-airline') "{{{

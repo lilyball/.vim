@@ -30,6 +30,14 @@ mappings = '<Plug>'
   name = 'VimShell'
   complete = 'customlist,vimshell#complete'
 
+# Unite sources
+
+[[plugins]]
+repository = 'Shougo/unite-outline'
+
+[[plugins]]
+repository = 'tsukkee/unite-tag'
+
 # SCM plugins
 
 [[plugins]]
