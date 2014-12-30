@@ -1201,6 +1201,17 @@ map <leader>u :call HandleURI()<CR>
 " Quickreturn
 inoremap <c-cr> <esc>A<cr>
 
+" Repeat an input sequence
+imap <silent><expr> <C-r>_ <SID>i_repeatSequence()
+function! s:i_repeatSequence()
+  let l:count = str2nr(input('Count? '))
+  if l:count <= 0 | return '' | endif
+  echo
+  let l:keys = input("Keys? ")
+  if l:keys == '' | return '' | endif
+  return repeat(l:keys, l:count)
+endfunction
+
 " Block Colors {{{
 
 function! s:InitBlockColor() abort " {{{
