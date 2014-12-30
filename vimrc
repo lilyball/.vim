@@ -485,13 +485,6 @@ if neobundle#tap('tagbar') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('ultisnips') "{{{
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<tab>"
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-  call neobundle#untap()
-endif "}}}
 if neobundle#tap('unite.vim') "{{{
   function! neobundle#hooks.on_source(bundle)
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
