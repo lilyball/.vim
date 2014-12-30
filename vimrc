@@ -27,6 +27,52 @@ let maplocalleader = "\\"
 
 " }}}
 
+" Key mapping helpers "{{{
+
+" These mappings allow plugins to "wrap" a key binding.
+"
+" The <Plug>(vimrc#key_base:KEY) mappings stand for the raw action
+" itself. Any remappings of these mean the plugin needs to replace the action.
+" For example, delimitMate will replace e.g. <Plug>(vimrc#key_base:<CR>)
+" because it needs to replace the <CR> action.
+"
+" The <Plug>(vimrc#key:KEY) mappings are meant for plugins that want to
+" conditionally perform the base action. For example, neocomplete will use
+" these mappings to change behavior in some cases.
+"
+" A third mapping <Plug>(vimrc#key_raw:KEY) mapping is defined that types
+" the given key without mappings. This can be used from base mappings.
+"
+" Note: By default, <BS> is imapped to <Plug>(vimrc#key:<C-h>) so plugins
+" only have to remap <C-h> instead of <BS>. <Plug>(vimrc#key:<BS>) and
+" <Plug>(vimrc#key_base:<BS>) still exist but are not mapped by anything.
+"
+" Note: We use two layers of <Plug>(vimrc#* mappings instead of just letting
+" the key itself be the "filter" mapping so plugins that check whether a given
+" key is mapped (such as delimitMate) will properly avoid setting a mapping on
+" the key. Similarly, this is set up here before bundles are loaded to ensure
+" the mappings exist.
+
+function! s:setupMappingHelper(name)
+  exe printf("inoremap <silent> <Plug>(vimrc#key_base:%s) %s", a:name, a:name)
+  exe printf("inoremap <silent> <Plug>(vimrc#key_raw:%s) %s", a:name, a:name)
+  exe printf("imap <silent> <Plug>(vimrc#key:%s) <Plug>(vimrc#key_base:%s)", a:name, a:name)
+  exe printf("imap <silent> %s <Plug>(vimrc#key:%s)", a:name, a:name)
+endfunction
+
+call s:setupMappingHelper("<CR>")
+call s:setupMappingHelper("<C-h>")
+call s:setupMappingHelper("<BS>")
+imap <silent> <BS> <Plug>(vimrc#key:<C-h>)
+call s:setupMappingHelper("<S-BS>")
+call s:setupMappingHelper("<Space>")
+call s:setupMappingHelper("<Tab>")
+call s:setupMappingHelper("<S-Tab>")
+call s:setupMappingHelper("<C-n>")
+call s:setupMappingHelper("<C-p>")
+call s:setupMappingHelper("'")
+"}}}
+
 " Turn on syntax now to ensure any appropriate autocommands run after the
 " syntax file has loaded.
 syntax on
@@ -296,6 +342,73 @@ if neobundle#tap('command-t') "{{{
 endif "}}}
 if neobundle#tap('delimitMate') "{{{
   let g:delimitMate_expand_cr = 1
+
+  function! neobundle#hooks.on_source(bundle)
+    let s:delimitMate = {}
+    function s:delimitMate.imap(key, rhs)
+      let lhs = '<Plug>(vimrc#key_base:'.a:key.')'
+      let dict = maparg(lhs, 'i', 0, 1)
+      if get(dict, 'rhs', a:key) ==? a:key
+        exe 'imap <buffer>' lhs a:rhs
+      else
+        echohl WarningMsg
+        unsilent echom printf("Warning: Cannot map %s to %s, it's already mapped to %s",
+              \ a:key, a:rhs, get(dict, 'rhs', "<Err>"))
+        echohl None
+      endif
+    endfunction
+    function s:delimitMate.on_map() dict
+      try
+        " delimiters
+        for delim in delimitMate#Get('quotes_list')
+          if maparg('<Plug>(vimrc#key_base:'.delim.')', 'i') != ''
+            call self.imap(delim, '<Plug>delimitMate'.delim)
+          endif
+        endfor
+        " extra mappings
+        call self.imap('<C-h>', '<Plug>delimitMateBS')
+        call self.imap('<S-BS>', '<Plug>delimitMateS-BS')
+        if delimitMate#Get('expand_cr')
+          call self.imap('<CR>', '<Plug>delimitMateCR')
+        endif
+        if delimitMate#Get('expand_space')
+          call self.imap('<Space>', '<Plug>delimitMateSpace')
+        endif
+        if delimitMate#Get('tab2exit')
+          call self.imap('<S-Tab>', '<Plug>delimitMateS-Tab')
+        endif
+      catch
+        echohl ErrorMsg
+        unsilent echom 'In' v:throwpoint
+        unsilent echom v:exception
+        echohl None
+      endtry
+    endfunction
+    function s:delimitMate.on_unmap()
+      let keys = ['<C-h>', '<S-BS>', '<CR>', '<Space>', '<S-Tab>']
+            \ + delimitMate#Get('quotes_list')
+      for key in keys
+        let dict = maparg('<Plug>(vimrc#key_base:'.key.')', 'i', 0, 1)
+        if dict == {} | continue | endif
+        if dict.buffer && dict.rhs =~# '^<Plug>delimitMate'
+          try
+            exe 'iunmap <buffer>' dict.lhs
+          catch
+            echohl ErrorMsg
+            unsilent echom 'In' v:throwpoint
+            unsilent echom v:exception
+            echohl None
+          endtry
+        endif
+      endfor
+    endfunction
+    augroup plug_delimitMate
+      au!
+
+      au User delimitMate_map :call s:delimitMate.on_map()
+      au User delimitMate_unmap :call s:delimitMate.on_unmap()
+    augroup END
+  endfunction
 
   call neobundle#untap()
 endif "}}}
