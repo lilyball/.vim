@@ -562,7 +562,6 @@ if neobundle#tap('neocomplete.vim') "{{{
   inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>\<Down>"
   " <C-p>: keyword completion
   inoremap <expr> <C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
-  imap <expr> <Plug>(vimrc#key:') pumvisible() ? "<Plug>(vimrc_neocomplete#close_popup)" : "<Plug>(vimrc#key_base:')"
 
   inoremap <silent><expr> <C-x><C-f> neocomplete#start_manual_complete('file')
 
