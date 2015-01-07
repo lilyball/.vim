@@ -643,6 +643,13 @@ if neobundle#tap('syntastic') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('tabular') "{{{
+  function! neobundle#hooks.on_post_source(bundle)
+    AddTabularPattern! commas /,\zs/l0l1
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
 if neobundle#tap('tagbar') "{{{
   let g:tagbar_usearrows = 1
 
