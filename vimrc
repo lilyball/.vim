@@ -1391,8 +1391,8 @@ augroup END
 " }}}
 " Quick Editing {{{
 
-nnoremap <leader>ev <C-w>s<C-w>j<C-w>L:e $MYVIMRC<cr>
-nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/UltiSnips/<cr>
+nnoremap <leader>ev :botright vsplit $MYVIMRC<cr>
+nnoremap <leader>es :botright vsplit ~/.vim/snippets/<cr>
 
 " }}}
 " Shell {{{
