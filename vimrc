@@ -1706,6 +1706,38 @@ endfunc "}}}
 command! Tidy :call Tidy()
 
 " }}}
+" Shell Tokenize {{{
+
+" Tokenize the String according to shell parsing rules
+function! s:ShellTokenize(text)
+	let pat = '\%([^ \t\n''"]\+\|\\.\|''[^'']*\%(''\|$\)\|"\%(\\.\|[^"]\)*\%("\|$\)\)\+'
+	let start = 0
+	let tokens = []
+	while 1
+		let pos = match(a:text, pat, start)
+		if l:pos == -1
+			break
+		endif
+		let end = matchend(a:text, pat, start)
+		call add(tokens, strpart(a:text, pos, end-pos))
+		let start = l:end
+	endwhile
+	return l:tokens
+endfunction
+
+function! s:SplitLineOnShellTokens()
+  let tokens = s:ShellTokenize(getline('.'))
+  if tokens == []
+    call setline('.', '')
+  else
+    call setline('.', tokens[0])
+    call append('.', tokens[1:])
+  endif
+endfunction
+
+command! ShellTokenize call s:SplitLineOnShellTokens()
+
+" }}}
 
 " }}}
 " Nyan! {{{
