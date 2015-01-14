@@ -1433,6 +1433,7 @@ cnoremap <c-k> <C-\>estrpart(getcmdline(),0,getcmdpos()-1)<CR>
 " Faster Esc
 if !&insertmode
   inoremap jk <esc>
+  snoremap jk <esc>
 endif
 
 " Source
