@@ -1883,18 +1883,31 @@ function! s:TabMessage(cmd)
   " shell commands will emit \r\n instead of \n
   " I'm guessing Vim is pretending to be a terminal
   let message = substitute(message, '\r\n', "\n", 'g')
-  " also trim any leading newlines, since that seems to be common
+  " also trim any leading newlines, since :echo prepends one to the text.
   " I think Vim's message window skips empty lines.
   " We'll keep any lines past the first non-empty one in case they're useful.
   let message = substitute(message, '^\n\+', "", '')
   silent put! =message
+  1
+  :delete _ " delete the blank line
   set nomodified
   set buftype=nofile
   set bufhidden=hide
   set noswapfile
-  exe 'file' fnameescape(printf('[TabMessage: %s]', a:cmd))
-  1
-  :delete _ " delete the blank line
+  let suffix = 1
+  while 1
+    let name = a:cmd
+    if suffix > 1
+      let name .= ' (' . suffix . ')'
+    endif
+    let name = printf('[TabMessage: %s]', name)
+    if bufexists(name)
+      let suffix += 1
+      continue
+    endif
+    exe 'noautocmd silent keepalt file' fnameescape(name)
+    break
+  endwhile
 endfunction
 command! -nargs=+ -complete=command TabMessage call <SID>TabMessage(<q-args>)
 
