@@ -1,0 +1,31 @@
+snippet skeleton_syntax
+abbr    Skeleton Syntax file
+options head
+    " Vim syntax file
+    " Language:    ${1:`expand('%:t:r:s?.?\u\0?')`}
+    " Maintainer:  ${2:`get(g:, 'snips_author', expand('$USER'))`}
+    ${3:" Last Change: `strftime("%b %d, %Y")`}
+
+    if version < 600
+        syntax clear
+    elseif exists('b:current_syntax')
+        finish
+    endif
+
+    " Settings {{{1
+    ${5}
+
+    " Syntax definitions {{{1
+
+
+    " Default highlighting {{{1
+
+
+    " }}}1
+
+    syn sync minlines=200
+    syn sync maxlines=500
+
+    let b:current_syntax = '${4:`substitute(expand('%:t:r'), '^$', &filetype, '')`}'
+
+    " vim: set et sw=4 ts=4:

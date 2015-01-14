@@ -625,11 +625,6 @@ if neobundle#tap('preview') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('snipMate') "{{{
-  let g:snips_author = "Kevin Ballard"
-
-  call neobundle#untap()
-endif "}}}
 if neobundle#tap('syntastic') "{{{
   let g:syntastic_enable_signs = 1
   let g:syntastic_disabled_filetypes = ['html']
@@ -827,6 +822,12 @@ endif "}}}
 let g:netrw_mousemaps = 0
 
 " }}}
+
+" }}}
+" Shared Configuration {{{
+
+" This is used by snippets for snipMate, UltiSnips, and neosnippet
+let g:snips_author = 'Kevin Ballard'
 
 " }}}
 

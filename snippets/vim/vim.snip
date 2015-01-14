@@ -1,0 +1,34 @@
+snippet header
+abbr    Header comment
+options head
+    " File: ${1:`expand('%:p:h:t').'/'.expand('%:t')`}
+    " Author: ${2:`get(g:, 'snips_author', expand('$USER'))`}
+    " Description: ${3}
+    ${4:" Last Change: `strftime("%b %d, %Y")`}
+    ${0}
+
+snippet save_cpo
+options head
+    let s:save_cpo = &cpo
+    set cpo&vim
+
+    ${1}
+
+    let &cpo = s:save_cpo
+    unlet s:save_cpo
+
+snippet neobundle_conf
+abbr    NeoBundle bundle configuration
+options head
+    if neobundle#tap('${1}') "{{{
+        ${2:#:code}
+        function! neobundle#hooks.on_source(bundle)
+            ${3:#:code}
+        endfunction
+        call neobundle#untap()
+    endif "}}}
+
+snippet fold
+	"{{{
+		${0}
+	${1} "}}}

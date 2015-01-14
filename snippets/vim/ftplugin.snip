@@ -1,0 +1,33 @@
+snippet skeleton_ftplugin
+abbr    Skeleton ftplugin file
+options head
+    " File: ${1:`expand('%:p:h:t').'/'.expand('%:t')`}
+    " Author: ${2:`get(g:, 'snips_author', expand('$USER'))`}
+    " Description: ${3:FileType Plugin for ${4:`substitute(expand('%:t:r:s?.?\u\0?'), '^$', &filetype, '')`\}}
+    ${5:" Last Change: `strftime("%b %d, %Y")`}
+
+    if exists('b:did_ftplugin')
+        finish
+    endif
+    let b:did_ftplugin = 1
+
+    let s:save_cpo = &cpo
+    set cpo&vim
+
+    " ${6:Settings} {{{1
+
+    ${7}
+
+    " Cleanup {{{1
+
+    let b:undo_ftplugin = "
+                \ ${0}
+                \"
+
+    " }}}
+
+
+    let &cpo = s:save_cpo
+    unlet s:save_cpo
+
+    " vim: set et sw=4 ts=4:
