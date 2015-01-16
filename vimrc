@@ -655,7 +655,11 @@ endif "}}}
 if neobundle#tap('unite.vim') "{{{
   function! neobundle#hooks.on_source(bundle)
     call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    call unite#filters#sorter_default#use(['sorter_rank'])
+    if has('ruby')
+      call unite#filters#sorter_default#use(['sorter_selecta'])
+    else
+      call unite#filters#sorter_default#use(['sorter_rank'])
+    endif
     call unite#custom#source('line,outline','matchers','matcher_fuzzy')
     call unite#custom#profile('default', 'context', {
           \ 'direction': 'botright',
@@ -666,6 +670,7 @@ if neobundle#tap('unite.vim') "{{{
     call unite#custom#profile('files,mixed,line,buffers,tag,outline', 'context', {
           \ 'split': 0
           \ })
+    call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 200)
   endfunction
 
   let g:unite_source_history_yank_enable=1
@@ -698,26 +703,26 @@ if neobundle#tap('unite.vim') "{{{
 
   " I believe the ! arg to file_rec says to use the project directory.
   if has('win32') || has('win64')
-    nnoremap <silent> [unite]<space> :<C-u>Unite -resume -buffer-name=mixed -start-insert file_rec:! buffer file_mru bookmark<cr><C-u>
-    nnoremap <silent> [unite]f :<C-u>Unite -resume -buffer-name=files -start-insert file_rec:!<cr><C-u>
+    nnoremap <silent> [unite]<space> :<C-u>Unite -resume -buffer-name=mixed -start-insert -no-restore file_rec:! buffer file_mru bookmark<cr><C-u>
+    nnoremap <silent> [unite]f :<C-u>Unite -resume -buffer-name=files -start-insert -no-restore file_rec:!<cr><C-u>
   else
-    nnoremap <silent> [unite]<space> :<C-u>Unite -resume -buffer-name=mixed -start-insert file_rec/async:! buffer file_mru bookmark<cr><C-u>
-    nnoremap <silent> [unite]f :<C-u>Unite -resume -buffer-name=files -start-insert file_rec/async:!<cr><C-u>
+    nnoremap <silent> [unite]<space> :<C-u>Unite -resume -buffer-name=mixed -start-insert -no-restore file_rec/async:! buffer file_mru bookmark<cr><C-u>
+    nnoremap <silent> [unite]f :<C-u>Unite -resume -buffer-name=files -start-insert -no-restore file_rec/async:!<cr><C-u>
   endif
   " ! doesn't work for file_rec/git though
-  nnoremap <silent> [unite]g :<C-u>Unite -resume -buffer-name=files -start-insert file_rec/git<cr><C-u>
+  nnoremap <silent> [unite]g :<C-u>Unite -resume -buffer-name=files -start-insert -no-restore file_rec/git<cr><C-u>
 
-  nnoremap <silent> [unite]d :<C-u>Unite -resume -buffer-name=files -start-insert -default-action=lcd neomru/directory<cr><C-u>
-  nnoremap <silent> [unite]e :<C-u>Unite -resume -buffer-name=files -start-insert neomru/file<cr><C-u>
+  nnoremap <silent> [unite]d :<C-u>Unite -resume -buffer-name=files -start-insert -no-restore -default-action=lcd neomru/directory<cr><C-u>
+  nnoremap <silent> [unite]e :<C-u>Unite -resume -buffer-name=files -start-insert -no-restore neomru/file<cr><C-u>
 
-  nnoremap <silent> [unite]l :<C-u>Unite -resume -buffer-name=line -start-insert line<cr><C-u>
+  nnoremap <silent> [unite]l :<C-u>Unite -resume -buffer-name=line -start-insert -no-restore line<cr><C-u>
   nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
   nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffers buffer<cr>
-  nnoremap <silent> [unite]/ :<C-u>Unite -resume -buffer-name=search -no-quit grep:.<cr>
+  nnoremap <silent> [unite]/ :<C-u>Unite -buffer-name=search -no-quit grep:.<cr>
   nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mappings mapping<cr>
   nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=quick_buffers -quick-match buffer<cr>
 
-  nnoremap <silent> [unite], :<C-u>UniteResume<cr>
+  nnoremap <silent> [unite], :<C-u>UniteResume -no-start-insert -restore<cr>
 
   call neobundle#untap()
 endif "}}}
@@ -726,7 +731,7 @@ if neobundle#tap('unite-outline') "{{{
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('unite-tag') "{{{
-  nnoremap <silent> [unite]t :<C-u>Unite -resume -buffer-name=tag tag tag/file tag/include<cr>
+  nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tag tag tag/file tag/include<cr>
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('vim-airline') "{{{
