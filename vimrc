@@ -71,6 +71,7 @@ call s:setupMappingHelper("<S-Tab>")
 call s:setupMappingHelper("<C-n>")
 call s:setupMappingHelper("<C-p>")
 call s:setupMappingHelper("'")
+call s:setupMappingHelper("<C-l>")
 "}}}
 
 " Turn on syntax now to ensure any appropriate autocommands run after the
@@ -536,10 +537,6 @@ if neobundle#tap('neocomplete.vim') "{{{
         \ 'VimFiler' : 'vimfiler#complete',
         \ 'Vinarise' : 'vinarise#complete',
         \}
-
-  function! neobundle#hooks.on_source(bundle)
-    call neocomplete#custom#source('look', 'min_pattern_length', 4)
-  endfunction
   "}}}
 
   " mappings "{{{
@@ -547,6 +544,7 @@ if neobundle#tap('neocomplete.vim') "{{{
   inoremap <expr> <Plug>(vimrc_neocomplete#smart_close_popup) neocomplete#smart_close_popup()
   inoremap <expr> <Plug>(vimrc_neocomplete#close_popup) neocomplete#close_popup()
   inoremap <expr> <Plug>(vimrc_neocomplete#start_manual_complete) neocomplete#start_manual_complete()
+  inoremap <expr> <Plug>(vimrc_neocomplete#complete_common_string) neocomplete#complete_common_string()
   " "<C-f>, <C-b>: page move
   inoremap <expr><C-f> pumvisible() ? "\<PageDown>" : "\<Right>"
   inoremap <expr><C-b> pumvisible() ? "\<PageUp>" : "\<Left>"
@@ -565,8 +563,8 @@ if neobundle#tap('neocomplete.vim') "{{{
 
   inoremap <silent><expr> <C-x><C-f> neocomplete#start_manual_complete('file')
 
-  inoremap <expr> <C-g> neocomplete#undo_completion()
-  inoremap <expr> <C-l> neocomplete#complete_common_string()
+  inoremap <expr> <C-g><C-e> neocomplete#undo_completion()
+  imap <Plug>(vimrc#key_base:<C-l>) <Plug>(vimrc_neocomplete#complete_common_string)
 
   " <CR>: close popup and save indent
   imap <silent> <Plug>(vimrc#key:<CR>) <Plug>(vimrc_neocomplete#close_popup)<Plug>(vimrc#key_base:<CR>)
@@ -576,6 +574,7 @@ if neobundle#tap('neocomplete.vim') "{{{
   imap <silent><expr> <Plug>(vimrc#key_base:<Tab>) pumvisible() ?
         \ "<Plug>(vimrc#key_base:<C-n>)" :
         \ <SID>neocomplete_check_back_space() ? "<Plug>(vimrc#key_raw:<Tab>)" :
+        \ neocomplete#complete_common_string() != '' ? "<Plug>(vimrc_neocomplete#complete_common_string)" :
         \ "<Plug>(vimrc_neocomplete#start_manual_complete)"
   function! s:neocomplete_check_back_space() "{{{
     let col = col('.') - 1
@@ -585,12 +584,6 @@ if neobundle#tap('neocomplete.vim') "{{{
   imap <silent><expr> <Plug>(vimrc#key:<S-Tab>) pumvisible() ?
         \ "<Plug>(vimrc#key_base:<C-p>)" :
         \ "<Plug>(vimrc#key_base:<S-Tab>)"
-
-  " For cursor moving in insert mode
-  inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-  inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-  inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-  inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
   "}}}
 
   let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
