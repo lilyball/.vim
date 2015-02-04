@@ -81,6 +81,10 @@ repository = 'kballard/vim-fish'
 filetypes = ['fish', 'fishprofile']
 
 [[plugins]]
+repository = 'rust-lang/rust.vim'
+filetypes = 'rust'
+
+[[plugins]]
 repository = 'kballard/vim-markdown'
 rev = 'inline_and_code_fixes'
 filetypes = 'markdown'
