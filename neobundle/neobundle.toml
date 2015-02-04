@@ -85,6 +85,10 @@ repository = 'rust-lang/rust.vim'
 filetypes = 'rust'
 
 [[plugins]]
+repository = 'kballard/vim-swift'
+filetypes = 'swift'
+
+[[plugins]]
 repository = 'kballard/vim-markdown'
 rev = 'inline_and_code_fixes'
 filetypes = 'markdown'
