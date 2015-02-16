@@ -1197,15 +1197,15 @@ augroup END
 " }}}
 " Markdown {{{
 
-let g:markdown_fenced_languages = ['rust', 'objc', 'swift']
+" Note: g:markdown_fenced_languages is configured in syntax/markdown.vim
 
 augroup ft_markdown
   au!
 
   " Use <localleader>1/2/3 to add headings.
-  au Filetype markdown nnoremap <buffer> <localleader>1 yypVr=
-  au Filetype markdown nnoremap <buffer> <localleader>2 yypVr-
-  au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
+  au FileType markdown nnoremap <buffer> <localleader>1 yypVr=
+  au FileType markdown nnoremap <buffer> <localleader>2 yypVr-
+  au FileType markdown nnoremap <buffer> <localleader>3 I### <ESC>
 augroup END
 
 " }}}
