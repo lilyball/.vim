@@ -654,6 +654,7 @@ if neobundle#tap('unite.vim') "{{{
       call unite#filters#sorter_default#use(['sorter_rank'])
     endif
     call unite#custom#source('line,outline','matchers','matcher_fuzzy')
+    call unite#custom#source('jump','sorters','sorter_nothing')
     call unite#custom#profile('default', 'context', {
           \ 'direction': 'botright',
           \ 'prompt': '» ',
@@ -714,6 +715,7 @@ if neobundle#tap('unite.vim') "{{{
   nnoremap <silent> [unite]/ :<C-u>Unite -buffer-name=search -no-quit grep:.<cr>
   nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mappings mapping<cr>
   nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=quick_buffers -quick-match buffer<cr>
+  nnoremap <silent> [unite]j :<C-u>Unite -buffer-name=jumps jump<cr>
 
   nnoremap <silent> [unite], :<C-u>UniteResume -no-start-insert -restore<cr>
 
