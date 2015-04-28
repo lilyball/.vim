@@ -137,3 +137,6 @@ filetypes = 'all'
 [[plugins]]
 repository = 'tpope/vim-speeddating'
 filetypes = 'all'
+
+[[plugins]]
+repository = 'mattn/webapi-vim'

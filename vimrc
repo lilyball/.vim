@@ -1401,6 +1401,7 @@ augroup END
 
 nnoremap <leader>ev :botright vsplit $MYVIMRC<cr>
 nnoremap <leader>es :botright vsplit ~/.vim/snippets/<cr>
+nnoremap <leader>en :botright vsplit ~/.vim/neobundle/neobundle.toml<cr>
 
 " }}}
 " Shell {{{
