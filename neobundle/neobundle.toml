@@ -140,3 +140,8 @@ filetypes = 'all'
 
 [[plugins]]
 repository = 'mattn/webapi-vim'
+
+[[plugins]]
+repository = 'mtth/scratch.vim'
+commands = ['Scratch', 'ScratchInsert', 'ScratchSelection']
+mappings = ['gs', 'gS']
