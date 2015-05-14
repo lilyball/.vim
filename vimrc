@@ -275,10 +275,7 @@ call neobundle#begin(expand('~/.vim/neobundle/'))
 
 " Bundles {{{
 
-if neobundle#has_fresh_cache() &&
-      \ neobundle#has_fresh_cache(expand('~/.vim/neobundle/neobundle.toml'))
-  NeoBundleLoadCache
-else
+if neobundle#load_cache(expand('~/.vim/neobundle/neobundle.toml'))
   NeoBundleFetch 'Shougo/neobundle.vim'
 
   NeoBundle 'Shougo/vimproc.vim', {
