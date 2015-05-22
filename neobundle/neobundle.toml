@@ -142,6 +142,11 @@ filetypes = 'all'
 repository = 'mattn/webapi-vim'
 
 [[plugins]]
+repository = 'mattn/gist-vim'
+depends = 'mattn/webapi-vim'
+commands = ['Gist']
+
+[[plugins]]
 repository = 'mtth/scratch.vim'
 commands = ['Scratch', 'ScratchInsert', 'ScratchSelection']
 mappings = ['gs', 'gS']

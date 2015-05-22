@@ -418,6 +418,11 @@ if neobundle#tap('gitv') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('gist-vim') "{{{
+  let g:gist_detect_filetype = 1
+
+  call neobundle#untap()
+endif "}}}
 if neobundle#tap('gundo') "{{{
   nnoremap <F5> :GundoToggle<CR>
   let g:gundo_debug = 1
