@@ -718,6 +718,7 @@ if neobundle#tap('unite.vim') "{{{
   nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mappings mapping<cr>
   nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=quick_buffers -quick-match buffer<cr>
   nnoremap <silent> [unite]j :<C-u>Unite -buffer-name=jumps jump<cr>
+  nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=registers register<cr>
 
   nnoremap <silent> [unite], :<C-u>UniteResume -no-start-insert -restore<cr>
 
