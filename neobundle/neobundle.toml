@@ -150,3 +150,11 @@ commands = ['Gist']
 repository = 'mtth/scratch.vim'
 commands = ['Scratch', 'ScratchInsert', 'ScratchSelection']
 mappings = ['gs', 'gS']
+
+[[plugins]]
+repository = 'tpope/vim-sleuth'
+filetypes = 'all'
+
+[[plugins]]
+repository = 'terryma/vim-expand-region'
+mappings = ['+', '_']
