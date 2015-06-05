@@ -816,6 +816,42 @@ if neobundle#tap('vimfiler.vim') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('vimshell.vim') "{{{
+  " Settings
+  function! s:vimshell_settings()
+    " Normal mappings
+    " allow C-k and C-l to do their normal window manipulation
+    silent! nunmap <buffer> <C-k>
+    silent! nunmap <buffer> <C-l>
+    " hangup on <localleader>k
+    nmap <buffer><silent> <localleader>k <Plug>(vimshell_hangup)
+    " clear on Cmd-K (MacVim) and <localleader>l
+    nmap <buffer><silent> <D-k> <Plug>(vimshell_clear)
+    nmap <buffer><silent> <localleader>l <Plug>(vimshell_clear)
+
+    " Insert mappings
+    " ctrl-j doesn't work right in vimshell
+    imap <buffer><silent> <C-j> <CR>
+    " clear on Cmd-K (MacVim)
+    imap <buffer><silent> <D-k> <Plug>(vimshell_clear)
+  endfunction
+  augroup plug_vimshell
+    au!
+    autocmd FileType vimshell call s:vimshell_settings()
+  augroup END
+
+  " Normal Mappings
+  nmap <leader>s [vimshell]
+  nnoremap [vimshell] <nop>
+
+  nnoremap <silent> [vimshell]<space> :<C-u>VimShellPop<CR>
+  nnoremap <silent> [vimshell]c :<C-u>VimShellCurrentDir -toggle -popup<CR>
+  nnoremap <silent> [vimshell]b :<C-u>VimShellBufferDir -toggle -popup<CR>
+  nnoremap <silent> [vimshell]p :<C-u>VimShellPop -project<CR>
+  nmap <silent> [vimshell]s <Plug>(vimshell_split_switch)
+
+  call neobundle#untap()
+endif "}}}
 
 " Built-in plugins {{{
 
