@@ -1037,10 +1037,6 @@ au BufEnter * normal zv
 noremap  <F1> :set invfullscreen<CR>
 inoremap <F1> <ESC>:set invfullscreen<CR>
 
-" q: should never work. I always hit this by accident when I instinctively hit
-" q to try and end a "Press ENTER" prompt.
-nnoremap q: :
-
 " }}}
 " Filetype Settings {{{
 
