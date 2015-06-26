@@ -779,6 +779,10 @@ if neobundle#tap('vim-signify') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('vim-swift') "{{{
+  let g:swift_device = 'iPhone 6'
+  call neobundle#untap()
+endif "}}}
 if neobundle#tap('vimfiler.vim') "{{{
   noremap  <F2> :VimFilerExplorer<CR>
   inoremap <F2> <ESC>:VimFilerExplorer<CR>
