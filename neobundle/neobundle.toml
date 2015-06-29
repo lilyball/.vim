@@ -50,6 +50,9 @@ repository = 'Shougo/unite-outline'
 [[plugins]]
 repository = 'tsukkee/unite-tag'
 
+[[plugins]]
+repository = 'tsukkee/unite-help'
+
 # SCM plugins
 
 [[plugins]]
