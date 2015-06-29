@@ -722,6 +722,9 @@ if neobundle#tap('unite.vim') "{{{
 
   nnoremap <silent> [unite], :<C-u>UniteResume -no-start-insert -restore<cr>
 
+  " Expand :U to :Unite
+  cabbrev <expr> U getcmdtype()==':' && getcmdpos()==2 ? 'Unite' : 'U'
+
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('unite-outline') "{{{
@@ -1442,29 +1445,9 @@ augroup END
 " }}}
 " Quick Editing {{{
 
-nnoremap <leader>ev :botright vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :exe 'botright vsplit' resolve($MYVIMRC)<cr>
 nnoremap <leader>es :botright vsplit ~/.vim/snippets/<cr>
 nnoremap <leader>en :botright vsplit ~/.vim/neobundle/neobundle.toml<cr>
-
-" }}}
-" Shell {{{
-
-function! s:ExecuteInShell(command) " {{{
-  let command = join(map(split(a:command), 'expand(v:val)'))
-  let winnr = bufwinnr('^' . command . '$')
-  silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
-  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap nonumber
-  echo 'Execute ' . command . '...'
-  silent! execute 'silent %!' . command
-  silent! redraw
-  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
-  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>:AnsiEsc<CR>'
-  silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
-  silent! execute 'AnsiEsc'
-  echo 'Shell command ' . command . ' executed.'
-endfunction " }}}
-command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-nnoremap <leader>! :Shell<Space>
 
 " }}}
 " Convenience Mappings {{{
@@ -1782,6 +1765,20 @@ function! s:SplitLineOnShellTokens()
 endfunction
 
 command! ShellTokenize call s:SplitLineOnShellTokens()
+
+" }}}
+" GitUp {{{
+
+function! s:GitUp()
+  silent let msg = system('cd ' . shellescape(expand('%:p:h')) . ' && gitup')
+  if msg != ''
+    echohl ErrorMsg
+    echom substitute(msg, '\n$', '', '')
+    echohl None
+  endif
+endfunction
+command! GitUp call s:GitUp()
+cabbrev <expr> gitup getcmdtype()==':'&&getcmdpos()==6 ? 'GitUp' : 'gitup'
 
 " }}}
 
