@@ -101,6 +101,11 @@ filetypes = 'markdown'
 repository = 'mustache/vim-mustache-handlebars'
 filetypes = ['mustache', 'handlebars']
 
+# Colorschemes
+
+[[plugins]]
+repository = 'chriskempson/base16-vim'
+
 # Miscellaneous
 
 [[plugins]]

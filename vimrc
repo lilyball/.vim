@@ -74,6 +74,8 @@ call s:setupMappingHelper("'")
 call s:setupMappingHelper("<C-l>")
 "}}}
 
+" Reset the colorscheme now to avoid errors when reloading vimrc.
+unlet! g:colors_name
 " Turn on syntax now to ensure any appropriate autocommands run after the
 " syntax file has loaded.
 syntax on
@@ -885,10 +887,17 @@ call neobundle#end()
 " Color Scheme {{{
 
 set background=dark
-if has('gui_running') && neobundle#is_installed('solarized')
-    colorscheme solarized
+if neobundle#is_installed('base16-vim')
+  NeoBundleSource base16-vim
+  if has('gui_running')
+    colorscheme base16-solarized
+  else
+    colorscheme base16-default
+  endif
+elseif has('gui_running') && neobundle#is_installed('solarized')
+  colorscheme solarized
 else
-    colorscheme darkblue
+  colorscheme darkblue
 endif
 
 " Highlight VCS conflict markers
