@@ -1629,18 +1629,18 @@ vnoremap ad a[
 " }}}
 " Next and Last {{{
 
-" Motion for "next/last object". For example, "din(" would go to the next "()" pair
+" Motion for "next/last object". For example, "dif(" would go to the next "()" pair
 " and delete its contents.
 
-onoremap an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
-xnoremap an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
-onoremap in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
-xnoremap in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
+onoremap <silent> af :<c-u>call <SID>NextTextObject('a', 'f')<cr>
+xnoremap <silent> af :<c-u>call <SID>NextTextObject('a', 'f')<cr>
+onoremap <silent> if :<c-u>call <SID>NextTextObject('i', 'f')<cr>
+xnoremap <silent> if :<c-u>call <SID>NextTextObject('i', 'f')<cr>
 
-onoremap al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
-xnoremap al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
-onoremap il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
-xnoremap il :<c-u>call <SID>NextTextObject('i' ,'F')<cr>
+onoremap <silent> aF :<c-u>call <SID>NextTextObject('a', 'F')<cr>
+xnoremap <silent> aF :<c-u>call <SID>NextTextObject('a', 'F')<cr>
+onoremap <silent> iF :<c-u>call <SID>NextTextObject('i', 'F')<cr>
+xnoremap <silent> iF :<c-u>call <SID>NextTextObject('i' ,'F')<cr>
 
 function! s:NextTextObject(motion, dir)
   let c = nr2char(getchar())
