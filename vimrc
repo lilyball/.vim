@@ -1454,9 +1454,9 @@ augroup END
 " }}}
 " Quick Editing {{{
 
-nnoremap <leader>ev :exe 'botright vsplit' resolve($MYVIMRC)<cr>
-nnoremap <leader>es :botright vsplit ~/.vim/snippets/<cr>
-nnoremap <leader>en :botright vsplit ~/.vim/neobundle/neobundle.toml<cr>
+nnoremap <leader>ev :exe 'botright split' resolve($MYVIMRC)<cr>
+nnoremap <leader>es :botright split ~/.vim/snippets/<cr>
+nnoremap <leader>en :botright split ~/.vim/neobundle/neobundle.toml<cr>
 
 " }}}
 " Convenience Mappings {{{
