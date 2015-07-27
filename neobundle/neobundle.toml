@@ -106,6 +106,24 @@ filetypes = ['mustache', 'handlebars']
 [[plugins]]
 repository = 'chriskempson/base16-vim'
 
+# Text Objects
+
+[[plugins]]
+repository = 'kana/vim-textobj-user'
+function_prefix = 'textobj'
+
+[[plugins]]
+repository = 'kana/vim-textobj-line'
+mappings = [['xo', 'al', 'il']]
+
+[[plugins]]
+repository = 'saaguero/vim-textobj-pastedtext'
+mappings = [['xo', 'gb']]
+
+[[plugins]]
+repository = 'kana/vim-textobj-indent'
+mappings = [['xo', 'ai', 'ii', 'aI', 'iI']]
+
 # Miscellaneous
 
 [[plugins]]
