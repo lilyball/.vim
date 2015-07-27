@@ -96,7 +96,7 @@ set backspace=indent,eol,start
 set laststatus=2
 set history=1000
 set list
-set listchars=tab:\|\ ,trail:.,extends:❯,precedes:❮,nbsp:⍽
+set listchars=tab:\|\ ,trail:.,extends:❯,precedes:❮,nbsp:⍽,conceal:⋰
 set shell=/bin/bash
 set lazyredraw
 set matchtime=3
