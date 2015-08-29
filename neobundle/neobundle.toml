@@ -134,9 +134,9 @@ lazy = false
 repository = 'vim-scripts/AfterColors.vim'
 lazy = false
 
-[[plugins]]
-repository = 'bkad/CamelCaseMotion'
-mappings = '<Plug>CamelCaseMotion_'
+#[[plugins]]
+#repository = 'bkad/CamelCaseMotion'
+#mappings = '<Plug>CamelCaseMotion_'
 
 [[plugins]]
 repository = 'vim-scripts/CountJump'
