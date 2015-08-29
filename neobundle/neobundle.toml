@@ -101,6 +101,10 @@ filetypes = 'markdown'
 repository = 'mustache/vim-mustache-handlebars'
 filetypes = ['mustache', 'handlebars']
 
+[[plugins]]
+repository = 'elixir-lang/vim-elixir'
+filetypes = ['elixir', 'eelixir']
+
 # Colorschemes
 
 [[plugins]]
