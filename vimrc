@@ -219,6 +219,8 @@ if !has('gui_running')
   else
     set t_Co=16
   endif
+  " Enable mouse support
+  set mouse=a
 endif
 
 " }}}
