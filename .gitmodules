@@ -20,7 +20,7 @@
 	update = rebase
 [submodule "bundle/delimitMate"]
 	path = bundle/delimitMate
-	url = https://github.com/kballard/delimitMate.git
+	url = https://github.com/Raimondi/delimitMate.git
 	update = rebase
 [submodule "bundle/closetag"]
 	path = bundle/closetag
