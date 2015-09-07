@@ -188,3 +188,7 @@ filetypes = 'all'
 [[plugins]]
 repository = 'terryma/vim-expand-region'
 mappings = ['+', '_']
+
+[[plugins]]
+repository = 'tmux-plugins/vim-tmux-focus-events'
+lazy = false
