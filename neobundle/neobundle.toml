@@ -75,7 +75,7 @@ filetypes = 'all'
 [[plugins]]
 repository = 'vim-scripts/ConflictMotions'
 depends = 'vim-scripts/CountJump'
-filetypes = 'all'
+lazy = 0
 
 # Filetypes
 
