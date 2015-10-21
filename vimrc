@@ -678,7 +678,8 @@ if neobundle#tap('unite.vim') "{{{
 
   if executable('ag')
     let g:unite_source_grep_command='ag'
-    let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S'
+    let g:unite_source_grep_default_opts='-S --vimgrep --hidden ' .
+          \ '--ignore .hg --ignore .svn --ignore .git --ignore .bzr'
     let g:unite_source_grep_recursive_opt=''
   elseif executable('ack')
     let g:unite_source_grep_command='ack'
