@@ -88,7 +88,7 @@ repository = 'rust-lang/rust.vim'
 filetypes = 'rust'
 
 [[plugins]]
-repository = 'kballard/vim-swift'
+repository = 'kballard/vim-swift-extra'
 filetypes = 'swift'
 unite_sources = ['swift/device', 'swift/developer_dir']
 
