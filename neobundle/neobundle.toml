@@ -87,10 +87,10 @@ filetypes = ['fish', 'fishprofile']
 repository = 'rust-lang/rust.vim'
 filetypes = 'rust'
 
-[[plugins]]
-repository = 'kballard/vim-swift'
-filetypes = 'swift'
-unite_sources = ['swift/device', 'swift/developer_dir']
+#[[plugins]]
+#repository = 'kballard/vim-swift'
+#filetypes = 'swift'
+#unite_sources = ['swift/device', 'swift/developer_dir']
 
 [[plugins]]
 repository = 'kballard/vim-markdown'
