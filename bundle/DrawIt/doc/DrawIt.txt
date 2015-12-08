@@ -1,4 +1,4 @@
-DrawIt.txt*	The DrawIt Tool				Nov 18, 2015
+DrawIt.txt*	The DrawIt Tool				Dec 08, 2015
 
 Authors:  Charles E. Campbell  <NdrchipO@ScampbellPfamily.AbizM>
           Sylvain Viart             <molo@multimania.com>
@@ -109,8 +109,8 @@ Copyright:    Copyright (C) 2004-2014 Charles E. Campbell
  || Functions |    Explanation                                       Links:  ||
  ++-----------+--------------------------------------------------------------++
  ||  :call SetDrawIt('vertical','horizontal','crossing','\','/','X','*')     ||
- ||            set drawing characters for motions for moving                 ||
- ||            and for the ellipse drawing boundary        |drawit-setdrawit|  ||
+ ||          | set drawing characters for motions for moving                 ||
+ ||          | and for the ellipse drawing boundary        |drawit-setdrawit|  ||
  ||  default | motion                                                        ||
  ||  |       | up/down,                                                      ||
  ||  -       | left/right,                                                   ||
@@ -465,6 +465,9 @@ DRAWIT MODES						*drawit-modes* {{{2
 		Oct 24, 2014	* added LineStyle submenu
 		Nov 18, 2015	* Extra tests handling  mixed double-single line
 				  drawing. (affects s:DrawCorner())
+		Dec 08, 2015	* (Kevin Ballard) pointed out that the canvas
+				  spacing should preferably use window width
+				  rather than &columns.
 	13	Sep 05, 2013	* improved s:Strlen() -- now uses |strdisplaywidth()|
 				  if available.
 		Sep 13, 2013	* (Paul Wagland) found a case where lines were

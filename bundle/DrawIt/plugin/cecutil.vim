@@ -37,7 +37,9 @@ endif
 let g:loaded_cecutil = "v18i"
 let s:keepcpo        = &cpo
 set cpo&vim
-"DechoRemOn
+"if exists("g:loaded_Decho")  " Decho
+" DechoRemOn
+"endif  " Decho
 
 " =======================
 "  Public Interface: {{{1
@@ -505,7 +507,7 @@ fun! SaveUserMaps(mapmode,maplead,mapchx,suffix)
     let i= i + 1
    endwhile
   endif
-"  call Dret("SaveUserMaps : restoremap_".a:suffix.": ".s:restoremap_{a:suffix})
+"  call Dret("SaveUserMaps : s:restoremap_".a:suffix.": ".s:restoremap_{a:suffix})
 endfun
 
 " ---------------------------------------------------------------------

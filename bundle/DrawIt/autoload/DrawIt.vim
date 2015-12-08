@@ -3,8 +3,8 @@
 " Maintainer:	Charles E. Campbell
 " Authors:		Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz> - NOSPAM
 "   			Sylvain Viart (molo@multimania.com)
-" Version:		14f	ASTRO-ONLY
-" Date:			Nov 18, 2015
+" Version:		14g	ASTRO-ONLY
+" Date:			Dec 08, 2015
 "
 " Quick Setup: {{{1
 "              tar -oxvf DrawIt.tar
@@ -41,7 +41,7 @@
 if &cp || exists("g:loaded_DrawIt")
  finish
 endif
-let g:loaded_DrawIt= "v14f"
+let g:loaded_DrawIt= "v14g"
 if v:version < 700
  echohl WarningMsg
  echo "***warning*** this version of DrawIt needs vim 7.0"
@@ -255,7 +255,7 @@ fun! DrawIt#DrawItStart(...)
   call SaveUserMaps("bn","","><^v","DrawIt")
   call SaveUserMaps("bv",usermaplead,"abceflsy","DrawIt")
   call SaveUserMaps("bn","","<c-v>","DrawIt")
-  call SaveUserMaps("bn",usermaplead,"gh><v^","DrawIt")
+  call SaveUserMaps("bn",usermaplead,"cgh><v^","DrawIt")
   call SaveUserMaps("bn","","<left>","DrawIt")
   call SaveUserMaps("bn","","<right>","DrawIt")
   call SaveUserMaps("bn","","<up>","DrawIt")
@@ -354,78 +354,78 @@ fun! DrawIt#DrawItStart(...)
   call SaveUserMaps("bn","",":\<c-v>","DrawIt")
 
   " DrawItStart: DrawIt maps (Charles Campbell) {{{3
-  nmap <silent> <buffer> <script> <left>		:set lz<CR>:silent! call <SID>DrawLeft()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <right>		:set lz<CR>:silent! call <SID>DrawRight()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <up>			:set lz<CR>:silent! call <SID>DrawUp()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <down>		:set lz<CR>:silent! call <SID>DrawDown()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <s-left>		:set lz<CR>:silent! call <SID>MoveLeft()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <s-right>		:set lz<CR>:silent! call <SID>MoveRight()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <s-up>		:set lz<CR>:silent! call <SID>MoveUp()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <s-down>		:set lz<CR>:silent! call <SID>MoveDown()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <space>		:set lz<CR>:silent! call <SID>DrawErase()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> >				:set lz<CR>:silent! call <SID>DrawSpace('>',1)<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <				:set lz<CR>:silent! call <SID>DrawSpace('<',2)<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> ^				:set lz<CR>:silent! call <SID>DrawSpace('^',3)<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> v				:set lz<CR>:silent! call <SID>DrawSpace('v',4)<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <home>		:set lz<CR>:silent! call <SID>DrawSlantUpLeft()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <end>			:set lz<CR>:silent! call <SID>DrawSlantDownLeft()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <pageup>		:set lz<CR>:silent! call <SID>DrawSlantUpRight()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <pagedown>	:set lz<CR>:silent! call <SID>DrawSlantDownRight()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader>>		:set lz<CR>:silent! call <SID>DrawFatRArrow()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader><		:set lz<CR>:silent! call <SID>DrawFatLArrow()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader>^		:set lz<CR>:silent! call <SID>DrawFatUArrow()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader>v		:set lz<CR>:silent! call <SID>DrawFatDArrow()<CR>:set nolz<CR>
-  nmap <silent> <buffer> <script> <Leader>f		:call <SID>Flood()<cr>
-  nmap <silent> <buffer> <script> <Leader>g		:call <SID>ToggleGrid()<cr>
+  nmap <silent> <buffer> <script> <nowait> <left>		:set lz<CR>:silent! call <SID>DrawLeft()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <right>		:set lz<CR>:silent! call <SID>DrawRight()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <up>			:set lz<CR>:silent! call <SID>DrawUp()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <down>		:set lz<CR>:silent! call <SID>DrawDown()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <s-left>		:set lz<CR>:silent! call <SID>MoveLeft()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <s-right>	:set lz<CR>:silent! call <SID>MoveRight()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <s-up>		:set lz<CR>:silent! call <SID>MoveUp()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <s-down>		:set lz<CR>:silent! call <SID>MoveDown()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <space>		:set lz<CR>:silent! call <SID>DrawErase()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> >			:set lz<CR>:silent! call <SID>DrawSpace('>',1)<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <			:set lz<CR>:silent! call <SID>DrawSpace('<',2)<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> ^			:set lz<CR>:silent! call <SID>DrawSpace('^',3)<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> v			:set lz<CR>:silent! call <SID>DrawSpace('v',4)<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <home>		:set lz<CR>:silent! call <SID>DrawSlantUpLeft()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <end>		:set lz<CR>:silent! call <SID>DrawSlantDownLeft()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <pageup>		:set lz<CR>:silent! call <SID>DrawSlantUpRight()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <pagedown>	:set lz<CR>:silent! call <SID>DrawSlantDownRight()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader>>	:set lz<CR>:silent! call <SID>DrawFatRArrow()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader><	:set lz<CR>:silent! call <SID>DrawFatLArrow()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader>^	:set lz<CR>:silent! call <SID>DrawFatUArrow()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader>v	:set lz<CR>:silent! call <SID>DrawFatDArrow()<CR>:set nolz<CR>
+  nmap <silent> <buffer> <script> <nowait> <Leader>f	:call <SID>Flood()<cr>
+  nmap <silent> <buffer> <script> <nowait> <Leader>g	:call <SID>ToggleGrid()<cr>
 
   " DrawItStart: Set up insertmode maps {{{3
   if exists("g:drawit_insertmode") && g:drawit_insertmode
-   imap <silent> <buffer> <script> <left>     <Esc><left>a
-   imap <silent> <buffer> <script> <right>    <Esc><right>a
-   imap <silent> <buffer> <script> <up>       <Esc><up>a
-   imap <silent> <buffer> <script> <down>     <Esc><down>a
-   imap <silent> <buffer> <script> <left>     <Esc><left>a
-   imap <silent> <buffer> <script> <s-right>  <Esc><s-right>a
-   imap <silent> <buffer> <script> <s-up>     <Esc><s-up>a
-   imap <silent> <buffer> <script> <s-down>   <Esc><s-down>a
-   imap <silent> <buffer> <script> <home>     <Esc><home>a
-   imap <silent> <buffer> <script> <end>      <Esc><end>a
-   imap <silent> <buffer> <script> <pageup>   <Esc><pageup>a
-   imap <silent> <buffer> <script> <pagedown> <Esc><pagedown>a
+   imap <silent> <buffer> <script> <nowait> <left>     <Esc><left>a
+   imap <silent> <buffer> <script> <nowait> <right>    <Esc><right>a
+   imap <silent> <buffer> <script> <nowait> <up>       <Esc><up>a
+   imap <silent> <buffer> <script> <nowait> <down>     <Esc><down>a
+   imap <silent> <buffer> <script> <nowait> <left>     <Esc><left>a
+   imap <silent> <buffer> <script> <nowait> <s-right>  <Esc><s-right>a
+   imap <silent> <buffer> <script> <nowait> <s-up>     <Esc><s-up>a
+   imap <silent> <buffer> <script> <nowait> <s-down>   <Esc><s-down>a
+   imap <silent> <buffer> <script> <nowait> <home>     <Esc><home>a
+   imap <silent> <buffer> <script> <nowait> <end>      <Esc><end>a
+   imap <silent> <buffer> <script> <nowait> <pageup>   <Esc><pageup>a
+   imap <silent> <buffer> <script> <nowait> <pagedown> <Esc><pagedown>a
   endif
 
   " DrawItStart: set up drawing mode mappings (Sylvain Viart) {{{3
-  nnoremap <silent> <buffer> <script> <c-v>      :call <SID>LeftStart()<CR><c-v>
-  vmap     <silent> <buffer> <script> <Leader>a  :<c-u>call <SID>CallBox('Arrow')<CR>
-  vmap     <silent> <buffer> <script> <Leader>b  :<c-u>call <SID>CallBox('DrawBox')<cr>
-  nmap              <buffer> <script> <Leader>c  :call <SID>Canvas()<cr>
-  vmap     <silent> <buffer> <script> <Leader>l  :<c-u>call <SID>CallBox('DrawPlainLine')<CR>
-  vmap     <silent> <buffer> <script> <Leader>s  :<c-u>call <SID>Spacer(line("'<"), line("'>"),0)<cr>
+  nnoremap <silent> <buffer> <script> <nowait> <c-v>      :call <SID>LeftStart()<CR><c-v>
+  vmap     <silent> <buffer> <script> <nowait> <Leader>a  :<c-u>call <SID>CallBox('Arrow')<CR>
+  vmap     <silent> <buffer> <script> <nowait> <Leader>b  :<c-u>call <SID>CallBox('DrawBox')<cr>
+  nmap              <buffer> <script> <nowait> <Leader>c  :call <SID>Canvas()<cr>
+  vmap     <silent> <buffer> <script> <nowait> <Leader>l  :<c-u>call <SID>CallBox('DrawPlainLine')<CR>
+  vmap     <silent> <buffer> <script> <nowait> <Leader>s  :<c-u>call <SID>Spacer(line("'<"), line("'>"),0)<cr>
 
   " DrawItStart: set up drawing mode mappings (Charles Campbell) {{{3
   " \pa ... \pz : blanks are transparent
   " \ra ... \rz : blanks copy over
-  vmap <buffer> <silent> <Leader>e   :<c-u>call <SID>CallBox('DrawEllipse')<CR>
+  vmap <buffer> <silent> <nowait> <Leader>e   :<c-u>call <SID>CallBox('DrawEllipse')<CR>
   
   let allreg= "abcdefghijklmnopqrstuvwxyz"
   while strlen(allreg) > 0
    let ireg= strpart(allreg,0,1)
-   exe "nmap <silent> <buffer> <Leader>p".ireg.'  :<c-u>set lz<cr>:silent! call <SID>PutBlock("'.ireg.'",0)<cr>:set nolz<cr>'
-   exe "nmap <silent> <buffer> <Leader>r".ireg.'  :<c-u>set lz<cr>:silent! call <SID>PutBlock("'.ireg.'",1)<cr>:set nolz<cr>'
+   exe "nmap <silent> <buffer> <nowait> <Leader>p".ireg.'  :<c-u>set lz<cr>:silent! call <SID>PutBlock("'.ireg.'",0)<cr>:set nolz<cr>'
+   exe "nmap <silent> <buffer> <nowait> <Leader>r".ireg.'  :<c-u>set lz<cr>:silent! call <SID>PutBlock("'.ireg.'",1)<cr>:set nolz<cr>'
    let allreg= strpart(allreg,1)
   endwhile
 
   " DrawItStart: mouse maps  (Sylvain Viart) {{{3
   " start visual-block with leftmouse
-  nnoremap <silent> <buffer> <script> <leftmouse>    <leftmouse>:call <SID>LeftStart()<CR><c-v>
-  vnoremap <silent> <buffer> <script> <rightmouse>   <leftmouse>:<c-u>call <SID>RightStart(1)<cr>
-  vnoremap <silent> <buffer> <script> <middlemouse>  <leftmouse>:<c-u>call <SID>RightStart(0)<cr>
-  vnoremap <silent> <buffer> <script> <c-leftmouse>  <leftmouse>:<c-u>call <SID>CLeftStart()<cr>
+  nnoremap <silent> <buffer> <script> <nowait> <leftmouse>    <leftmouse>:call <SID>LeftStart()<CR><c-v>
+  vnoremap <silent> <buffer> <script> <nowait> <rightmouse>   <leftmouse>:<c-u>call <SID>RightStart(1)<cr>
+  vnoremap <silent> <buffer> <script> <nowait> <middlemouse>  <leftmouse>:<c-u>call <SID>RightStart(0)<cr>
+  vnoremap <silent> <buffer> <script> <nowait> <c-leftmouse>  <leftmouse>:<c-u>call <SID>CLeftStart()<cr>
 
   " DrawItStart: mouse maps (Charles Campbell) {{{3
   " Draw with current brush
-  nnoremap <silent> <buffer> <script> <s-leftmouse>  <leftmouse>:call <SID>SLeftStart()<CR><c-v>
-  nnoremap <silent> <buffer> <script> <c-leftmouse>  <leftmouse>:call <SID>CLeftStart()<CR><c-v>
+  nnoremap <silent> <buffer> <script> <nowait> <s-leftmouse>  <leftmouse>:call <SID>SLeftStart()<CR><c-v>
+  nnoremap <silent> <buffer> <script> <nowait> <c-leftmouse>  <leftmouse>:call <SID>CLeftStart()<CR><c-v>
 
  " DrawItStart: Menu support {{{3
  if has("gui_running") && has("menu") && &go =~# 'm'
@@ -492,7 +492,7 @@ fun! DrawIt#DrawItStop()
   " DrawItStop: insure that erase mode is off {{{3
   " (thanks go to Gary Johnson for this)
   if b:di_erase == 1
-  	call s:DrawErase()
+    call s:DrawErase()
   endif
 
   " DrawItStop: restore user map(s), if any {{{3
@@ -995,10 +995,10 @@ fun! s:DrawCorner()
   " - MIXED SINGLE-DOUBLE CORNERS ----------------------------------------
   "   ┼═   ╬═      ╒═
   "   │    │       │
-  if  !s:IsDnS(cup)  && !s:IsDnD(cup)
+  if  !s:IsDnS(cup)      && !s:IsDnD(cup)
  \ &&  s:IsLeftD(cright)
  \ &&  s:IsUpS(cdown)
- \ && !s:IsRightD(cleft)
+ \ && !s:IsRightD(cleft) && !s:IsRightS(cleft)
 "   call Decho("case 1: !DnS && LeftD && UpS && !RightD")
    exe "norm! r".b:di_cSdDr
 
@@ -1007,7 +1007,7 @@ fun! s:DrawCorner()
   elseif  !s:IsDnD(cup) && !s:IsDnS(cup)
  \ &&      s:IsLeftS(cright)
  \ &&      s:IsUpD(cdown)
- \ &&     !s:IsRightS(cleft)
+ \ &&     !s:IsRightS(cleft) && !s:IsRightD(cleft)
 "   call Decho("case 2: !DnD && LeftD && UpD && !RightS")
    exe "norm! r".b:di_cDdSr
 
@@ -2424,12 +2424,9 @@ fun! s:AutoCanvas(linestart,linestop,cols)
   exe a:linestart.",".a:linestop."retab"
   let &l:et= etkeep
 
-  " insure that there's whitespace to textwidth/screenwidth/a:cols
+  " insure that there's whitespace to a:cols/window-width/screenwidth/textwidth
   if a:cols <= 0
-   let tw= &tw
-   if tw <= 0
-    let tw= &columns
-   endif
+   let tw= s:GetWinWidth()
   else
    let tw= a:cols
   endif
@@ -2578,10 +2575,7 @@ fun! s:Spacer(debut, fin, cols) range
   call s:SavePosn()
 
   if a:cols <= 0
-   let width = &textwidth
-   if width <= 0
-    let width= &columns
-   endif
+   let width= s:GetWinWidth()
   else
    let width= a:cols
   endif
@@ -2876,6 +2870,27 @@ fun! s:DrawPlainLine(x0,y0,x1,y1)
 "  call Dret("s:DrawPlainLine")
 endf
 
+" ---------------------------------------------------------------------
+" s:GetWinWidth: returns amount of usable window width, in columns {{{2
+fun! s:GetWinWidth()
+"  call Dfunc("s:GetWinWidth()")
+  let curcol= col(".")
+  norm! g$
+  let winr= wincol()
+  norm! g0
+  let winl= wincol()
+  exe "sil! ".curcol."|"
+  let width= winr - winl + 1
+  if width <= 0
+   let width= &columns
+  endif
+  if width <= 0
+   let width = &textwidth
+  endif
+"  call Dret("s:GetWinWidth ".width)
+  return width
+endfun
+
 " =====================================================================
 "  Mouse Functions: {{{1
 " =====================================================================
@@ -2987,11 +3002,11 @@ fun! s:CLeftDrag()
   let curline= line(".")
   call s:AutoCanvas(curline,curline + s:cleft_height,virtcol(".")+s:cleft_width)
   if s:cleft_width > 0 && s:cleft_height > 0
-   exe "silent! norm! \<c-v>".s:cleft_width."l".s:cleft_height.'j"'.b:drawit_brush.'y'
+   exe "sil! norm! \<c-v>".s:cleft_width."l".s:cleft_height.'j"'.b:drawit_brush.'y'
   elseif s:cleft_width > 0
-   exe "silent! norm! \<c-v>".s:cleft_width.'l"'.b:drawit_brush.'y'
+   exe "sil! norm! \<c-v>".s:cleft_width.'l"'.b:drawit_brush.'y'
   else
-   exe "silent! norm! \<c-v>".s:cleft_height.'j"'.b:drawit_brush.'y'
+   exe "sil! norm! \<c-v>".s:cleft_height.'j"'.b:drawit_brush.'y'
   endif
   exe "let s:cleft_oldblock= @".b:drawit_brush
 "  call Decho("s:cleft_oldblock=@".b:drawit_brush)
