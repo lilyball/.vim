@@ -728,6 +728,9 @@ if neobundle#tap('unite.vim') "{{{
 
   nnoremap <silent> [unite], :<C-u>UniteResume -no-start-insert -restore<cr>
 
+  " Map [unite]? to the last search account for some common vim regex tokens
+  nnoremap <silent> [unite]? :<C-u>execute 'Unite -buffer-name=search -no-quit grep:.::'.escape(substitute(substitute(@/, '\\[<>]', '\\b', 'g'), '\\v', '', 'g'),'\ ')<cr>
+
   " Expand :U to :Unite
   cabbrev <expr> U getcmdtype()==':' && getcmdpos()==2 ? 'Unite' : 'U'
 
@@ -924,9 +927,6 @@ runtime macros/matchit.vim
 
 " Open a Quickfix window for the last search
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-
-" Ack for the last search
-nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
 
 " Search Highlighting {{{
 
