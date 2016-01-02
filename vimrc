@@ -1494,15 +1494,19 @@ set completeopt=longest,menuone,preview
 " Sudo to write
 cmap w!! w !sudo tee % >/dev/null
 
-" I suck at typing.
-"nnoremap <localleader>= ==
-"vnoremap - =
-
 " Toggle textwidth
 nnoremap <F8> :if &tw == 0 \| set tw=78 \| else \| set tw=0 \| endif<CR>
 
 " Toggle paste
 set pastetoggle=<F8>
+
+" Move current line/range up or down
+" ⌘⌥[
+nnoremap <silent> <D-“> :<C-u>silent! move <C-r>=max([0,line('.')-1-v:count1])<CR><CR>
+vnoremap <silent> <D-“> :<C-u>silent! '<,'>move <C-r>=max([0,line("'<")-1-v:count1])<CR><CR>gv
+" ⌘⌥]
+nnoremap <silent> <D-‘> :<C-u>silent! move <C-r>=min([line('$'),line('.')+v:count1])<CR><CR>
+vnoremap <silent> <D-‘> :<C-u>silent! '<,'>move <C-r>=min([line('$'),line("'>")+v:count1])<CR><CR>gv
 
 " Handle URL {{{
 " Stolen from https://github.com/askedrelic/homedir/blob/master/.vimrc
