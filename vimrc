@@ -720,7 +720,7 @@ if neobundle#tap('unite.vim') "{{{
   nnoremap <silent> [unite]l :<C-u>Unite -resume -buffer-name=line -start-insert -no-restore line<cr><C-u>
   nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
   nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffers buffer<cr>
-  nnoremap <silent> [unite]/ :<C-u>Unite -buffer-name=search -no-quit grep:.<cr>
+  nnoremap <silent> [unite]/ :<C-u>Unite -buffer-name=search grep:.<cr>
   nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mappings mapping<cr>
   nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=quick_buffers -quick-match buffer<cr>
   nnoremap <silent> [unite]j :<C-u>Unite -buffer-name=jumps jump<cr>
@@ -729,7 +729,7 @@ if neobundle#tap('unite.vim') "{{{
   nnoremap <silent> [unite], :<C-u>UniteResume -no-start-insert -restore<cr>
 
   " Map [unite]? to the last search account for some common vim regex tokens
-  nnoremap <silent> [unite]? :<C-u>execute 'Unite -buffer-name=search -no-quit grep:.::'.escape(substitute(substitute(@/, '\\[<>]', '\\b', 'g'), '\\v', '', 'g'),'\ ')<cr>
+  nnoremap <silent> [unite]? :<C-u>execute 'Unite -buffer-name=search grep:.::'.escape(substitute(substitute(@/, '\\[<>]', '\\b', 'g'), '\\v', '', 'g'),'\ ')<cr>
 
   " Expand :U to :Unite
   cabbrev <expr> U getcmdtype()==':' && getcmdpos()==2 ? 'Unite' : 'U'
