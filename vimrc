@@ -934,6 +934,7 @@ set hlsearch
 set incsearch
 
 nnoremap <silent> <C-[>u :nohlsearch<CR>
+nnoremap <silent> ¨ :nohlsearch<CR>
 
 " }}}
 " Error Navigation {{{
