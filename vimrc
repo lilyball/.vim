@@ -1367,7 +1367,15 @@ augroup END
 " }}}
 " Rust {{{
 
-let g:rust_conceal=1
+if has('gui_running')
+  " Unfortunately, MacVim doesn't do font fallback with the CoreText renderer,
+  " and it doesn't restrict the line height with the other renderer, and Menlo
+  " doesn't include the long arrow characters.
+  let g:rust_conceal=0
+else
+  let g:rust_conceal=1
+endif
+let g:rust_conceal_mod_path=0
 let g:rust_colorcolumn=1
 let g:rust_fold=1
 augroup ft_rust
