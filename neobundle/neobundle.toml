@@ -2,7 +2,7 @@
 
 [[plugins]]
 repository = 'Shougo/neomru.vim'
-filetypes = 'all'
+lazy = false
 
 [[plugins]]
 repository = 'Shougo/unite.vim'
@@ -39,7 +39,7 @@ insert = 1
 repository = 'Shougo/neosnippet.vim'
 depends = ['Shougo/neosnippet-snippets', 'Shougo/context_filetype.vim']
 insert = 1
-filetypes = ['neosnippet']
+on_ft = ['neosnippet']
 unite_sources = ['neosnippet', 'neosnippet/user', 'neosnippet/runtime']
 
 # Unite sources
@@ -66,11 +66,11 @@ lazy = 0
 
 [[plugins]]
 repository = 'mhinz/vim-signify'
-filetypes = 'all'
+lazy = false
 
 [[plugins]]
 repository = 'vim-scripts/ConflictDetection'
-filetypes = 'all'
+lazy = false
 
 [[plugins]]
 repository = 'vim-scripts/ConflictMotions'
@@ -81,29 +81,29 @@ lazy = 0
 
 [[plugins]]
 repository = 'kballard/vim-fish'
-filetypes = ['fish', 'fishprofile']
+on_ft = ['fish', 'fishprofile']
 
 [[plugins]]
 repository = 'rust-lang/rust.vim'
-filetypes = 'rust'
+on_ft = 'rust'
 
 [[plugins]]
 repository = 'kballard/vim-swift-extra'
-filetypes = 'swift'
+on_ft = 'swift'
 unite_sources = ['swift/device', 'swift/developer_dir']
 
 [[plugins]]
 repository = 'kballard/vim-markdown'
 rev = 'inline_and_code_fixes'
-filetypes = 'markdown'
+on_ft = 'markdown'
 
 [[plugins]]
 repository = 'mustache/vim-mustache-handlebars'
-filetypes = ['mustache', 'handlebars']
+on_ft = ['mustache', 'handlebars']
 
 [[plugins]]
 repository = 'elixir-lang/vim-elixir'
-filetypes = ['elixir', 'eelixir']
+on_ft = ['elixir', 'eelixir']
 
 # Colorschemes
 
@@ -147,7 +147,7 @@ repository = 'vim-scripts/CountJump'
 
 [[plugins]]
 repository = 'scrooloose/nerdcommenter'
-filetypes = 'all'
+lazy = false
 
 [[plugins]]
 repository = 'mileszs/ack.vim'
@@ -162,11 +162,11 @@ repository = 'mileszs/ack.vim'
 
 [[plugins]]
 repository = 'editorconfig/editorconfig-vim'
-filetypes = 'all'
+lazy = false
 
 [[plugins]]
 repository = 'tpope/vim-speeddating'
-filetypes = 'all'
+lazy = false
 
 [[plugins]]
 repository = 'mattn/webapi-vim'
@@ -183,7 +183,7 @@ mappings = ['gs', 'gS']
 
 [[plugins]]
 repository = 'tpope/vim-sleuth'
-filetypes = 'all'
+lazy = false
 
 [[plugins]]
 repository = 'terryma/vim-expand-region'
