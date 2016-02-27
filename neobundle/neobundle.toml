@@ -131,7 +131,11 @@ mappings = [['xo', 'ai', 'ii', 'aI', 'iI']]
 # Miscellaneous
 
 [[plugins]]
-repository = 'bling/vim-airline'
+repository = 'vim-airline/vim-airline'
+lazy = false
+
+[[plugins]]
+repository = 'vim-airline/vim-airline-themes'
 lazy = false
 
 [[plugins]]

@@ -758,7 +758,7 @@ if neobundle#tap('vim-airline') "{{{
     function! s:AirlineInit()
       let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
     endfunction
-    autocmd VimEnter * call s:AirlineInit()
+    autocmd User AirlineAfterInit call s:AirlineInit()
   endfunction
 
   call neobundle#untap()
@@ -897,11 +897,14 @@ set background=dark
 if neobundle#is_installed('base16-vim')
   NeoBundleSource base16-vim
   if has('gui_running')
+    let g:airline_theme = 'base16_solarized'
     colorscheme base16-solarized
   else
+    let g:airline_theme = 'base16'
     colorscheme base16-default
   endif
 elseif has('gui_running') && neobundle#is_installed('solarized')
+  let g:airline_theme = 'solarized'
   colorscheme solarized
 else
   colorscheme darkblue
