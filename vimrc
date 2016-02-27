@@ -755,7 +755,10 @@ if neobundle#tap('vim-airline') "{{{
     call airline#parts#define_condition('bomb', '&bomb')
     call airline#parts#define_accent('bomb', 'bold')
 
+    call airline#parts#define_function('obsession', 'ObsessionStatus')
+
     function! s:AirlineInit()
+      let g:airline_section_c .= airline#section#create(['obsession'])
       let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
     endfunction
     autocmd User AirlineAfterInit call s:AirlineInit()

@@ -196,3 +196,7 @@ mappings = ['+', '_']
 [[plugins]]
 repository = 'tmux-plugins/vim-tmux-focus-events'
 lazy = false
+
+[[plugins]]
+repository = 'tpope/vim-obsession'
+lazy = false
