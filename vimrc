@@ -900,14 +900,11 @@ set background=dark
 if neobundle#is_installed('base16-vim')
   NeoBundleSource base16-vim
   if has('gui_running')
-    let g:airline_theme = 'base16_solarized'
     colorscheme base16-solarized
   else
-    let g:airline_theme = 'base16'
     colorscheme base16-default
   endif
 elseif has('gui_running') && neobundle#is_installed('solarized')
-  let g:airline_theme = 'solarized'
   colorscheme solarized
 else
   colorscheme darkblue
