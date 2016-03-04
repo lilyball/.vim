@@ -51,12 +51,15 @@ unite_sources = ['neosnippet', 'neosnippet/user', 'neosnippet/runtime']
 
 [[plugins]]
 repository = 'Shougo/unite-outline'
+lazy = false
 
 [[plugins]]
 repository = 'tsukkee/unite-tag'
+lazy = false
 
 [[plugins]]
 repository = 'tsukkee/unite-help'
+lazy = false
 
 # SCM plugins
 
