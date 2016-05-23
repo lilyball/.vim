@@ -158,7 +158,7 @@ lazy = false
 repository = 'vim-scripts/CountJump'
 
 [[plugins]]
-repository = 'alerque/nerdcommenter'
+repository = 'scrooloose/nerdcommenter'
 lazy = false
 
 [[plugins]]
