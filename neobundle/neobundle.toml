@@ -208,3 +208,6 @@ lazy = false
 [[plugins]]
 repository = 'tpope/vim-obsession'
 lazy = false
+
+[[plugins]]
+repository = 'racer-rust/vim-racer'

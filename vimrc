@@ -787,6 +787,20 @@ if neobundle#tap('vim-fugitive') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('vim-racer') "{{{
+  let g:racer_cmd = $HOME."/.cargo/bin/racer"
+  let g:racer_experimental_completer = 1
+
+  augroup plug_vim_racer
+    au!
+    autocmd FileType rust nmap gd <Plug>(rust-dev)
+    autocmd FileType rust nmap gh <Plug>(rust-def-split)
+    autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
+    autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
+  augroup END
+
+  call neobundle#untap()
+endif "}}}
 if neobundle#tap('vim-signify') "{{{
   let g:signify_update_on_bufenter=0
   let g:signify_update_on_focusgained=1
@@ -795,7 +809,7 @@ if neobundle#tap('vim-signify') "{{{
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('vim-swift') "{{{
-  let g:swift_device = 'iPhone 6'
+  let g:swift_device = 'iPhone 7'
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('vimfiler.vim') "{{{
