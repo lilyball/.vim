@@ -139,7 +139,7 @@ if has('gui_running')
   " because trail won't be highlighted any differently than the cursorline
   "set cursorline
 
-  set guifont=Menlo\ for\ Powerline:h11,Menlo:h11
+  set guifont=Menlo\ Nerd\ Font:h11,Menlo\ for\ Powerline:h11,Menlo:h11
 
   " Remove all the UI cruft
   set guioptions+=c
