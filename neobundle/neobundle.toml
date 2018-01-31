@@ -113,6 +113,10 @@ on_ft = ['mustache', 'handlebars']
 repository = 'elixir-lang/vim-elixir'
 on_ft = ['elixir', 'eelixir']
 
+[[plugins]]
+repository = 'leafgarland/typescript-vim'
+on_ft = ['typescript']
+
 # Colorschemes
 
 [[plugins]]
