@@ -117,6 +117,10 @@ on_ft = ['elixir', 'eelixir']
 repository = 'leafgarland/typescript-vim'
 on_ft = ['typescript']
 
+[[plugins]]
+repository = 'LnL7/vim-nix'
+on_ft = ['nix']
+
 # Colorschemes
 
 [[plugins]]
