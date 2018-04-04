@@ -914,9 +914,9 @@ set background=dark
 if neobundle#is_installed('base16-vim')
   NeoBundleSource base16-vim
   if has('gui_running')
-    colorscheme base16-solarized
+    colorscheme base16-solarized-dark
   else
-    colorscheme base16-default
+    colorscheme base16-default-dark
   endif
 elseif has('gui_running') && neobundle#is_installed('solarized')
   colorscheme solarized
