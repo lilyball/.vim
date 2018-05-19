@@ -1782,7 +1782,7 @@ command! Tidy :call Tidy()
 
 " Tokenize the String according to shell parsing rules
 function! s:ShellTokenize(text)
-	let pat = '\%([^ \t\n''"]\+\|\\.\|''[^'']*\%(''\|$\)\|"\%(\\.\|[^"]\)*\%("\|$\)\)\+'
+	let pat = '\%([^ \t\n''"\\]\+\|\\.\|''[^'']*\%(''\|$\)\|"\%(\\.\|[^"]\)*\%("\|$\)\)\+'
 	let start = 0
 	let tokens = []
 	while 1
