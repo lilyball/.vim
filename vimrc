@@ -131,6 +131,12 @@ if v:version >= 700
   endtry
 endif
 
+if &term =~ '^xterm\|rxvt'
+  " set insert mode to solid vertical bar
+  let &t_SI .= "\<Esc>[6 q"
+  let &t_EI .= "\<Esc>[2 q"
+end
+
 " GUI Options {{{
 
 if has('gui_running')
