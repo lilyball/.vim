@@ -68,11 +68,6 @@ repository = 'tpope/vim-fugitive'
 lazy = 0
 
 [[plugins]]
-repository = 'gregsexton/gitv'
-depends = 'tpope/vim-fugitive'
-lazy = 0
-
-[[plugins]]
 repository = 'mhinz/vim-signify'
 lazy = false
 

@@ -421,14 +421,6 @@ if neobundle#tap('delimitMate') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('gitv') "{{{
-  function! neobundle#hooks.on_source(bundle)
-    nnoremap <silent> <leader>Gv :Gitv<CR>
-    nnoremap <silent> <leader>GV :Gitv!<CR>
-  endfunction
-
-  call neobundle#untap()
-endif "}}}
 if neobundle#tap('gist-vim') "{{{
   let g:gist_detect_filetype = 1
 
