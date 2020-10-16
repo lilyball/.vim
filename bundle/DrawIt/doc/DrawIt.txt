@@ -465,7 +465,7 @@ DRAWIT MODES						*drawit-modes* {{{2
 		Oct 24, 2014	* added LineStyle submenu
 		Nov 18, 2015	* Extra tests handling  mixed double-single line
 				  drawing. (affects s:DrawCorner())
-		Dec 08, 2015	* (Kevin Ballard) pointed out that the canvas
+		Dec 08, 2015	* (Lily Ballard) pointed out that the canvas
 				  spacing should preferably use window width
 				  rather than &columns.
 	13	Sep 05, 2013	* improved s:Strlen() -- now uses |strdisplaywidth()|

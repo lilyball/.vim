@@ -1,7 +1,7 @@
 "============================================================================
 "File:        dtrace.vim
 "Description: Syntax checking plugin for syntastic.vim
-"Maintainer:  Kevin Ballard <kevin at sb dot org>
+"Maintainer:  Lily Ballard <lily at sb dot org>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
 "             it and/or modify it under the terms of the Do What The Fuck You

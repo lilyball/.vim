@@ -1,5 +1,5 @@
 " File: ftplugin/openstep.vim
-" Author: Kevin Ballard
+" Author: Lily Ballard
 " Description: FileType Plugin for OpenStep ASCII Property List
 " Last Change: Aug 05, 2014
 

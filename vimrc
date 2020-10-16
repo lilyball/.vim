@@ -1,5 +1,5 @@
 " vim: set et sw=2 ts=2:
-" Author: Kevin Ballard <kevin@sb.org>
+" Author: Lily Ballard <lily@sb.org>
 "
 " Some of these settings came from Steve Losh
 " https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
@@ -897,7 +897,7 @@ let g:netrw_mousemaps = 0
 " Shared Configuration {{{
 
 " This is used by snippets for snipMate, UltiSnips, and neosnippet
-let g:snips_author = 'Kevin Ballard'
+let g:snips_author = 'Lily Ballard'
 
 " }}}
 

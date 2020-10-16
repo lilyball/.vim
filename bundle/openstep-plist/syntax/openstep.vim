@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:    OpenStep ASCII Property List
-" Maintainer:  Kevin Ballard
+" Maintainer:  Lily Ballard
 " Last Change: Jul 14, 2014
 
 if version < 600

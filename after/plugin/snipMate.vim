@@ -1,5 +1,5 @@
 " File: snippet.vim
-" Author: Kevin Ballard
+" Author: Lily Ballard
 " Description: Overrides for snipMate .snippets settings
 " Last Modified: May 28, 2014
 

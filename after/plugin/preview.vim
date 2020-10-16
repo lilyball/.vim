@@ -1,5 +1,5 @@
 " File: after/preview.vim
-" Author: Kevin Ballard
+" Author: Lily Ballard
 " Description: Defines menus for the Preview plugin
 " Last Modified: June 08, 2014
 

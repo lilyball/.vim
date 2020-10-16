@@ -1,5 +1,5 @@
 " File: ftdetect/openstep.vim
-" Author: Kevin Ballard
+" Author: Lily Ballard
 " Description: Filetype detection file for OpenStep ASCII Property List
 " Last Change: Jul 14, 2014
 

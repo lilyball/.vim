@@ -1,5 +1,5 @@
 " File: syntax/markdown.vim
-" Author: Kevin Ballard
+" Author: Lily Ballard
 " Description: Helper file for markdown syntax
 " Last Change: Feb 16, 2015
 
