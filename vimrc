@@ -275,7 +275,58 @@ set backupskip+=svn-commit*.tmp
 " }}}
 
 " }}}
-" Bundles {{{
+" Plugins {{{
+
+" NERDCommenter {{{
+let g:NERDCustomDelimiters = {
+      \ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
+      \ }
+"}}}
+" Airline {{{
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep=' '
+let g:airline#extensions#tabline#left_alt_sep='¦'
+
+function! s:AirlineInit()
+  call airline#parts#define_text('bomb', 'BOM')
+  call airline#parts#define_condition('bomb', '&bomb')
+  call airline#parts#define_accent('bomb', 'bold')
+
+  call airline#parts#define_function('obsession', 'ObsessionStatus')
+
+  let g:airline_section_c .= airline#section#create(['obsession'])
+  let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
+endfunction
+autocmd User AirlineAfterInit call s:AirlineInit()
+"}}}
+" vim-fugitive {{{
+nnoremap <leader>Gd :Gdiff<CR>
+nnoremap <leader>Gs :Gstatus<CR>
+nnoremap <leader>Gw :Gwrite<CR>
+nnoremap <leader>Ga :Gadd<CR>
+nnoremap <leader>Gb :Gblame<CR>
+nnoremap <leader>Gco :Gcheckout<CR>
+nnoremap <leader>Gci :Gcommit<CR>
+nnoremap <leader>Gm :Gmove<CR>
+nnoremap <leader>Gr :Gremove<CR>
+nnoremap <leader>Gl :Glog<CR>
+
+augroup ft_fugitive
+  au!
+
+  au BufNewFile,BufRead .git/index setlocal nolist
+  au BufReadPost fugitive://* set bufhidden=delete
+augroup END
+"}}}
+" vim-signify {{{
+let g:signify_update_on_bufenter=0
+let g:signify_update_on_focusgained=1
+let g:signify_vcs_list = ['git']
+"}}}
+
+" }}}
+" Neobundle {{{
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -611,13 +662,6 @@ if neobundle#tap('neosnippet.vim') "{{{
   endfunction
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('nerdcommenter') "{{{
-  let g:NERDCustomDelimiters = {
-        \ 'rust': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/'},
-        \ }
-
-  call neobundle#untap()
-endif "}}}
 if neobundle#tap('preview') "{{{
   let g:PreviewMarkdownFences = 1
 
@@ -742,49 +786,6 @@ if neobundle#tap('unite-tag') "{{{
   nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tag tag tag/file tag/include<cr>
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('vim-airline') "{{{
-  let g:airline_powerline_fonts = 1
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#left_sep=' '
-  let g:airline#extensions#tabline#left_alt_sep='¦'
-
-  function! neobundle#hooks.on_source(bundle)
-    call airline#parts#define_text('bomb', 'BOM')
-    call airline#parts#define_condition('bomb', '&bomb')
-    call airline#parts#define_accent('bomb', 'bold')
-
-    call airline#parts#define_function('obsession', 'ObsessionStatus')
-
-    function! s:AirlineInit()
-      let g:airline_section_c .= airline#section#create(['obsession'])
-      let g:airline_section_y = airline#section#create_right(['bomb', 'ffenc'])
-    endfunction
-    autocmd User AirlineAfterInit call s:AirlineInit()
-  endfunction
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('vim-fugitive') "{{{
-  nnoremap <leader>Gd :Gdiff<CR>
-  nnoremap <leader>Gs :Gstatus<CR>
-  nnoremap <leader>Gw :Gwrite<CR>
-  nnoremap <leader>Ga :Gadd<CR>
-  nnoremap <leader>Gb :Gblame<CR>
-  nnoremap <leader>Gco :Gcheckout<CR>
-  nnoremap <leader>Gci :Gcommit<CR>
-  nnoremap <leader>Gm :Gmove<CR>
-  nnoremap <leader>Gr :Gremove<CR>
-  nnoremap <leader>Gl :Glog<CR>
-
-  augroup ft_fugitive
-    au!
-
-    au BufNewFile,BufRead .git/index setlocal nolist
-    au BufReadPost fugitive://* set bufhidden=delete
-  augroup END
-
-  call neobundle#untap()
-endif "}}}
 if neobundle#tap('vim-racer') "{{{
   let g:racer_cmd = $HOME."/.cargo/bin/racer"
   let g:racer_experimental_completer = 1
@@ -796,13 +797,6 @@ if neobundle#tap('vim-racer') "{{{
     autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
     autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
   augroup END
-
-  call neobundle#untap()
-endif "}}}
-if neobundle#tap('vim-signify') "{{{
-  let g:signify_update_on_bufenter=0
-  let g:signify_update_on_focusgained=1
-  let g:signify_vcs_list = ['git']
 
   call neobundle#untap()
 endif "}}}

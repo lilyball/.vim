@@ -64,14 +64,6 @@ lazy = false
 # SCM plugins
 
 [[plugins]]
-repository = 'tpope/vim-fugitive'
-lazy = 0
-
-[[plugins]]
-repository = 'mhinz/vim-signify'
-lazy = false
-
-[[plugins]]
 repository = 'vim-scripts/ConflictDetection'
 lazy = false
 
@@ -142,14 +134,6 @@ mappings = [['xo', 'ai', 'ii', 'aI', 'iI']]
 # Miscellaneous
 
 [[plugins]]
-repository = 'vim-airline/vim-airline'
-lazy = false
-
-[[plugins]]
-repository = 'vim-airline/vim-airline-themes'
-lazy = false
-
-[[plugins]]
 repository = 'vim-scripts/AfterColors.vim'
 lazy = false
 
@@ -161,10 +145,6 @@ lazy = false
 repository = 'vim-scripts/CountJump'
 
 [[plugins]]
-repository = 'scrooloose/nerdcommenter'
-lazy = false
-
-[[plugins]]
 repository = 'mileszs/ack.vim'
 
   [[plugins.commands]]
@@ -174,14 +154,6 @@ repository = 'mileszs/ack.vim'
   [[plugins.commands]]
   name = ['AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
   complete = 'help'
-
-[[plugins]]
-repository = 'editorconfig/editorconfig-vim'
-lazy = false
-
-[[plugins]]
-repository = 'tpope/vim-speeddating'
-lazy = false
 
 [[plugins]]
 repository = 'mattn/webapi-vim'
@@ -197,20 +169,8 @@ commands = ['Scratch', 'ScratchInsert', 'ScratchSelection']
 mappings = ['gs', 'gS']
 
 [[plugins]]
-repository = 'tpope/vim-sleuth'
-lazy = false
-
-[[plugins]]
 repository = 'terryma/vim-expand-region'
 mappings = ['+', '_']
-
-[[plugins]]
-repository = 'tmux-plugins/vim-tmux-focus-events'
-lazy = false
-
-[[plugins]]
-repository = 'tpope/vim-obsession'
-lazy = false
 
 [[plugins]]
 repository = 'racer-rust/vim-racer'
